@@ -1,0 +1,28 @@
+type Purchase {
+    id: String!
+    ven: String!
+    prod: String!
+    len: String
+    uom: String!
+    var: String
+    boxCount: Int!
+    boxType: String!
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    totalQty: Int!
+    totalPrice: Float!
+}
+
+input AddPurchaseInput {
+    ven: String!
+    prod: String!
+    len: String!
+    uom: String!
+    var: String!
+    boxType: String!
+    boxCount: Int!
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    totalQty: Int!
+    totalPrice: Float!
+}

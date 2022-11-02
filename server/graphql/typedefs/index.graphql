@@ -1,0 +1,39 @@
+type Query {
+    products: [Product]
+
+    product(id: String!): Product!
+
+    purchases: [Purchase]
+    
+    purchase(id: String!): Purchase!
+
+    standingOrders: [StandingOrder]
+
+    standingOrder(id: String!): StandingOrder!
+
+    shippingMethods: [ShippingMethod]
+
+    shippingMethod(id: String!): ShippingMethod!
+
+    vendors: [Vendor]
+
+    vendor(id: String!): Vendor!
+}
+
+type Mutation {
+    addProduct(product: AddProductInput!): Product!
+
+    addPurchase(purchase: AddPurchaseInput!): Purchase!
+
+    deletePurchase(purchID: String!, standingOrderID: String!): Purchase!
+
+    addSOItem(standingOrderId: String!, item: StandingOrderItemInput!): StandingOrder!
+
+    deleteSOItem(standingOrderId: String!, itemId: String!) : StandingOrder
+
+    addStandingOrder(standingOrder: AddStandingOrderInput!): StandingOrder!
+
+    addShippingMethod(shippingMethod: AddShippingMethodInput!): ShippingMethod!
+
+    addVendor(vendor: AddVendorInput!): Vendor!
+}

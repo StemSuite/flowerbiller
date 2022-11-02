@@ -1,0 +1,14 @@
+type Product {
+    id: String!
+    name: String!
+    varieties: [String]
+    lens: [String]
+    uom: String!
+}
+
+input AddProductInput {
+    name: String!
+    varieties: [String]
+    lens: [String]
+    uom: String!
+}

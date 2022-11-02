@@ -1,0 +1,12 @@
+type ShippingMethod {
+    id: String!
+    name: String!
+    shortHand: String!
+    arrivalDays: [Int]
+}
+
+input AddShippingMethodInput {
+    name: String!
+    shortHand: String!
+    arrivalDays: [Int]
+}

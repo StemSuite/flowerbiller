@@ -1,0 +1,12 @@
+type Vendor {
+    id: String!
+    name: String!
+    shortHand: String!
+    shippingMethods: [ShippingMethod]
+}
+
+input AddVendorInput {
+    name: String!
+    shortHand: String!
+    shippingMethods: [String!]
+}
