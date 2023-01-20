@@ -19,8 +19,7 @@ export const STANDING_ORDERS_QUERY = `
             startDate
             endDate
         }
-    }
-`
+    }`;
 
 export const STANDING_ORDER_QUERY = `
     query standingOrder($id: String!) {
@@ -30,6 +29,10 @@ export const STANDING_ORDER_QUERY = `
             }
             startDate
             endDate
+            shippingMethod {
+                shortHand
+            }
+            shippingDay
             items {
                 _id
                 prod
@@ -42,6 +45,19 @@ export const STANDING_ORDER_QUERY = `
                 pricePerUnit
                 totalQty
                 totalPrice
+            }
+        }
+    }`;
+
+export const VENDORS_QUERY = `
+    query vendors {
+        vendors {
+            id
+            shortHand
+            shippingMethods {
+                id
+                shortHand
+                shippingDays
             }
         }
     }`;

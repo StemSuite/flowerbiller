@@ -47,7 +47,7 @@ function DisplayPurch(props) {
    if (props.standingOrderId) fields = fields.slice(1)
 
    let headers = fields.map((field, i) => {
-    return <th class="sort-header" key={i}>{field.header}</th>
+    return <th className="sort-header" key={i}>{field.header}</th>
    })
 
   let prodList = sortedProds.map(prod => {

@@ -30,7 +30,8 @@ type StandingOrder {
     vendor: Vendor!
     startDate: String!
     endDate: String
-    arrivalDay: Int!
+    shippingMethod: ShippingMethod!
+    shippingDay: Int!
     items: [StandingOrderItem]
 }
 
@@ -38,5 +39,6 @@ input AddStandingOrderInput {
     vendor: String!
     startDate: String!
     endDate: String
-    arrivalDay: Int!
+    shippingMethod: String!
+    shippingDay: Int!
 }

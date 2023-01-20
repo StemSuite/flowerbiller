@@ -2,6 +2,7 @@ import { useQuery } from "urql";
 import { STANDING_ORDERS_QUERY } from "../lib/Queries.js";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom"
+import NewStandingOrder from "./shared/modals/NewStandingOrder.js";
 
 function StandingOrders () {
   
@@ -26,7 +27,7 @@ function StandingOrders () {
     ]
 
     let headers = fields.map((field, i) => {
-      return <th class="sort-header" key={i}>{field.header}</th>
+      return <th className="sort-header" key={i}>{field.header}</th>
      })
 
     let list = data.standingOrders.map(so => {
@@ -38,10 +39,12 @@ function StandingOrders () {
         </tr>
         )
     })
+
   
       return (
         <div>
           <h2>Standing Orders</h2>
+          <NewStandingOrder/>
           <table>
             <thead>
                 <tr>{headers}</tr>

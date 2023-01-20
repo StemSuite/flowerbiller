@@ -1,12 +1,13 @@
 function VarietyField(props) {
   let selectedProduct = props.selectedProduct;
-  let inputVariety = props.inputVariety;
+ 
   return (
     <div>
-      <select ref={inputVariety}>
+      <label htmlFor="varietyField">Variety</label>
+      <select name="varietyField" id="varietyField">
         <option hidden> </option>
-        {selectedProduct.varieties.map((e, key) => {
-          return <option key={key}>{e}</option>;
+        {selectedProduct.varieties.map((variety, i) => {
+          return <option value={variety} key={i}>{variety}</option>;
         })}
       </select>
     </div>

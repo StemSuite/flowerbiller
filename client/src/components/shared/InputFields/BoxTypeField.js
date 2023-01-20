@@ -1,12 +1,13 @@
 function BoxTypeField(props) {
-  let inputBoxType = props.inputBoxType;
   let boxes = ['QB', 'HB']
+  
   return (
     <div>
-      <select ref={inputBoxType}>
+      <label htmlFor="boxField">Box Type</label>
+      <select name="boxField" id="boxField" >
         <option hidden> </option>
-        {boxes.map((e, key) => {
-          return <option key={key}>{e}</option>;
+        {boxes.map((box, i) => {
+          return <option value={box} key={i}>{box}</option>;
         })}
       </select>
     </div>

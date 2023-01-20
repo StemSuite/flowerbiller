@@ -1,12 +1,12 @@
 function LengthField(props) {
-  let selectedProduct = props.selectedProduct;
-  let inputLength = props.inputLength;
+  let validLengths = props.selectedProduct.lens;
 
   return (
     <div>
-      <select ref={inputLength}>
-        {selectedProduct.lens.map((e, key) => {
-          return <option key={key}>{e}</option>;
+      <label htmlFor="lenField">Len</label>
+      <select name="lenField" id="lenField">
+        {validLengths.map((len, i) => {
+          return <option value={len} key={i}>{len}</option>;
         })}
       </select>
     </div>

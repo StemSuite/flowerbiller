@@ -1,5 +1,5 @@
 export const ADD_PURCHASE =  `
-    mutation($purchase: AddPurchaseInput!) {
+    mutation ($purchase: AddPurchaseInput!) {
         addStandingOrderPurch(purchase: $purchase) {   
             id
             ven
@@ -35,6 +35,13 @@ export const DELETE_PURCHASE = `
 export const DELETE_SO_ITEM = `
     mutation deleteSOItem($standingOrderId: String!, $itemId: String!) {
         deleteSOItem(standingOrderId: $standingOrderId, itemId: $itemId) {
+            _id
+        }
+    }`;
+
+export const ADD_STANDING_ORDER = `
+    mutation addStandingOrder($standingOrder: AddStandingOrderInput!) {
+        addStandingOrder(standingOrder: $standingOrder) {
             _id
         }
     }`;

@@ -1,9 +1,9 @@
 function PriceField(props) {
-  let inputPrice = props.inputPrice
-
   return(
     <div>
-      <input ref={inputPrice} placeholder="0.00" id="price" name="price" type="number" step="0.01"/>
+      <label htmlFor="priceField"> $/Unit</label>
+      <input name="priceField" id="priceField" placeholder="0.00" 
+            type="number" step="0.01"/>
     </div>
   )
 }

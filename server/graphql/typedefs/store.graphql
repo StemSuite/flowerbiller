@@ -1,0 +1,13 @@
+type Store {
+    id: String!
+    number: Int
+    name: String!
+    address: String
+
+}
+
+input AddStoreInput {
+    number: Int
+    name: String!
+    address: String
+}

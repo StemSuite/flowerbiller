@@ -4,6 +4,7 @@ import { STANDING_ORDER_QUERY } from "../lib/Queries.js";
 import PurchaseForm from "./shared/PurchaseForm.js"
 import DisplayPurch from "./shared/DisplayPurch.js"
 import { useEffect, useState } from "react";
+import { daysOfTheWeek } from "../lib/data.js";
 
 function StandingOrder () {
   const id = useParams().id
@@ -31,7 +32,7 @@ function StandingOrder () {
 	return (
 		<div id="container">
 			<h2>Standing Order</h2>
-      <h3>Vendor:{info.vendor.shortHand} Dates:{info.startDate} - {info.endDate}</h3>
+      <h3>Vendor: {info.vendor.shortHand}   Dates:{info.startDate} - {info.endDate}   Shipping: {daysOfTheWeek[info.shippingDay]}(s) via {info.shippingMethod.shortHand}</h3>
 
 			<div>
         <PurchaseForm addedProds={prods} setProds={setProds} standingOrderId={id}/>

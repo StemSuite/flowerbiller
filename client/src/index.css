@@ -18,17 +18,107 @@ code {
   padding-right: 20px;
 }
 
-#purch_table th{
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-#purch_table thead, tr {
-  text-align: center;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
 .sort-header {
   text-decoration: underline;
 }
+
+.purchaseForm {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.purchaseForm label {
+  display: block;
+  text-align: center;
+  line-height: 150%;
+  font-size: .85em;
+  margin-right: 10px;
+}
+
+.purchaseForm #prodField {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.purchaseForm #lenField {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.purchaseForm #varietyField {
+  min-width: 100px;
+  width: max-content;
+  margin-right: 10px;
+}
+
+.purchaseForm #boxCount {
+  width: 75px;
+  margin-right: 10px;
+}
+
+.purchaseForm #boxField {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.purchaseForm #qtyPerBox {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.purchaseForm #priceField {
+  display: inline-flex;
+  width: 80px;
+  margin-right: 10px;
+}
+
+.purchaseForm #priceField {
+  display: inline-flex;
+  width: 80px;
+  margin-right: 10px;
+}
+
+.purchaseForm #submit {
+  margin-top: 20px;
+}
+
+form.newStandingOrder {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+form.newStandingOrder label {
+  display: block;
+  text-align: center;
+  line-height: 150%;
+  font-size: .85em;
+  margin: 5px;
+}
+
+form.newStandingOrder select {
+  align-self: center;
+  min-width: 80px;
+  height: 22px;
+  margin: auto;
+  display: block;
+}
+
+form.newStandingOrder input {
+  height: 22px;
+  margin: auto;
+  margin-right: 5px;
+  display: block;
+}
+
+form.newStandingOrder #shippingMethodField {
+  margin: auto;
+}
+
+form.newStandingOrder #submit {
+  margin-top: 32px;
+}
+

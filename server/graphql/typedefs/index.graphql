@@ -18,6 +18,10 @@ type Query {
     vendors: [Vendor]
 
     vendor(id: String!): Vendor!
+
+    store(id: String!): Store!
+
+    stores: [Store]
 }
 
 type Mutation {
@@ -29,11 +33,13 @@ type Mutation {
 
     addSOItem(standingOrderId: String!, item: StandingOrderItemInput!): StandingOrder!
 
-    deleteSOItem(standingOrderId: String!, itemId: String!) : StandingOrder
+    deleteSOItem(standingOrderId: String!, itemId: String!): StandingOrder
 
     addStandingOrder(standingOrder: AddStandingOrderInput!): StandingOrder!
 
     addShippingMethod(shippingMethod: AddShippingMethodInput!): ShippingMethod!
 
     addVendor(vendor: AddVendorInput!): Vendor!
+
+    addStore(store: AddStoreInput!): Store!
 }

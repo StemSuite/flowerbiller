@@ -9,6 +9,7 @@ function Nav() {
         <ul id="nav_bar">
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/standing_orders">Standing Orders</NavLink></li>
+          <li><NavLink to="/special_orders">Special Orders</NavLink></li>
         </ul>
       </nav>
     </div>

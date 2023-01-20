@@ -2,14 +2,14 @@ function ProductField(props) {
   let inputProd = props.inputProd
   let products = props.products;
   let changeProduct = props.changeProduct;
-  let selectedProduct = props.selectedProduct;
 
   return (
     <div>
-      <select ref = {inputProd} name="inputProd" id="inputProd" value={selectedProduct.name || ''} onChange={changeProduct}>
+      <label htmlFor="prodField">Product</label>
+      <select ref={inputProd} name="prodField" id="prodField" onChange={changeProduct}>
         <option hidden> </option>
-        {products.map((e, key) => {
-          return <option key={key}>{e.name}</option>;
+        {products.map(prod => {
+          return <option value={prod.name} key={prod.id}>{prod.name}</option>;
         })}
       </select>
     </div>

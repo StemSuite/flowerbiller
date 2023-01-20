@@ -1,8 +1,8 @@
 function QuantityField(props) {
-  let input = props.input
   return (
     <div>
-      <input ref={input} placeholder="0" id="qty" name="qty" type="number"/>
+      <label htmlFor={props.name}>{props.label}</label>
+      <input name={props.name} id={props.name} placeholder="0" type="number"/>
     </div>
   )
 }
