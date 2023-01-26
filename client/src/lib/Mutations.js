@@ -1,34 +1,9 @@
-export const ADD_PURCHASE =  `
-    mutation ($purchase: AddPurchaseInput!) {
-        addStandingOrderPurch(purchase: $purchase) {   
-            id
-            ven
-            prod
-            len
-            uom
-            var
-            boxCount
-            boxType
-            qtyPerBox
-            pricePerUnit
-            totalQty
-            totalPrice
-        }
-    }`;
-
 export const ADD_SO_ITEM = `
     mutation addSOItem($standingOrderId: String! $item: StandingOrderItemInput!) {
         addSOItem(standingOrderId: $standingOrderId, item: $item) {
             items {
                 prod
             }
-        }
-    }`
-
-export const DELETE_PURCHASE = `
-    mutation deletePurchase($purchId: String!) {
-        deletePurchase(purchId: $purchId, standingOrderId: $standingOrderId) {
-            id
         }
     }`;
 
@@ -42,6 +17,29 @@ export const DELETE_SO_ITEM = `
 export const ADD_STANDING_ORDER = `
     mutation addStandingOrder($standingOrder: AddStandingOrderInput!) {
         addStandingOrder(standingOrder: $standingOrder) {
+            _id
+        }
+    }`;
+
+export const ADD_EVENT =`
+    mutation addEvent($event: AddEventInput!) {
+        addEvent(event: $event) {
+            _id
+        }
+    }`;
+
+export const ADD_EVENT_ITEM=`
+    mutation addEventItem($eventID: String!, $item: EventItemInput!) {
+        addEventItem(eventID: $eventID, item: $item) {
+            items {
+                prod
+            }
+        }
+    }`;
+
+export const DELETE_EVENT_ITEM=`
+    mutation deleteEventItem($eventID: String!, $itemID: String!) {
+        deleteEventItem(eventID: $eventID, itemID: $itemID) {
             _id
         }
     }`;

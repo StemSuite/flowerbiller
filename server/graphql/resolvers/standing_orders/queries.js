@@ -10,7 +10,6 @@ moment.updateLocale("es", {
 
 const standingOrderQueries = {
     standingOrders: async () => {
-
         return StandingOrder.find().populate('vendor')
             .then( res => {
                return res.map(so => {
@@ -22,8 +21,7 @@ const standingOrderQueries = {
             })
     },
     
-    standingOrder: async (_, {id}) => {
-
+    standingOrder: async (_, { id }) => {
         return StandingOrder.findById(id).populate('vendor').populate('shippingMethod')
             .then( res => {
                let formatted = res.toObject()

@@ -1,0 +1,34 @@
+type EventItem {
+    _id: String!
+    prod: String!
+    len: String
+    var: String
+    uom: String!
+    quantity: Int!
+}
+
+input EventItemInput {
+    prod: String!
+    len: String
+    var: String
+    uom: String!
+    quantity: Int!
+}
+
+type Event {
+    _id: String!
+    store: Store!
+    title: String!
+    customer: String!
+    location: String
+    date: String!
+    items: [EventItem]
+}
+
+input AddEventInput {
+    store: String!
+    title: String!
+    customer: String!
+    location: String
+    date: String!
+}

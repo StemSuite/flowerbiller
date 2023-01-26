@@ -18,15 +18,11 @@ code {
   padding-right: 20px;
 }
 
-.sort-header {
-  text-decoration: underline;
-}
-
 .purchaseForm {
+  max-width: 80%;
   display: inline-flex;
   align-items: center;
-  padding: 10px;
-  margin-left: 10px;
+  margin: 10px;
 }
 
 .purchaseForm label {
@@ -34,50 +30,62 @@ code {
   text-align: center;
   line-height: 150%;
   font-size: .85em;
-  margin-right: 10px;
+  margin: auto;
+}
+
+.purchaseForm input {
+  margin-inline-end: 10px;
+}
+
+.purchaseForm select {
+  margin-inline-end: 10px;
 }
 
 .purchaseForm #prodField {
   width: 150px;
-  margin-right: 10px;
 }
 
 .purchaseForm #lenField {
   width: 100px;
-  margin-right: 10px;
 }
 
 .purchaseForm #varietyField {
   min-width: 100px;
   width: max-content;
-  margin-right: 10px;
 }
 
 .purchaseForm #boxCount {
-  width: 75px;
-  margin-right: 10px;
+  width: 50px;
 }
 
 .purchaseForm #boxField {
   width: 80px;
-  margin-right: 10px;
 }
 
 .purchaseForm #qtyPerBox {
-  width: 80px;
-  margin-right: 10px;
+  width: 50px;
 }
 
 .purchaseForm #priceField {
-  display: inline-flex;
   width: 80px;
-  margin-right: 10px;
 }
 
 .purchaseForm #priceField {
-  display: inline-flex;
   width: 80px;
-  margin-right: 10px;
+}
+
+.purchaseForm #quantity-field {
+  margin-inline-end: 10px;
+  display: block;
+  flex: none;
+}
+
+.purchaseForm #quantity-field input {
+  margin: 0px;
+}
+
+.purchaseForm #prod-uom {
+  display: inline
 }
 
 .purchaseForm #submit {
@@ -120,5 +128,125 @@ form.newStandingOrder #shippingMethodField {
 
 form.newStandingOrder #submit {
   margin-top: 32px;
+}
+
+form.newEvent {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+form.newEvent label {
+  display: block;
+  text-align: center;
+  line-height: 150%;
+  font-size: .85em;
+  margin: 5px;
+}
+
+form.newEvent select {
+  align-self: center;
+  min-width: 80px;
+  height: 22px;
+  margin-right: 5px;
+  display: block;
+}
+
+form.newEvent input {
+  height: 22px;
+  margin: auto;
+  margin-right: 5px;
+  display: block;
+}
+
+form.newEvent #event-store {
+  margin-right: 5px;
+  height: 22px;
+}
+
+form.newEvent #submit {
+  margin-top: 32px;
+}
+
+#info-title {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#info-title label {
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  margin-bottom: 0;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#info-title h4 {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#product-table {
+  border-collapse: collapse;
+  display: inline-table;
+  width: 100%;
+  max-width: 8in;
+}
+
+#product-table thead th{
+  text-decoration: underline;
+  text-align: center;
+  background-color: white;
+  height: 25px;
+  padding-left: 5px;
+  padding: auto;
+}
+
+#product-table td {
+  text-align: center;
+  padding: 5px;
+}
+
+#product-table tbody tr:nth-child(odd){
+  background-color: rgb(209, 231, 209);
+}
+
+#product-table #delete-button {
+  align-content: flex-end;
+  align-self: flex-end;
+  padding: 0px;
+  margin: 0px;
+}
+
+.list-display table {
+  border-collapse: collapse;
+  display: inline-table;
+  width: 100%;
+  max-width: 8in;
+}
+
+.list-display thead th{
+  text-decoration: underline;
+  text-align: center;
+  background-color: white;
+  height: 25px;
+  padding-left: 5px;
+  padding: auto;
+}
+
+.list-display td {
+  text-align: center;
+  padding: 5px;
+}
+
+.list-display tbody tr:nth-child(odd){
+  background-color: rgb(209, 231, 209);
 }
 

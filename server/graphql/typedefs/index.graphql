@@ -22,6 +22,10 @@ type Query {
     store(id: String!): Store!
 
     stores: [Store]
+
+    event(id: String!): Event!
+
+    events: [Event]
 }
 
 type Mutation {
@@ -42,4 +46,10 @@ type Mutation {
     addVendor(vendor: AddVendorInput!): Vendor!
 
     addStore(store: AddStoreInput!): Store!
+
+    addEvent(event: AddEventInput): Event!
+
+    addEventItem(eventID: String!, item: EventItemInput): Event!
+
+    deleteEventItem(eventID: String!, itemID: String!): Event
 }

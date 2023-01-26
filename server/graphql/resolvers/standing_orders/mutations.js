@@ -11,13 +11,15 @@ const standingOrderMutations = {
         return StandingOrder.findByIdAndUpdate(standingOrderId, 
             {$push: {items: item}}, 
             {new: true}
-        )},
+        )
+    },
 
     deleteSOItem: async(_, {standingOrderId, itemId}) => {
         return StandingOrder.findByIdAndUpdate(standingOrderId, 
             {$pull: {items: {_id: itemId}}},
             {new: true}
-        )},
+        )
+    },
 }
 
 export default standingOrderMutations;

@@ -61,3 +61,47 @@ export const VENDORS_QUERY = `
             }
         }
     }`;
+
+export const EVENTS_QUERY = `
+    query events {
+        events {
+            _id
+            store {
+                name
+            }
+            title
+            customer
+            location
+            date
+        }
+    }`;
+
+export const EVENT_QUERY = `
+    query event($id: String!) {
+        event(id: $id) {
+            _id
+            title
+            customer
+            date
+            store {
+                name
+            }
+            items {
+                _id
+                prod
+                len
+                var
+                uom
+                quantity
+            }
+        }
+    }`;
+
+export const STORES_QUERY = `
+    query stores {
+        stores {
+            id
+            name
+        }
+    }
+`;
