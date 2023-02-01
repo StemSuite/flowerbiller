@@ -1,22 +1,20 @@
 type StandingOrderItem {
     _id: String!
-    prod: String!
-    len: String
-    var: String
-    uom: String!
+    prodName: String!
+    size: String!
+    varName: String!
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!
+    uom: String!
     pricePerUnit: Float!
     totalQty: Int!
     totalPrice: Float!
 }
 
 input StandingOrderItemInput {
-    prod: String!
-    len: String
-    var: String
-    uom: String!
+    variety: String!
+    size: String
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!

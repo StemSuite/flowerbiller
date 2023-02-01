@@ -21,10 +21,16 @@ const EventQueries = {
     },
     
     event: async (_, { id }) => {
-        return Event.findById(id).populate('store').populate('items')
+        return Event.findById(id).populate('store')
+            .populate({ path: 'items.variety', populate: {path: 'product'} })
             .then( res => {
                let formatted = res.toObject()
                formatted.date = moment(res.startDate).format("MM/DD/YY")
+               formatted.items.forEach(item => {
+                    item.prodName = item.variety.product.name
+                    item.varName = item.variety.name
+                    item.uom = item.variety.product.uom
+                })
                return formatted
             })
     },

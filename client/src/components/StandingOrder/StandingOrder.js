@@ -9,7 +9,7 @@ import { daysOfTheWeek } from "../../lib/data.js";
 function StandingOrder () {
   const id = useParams().id
 
-  const [prods, setProds] = useState([])
+  const [items, setItems] = useState([])
 
   const [standingOrder] = useQuery({
     query: STANDING_ORDER_QUERY,
@@ -20,7 +20,7 @@ function StandingOrder () {
 
   useEffect(() => {
     if (data === undefined) return 
-    setProds(data.standingOrder.items)
+    setItems(data.standingOrder.items)
   }, [data])
 
   if (fetching) return "Loading...";
@@ -47,11 +47,11 @@ function StandingOrder () {
       </div>
 
 			<div>
-        <SOItemForm addedProds={prods} setProds={setProds} standingOrderId={id}/>
+        <SOItemForm standingOrderId={id}/>
       </div>
 
       <div>
-        <SOItems addedProds={prods} setProds={setProds} orderId={id}/>
+        <SOItems addedProds={items} setProds={setItems} orderId={id}/>
       </div>
 
 		</div>

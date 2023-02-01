@@ -67,9 +67,9 @@ function NewSOForm(closeModal) {
         endDate: endDate,
         shippingMethod: selectedShippingMethod,
         shippingDay: Number(selectedShippingDay)
-  }
+    } 
 
-  addSO({standingOrder: newStandingOrder});
+    addSO({standingOrder: newStandingOrder});
     closeModal();
   }
 

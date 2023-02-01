@@ -1,11 +1,43 @@
+export const PRODUCT_TYPES_QUERY =  `
+    query product{
+        productTypes {
+            id
+            name
+            uoms
+        }
+    }`;
+
 export const PRODUCTS_QUERY =  `
-    query {
+    query products{
         products {
             id
             name
-            varieties
-            lens
             uom
+            sizes
+        }
+    }`;
+
+export const VARIETIES_QUERY = `
+    query varieties{
+        varieties {
+            id
+            product {
+                name
+                type {
+                    name
+                }
+            }
+            name
+            colors
+            tags
+        }
+    }`;
+
+export const VARIETIES_BY_PRODUCT_ID_QUERY = `
+    query varietiesByProdID($prodID: String!) {
+        varietiesByProdID(prodID: $prodID) {
+            id
+            name
         }
     }`;
 
@@ -24,29 +56,30 @@ export const STANDING_ORDERS_QUERY = `
 export const STANDING_ORDER_QUERY = `
     query standingOrder($id: String!) {
         standingOrder(id: $id) {
-            vendor {
-                shortHand
-            }
-            startDate
-            endDate
-            shippingMethod {
-                shortHand
-            }
-            shippingDay
-            items {
-                _id
-                prod
-                len
-                uom
-                var
-                boxCount
-                boxType
-                qtyPerBox
-                pricePerUnit
-                totalQty
-                totalPrice
-            }
+            _id
+        vendor {
+          shortHand
         }
+        shippingMethod {
+          shortHand
+        }
+        startDate
+        endDate
+        shippingDay
+        items {
+            _id
+            prodName
+            size
+            varName
+            boxCount
+            boxType
+            qtyPerBox
+            uom
+            pricePerUnit
+            totalQty
+            totalPrice
+        }
+      }
     }`;
 
 export const VENDORS_QUERY = `
@@ -88,9 +121,9 @@ export const EVENT_QUERY = `
             }
             items {
                 _id
-                prod
-                len
-                var
+                prodName
+                size
+                varName
                 uom
                 quantity
             }

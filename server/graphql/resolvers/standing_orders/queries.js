@@ -1,5 +1,5 @@
 import moment from 'moment'
-import StandingOrder from '../../../models/standingOrder.js'
+import StandingOrder from '../../../models/standing_order.js'
 
 
 //changes moment instance to return 'N/A' instead of invalid on invalid dates
@@ -23,10 +23,16 @@ const standingOrderQueries = {
     
     standingOrder: async (_, { id }) => {
         return StandingOrder.findById(id).populate('vendor').populate('shippingMethod')
+            .populate({ path: 'items.variety', populate: {path: 'product'} })
             .then( res => {
                let formatted = res.toObject()
-               formatted.startDate = moment(res.startDate).format("MM/DD/YY") || "N/A"
-               formatted.endDate = moment(res.endDate).format("MM/DD/YY") || "N/A"
+               formatted.startDate = moment(res.startDate).format("MM/DD/YY")
+               formatted.endDate = moment(res.endDate).format("MM/DD/YY")
+               formatted.items.forEach(item => {
+                    item.prodName = item.variety.product.name
+                    item.varName = item.variety.name
+                    item.uom = item.variety.product.uom
+                })
                return formatted
             })
     },

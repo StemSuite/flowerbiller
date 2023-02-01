@@ -5,13 +5,13 @@ import { DELETE_SO_ITEM } from "../../lib/Mutations.js";
 
 function SOItems(props) {
   const [sortValue, setSort] = useState({label: 'Product', ascending: true});
-  const [sortedProds, setProds] = useState(sort[sortValue.label].func(props.addedProds))
+  const [sortedItems, setItems] = useState(sort[sortValue.label].func(props.addedProds))
   const [ , deleteSOItem] = useMutation(DELETE_SO_ITEM)
 
   useEffect(() =>{
     let prodsCopy = [...props.addedProds]
     let sortedProds = sort[sortValue.label].func(prodsCopy)
-    setProds(sortValue.ascending ? sortedProds : sortedProds.reverse())
+    setItems(sortValue.ascending ? sortedProds : sortedProds.reverse())
   },[props.addedProds, sortValue])
 
   function changeSort(header, ascending) {
@@ -23,9 +23,9 @@ function SOItems(props) {
   }
 
   let fields = [ 
-    { header: 'Product', key: 'prod'},
-    { header: 'Len', key: 'len'},
-    { header: 'Variety', key: 'var'},
+    { header: 'Product', key: 'prodName'},
+    { header: 'Variety', key: 'varName'},
+    { header: 'Size', key: 'size'},
     { header: 'Boxes', key: 'boxCount'},
     { header: 'Box Type', key: 'boxType'},
     { header: 'Qty/Box', key: 'qtyPerBox'},
@@ -39,14 +39,14 @@ function SOItems(props) {
     return <th className="sort-header" key={i} onClick={() => changeSort(field.header, !sortValue.ascending)}>{field.header}</th>
    })
 
-  let prodList = sortedProds.map(prod => {
-    prod.pricePerUnit = Number(prod.pricePerUnit).toFixed(2)
-    prod.totalPrice = Number(prod.totalPrice).toFixed(2)
+  let prodList = sortedItems.map(item => {
+    if (typeof item.pricePerUnit !== 'string') item.pricePerUnit = '$' + item.pricePerUnit.toFixed(2)
+    if (typeof item.totalPrice !== 'string') item.totalPrice = '$' + item.totalPrice.toFixed(2)
     
     return (
-      <tr  key={prod._id}>
-        {fields.map((field, i) => <td key={i}>{prod[field.key]}</td>)}
-        <td id="delete-button"><button onClick={() => deleteProd(prod._id)}>Delete</button></td>
+      <tr  key={item._id}>
+        {fields.map((field, i) => <td key={i}>{ item[field.key]}</td>)}
+        <td id="delete-button"><button onClick={() => deleteProd(item._id)}>Delete</button></td>
       </tr>
       )
     })

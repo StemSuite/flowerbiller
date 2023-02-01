@@ -195,7 +195,7 @@ form.newEvent #submit {
 
 #product-table {
   border-collapse: collapse;
-  display: inline-table;
+  display: table;
   width: 100%;
   max-width: 8in;
 }
@@ -250,3 +250,52 @@ form.newEvent #submit {
   background-color: rgb(209, 231, 209);
 }
 
+.modalButtons {
+  display: inline-flex;
+  align-items: center;
+}
+
+.modalButtons .openModalButton {
+  margin: 10px;
+}
+
+form.newProduct {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+form.newProduct label {
+  display: block;
+  text-align: center;
+  line-height: 150%;
+  font-size: .85em;
+  margin: 5px;
+}
+
+form.newProduct select {
+  align-self: center;
+  min-width: 80px;
+  height: 27px;
+  margin-right: 5px;
+  display: block;
+}
+
+form.newProduct input {
+  height: 22px;
+  margin: auto;
+  margin-right: 5px;
+  display: block;
+}
+
+#instructions {
+  list-style: circle;
+  display: block;
+  font-size: .8em;
+}
+
+form.newProduct #submit {
+  margin-top: 32px;
+  height: 27px;
+}

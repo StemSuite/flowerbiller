@@ -1,16 +1,15 @@
 type EventItem {
     _id: String!
-    prod: String!
-    len: String
-    var: String
+    prodName: String!
+    size: String!
+    varName: String!
     uom: String!
     quantity: Int!
 }
 
 input EventItemInput {
-    prod: String!
-    len: String
-    var: String
+    variety: String
+    size: String
     uom: String!
     quantity: Int!
 }

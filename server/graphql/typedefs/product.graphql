@@ -1,14 +1,40 @@
-type Product {
+type ProductType {
     id: String!
     name: String!
-    varieties: [String]
-    lens: [String]
+    uoms: [String]
+}
+
+input AddProductTypeInput {
+    name: String!
+    uoms: [String]
+}
+
+type Product {
+    id: String!
+    type: ProductType!
+    name: String!
     uom: String!
+    sizes: [String]
 }
 
 input AddProductInput {
+    type: String!
     name: String!
-    varieties: [String]
-    lens: [String]
     uom: String!
+    sizes: [String]
+}
+
+type Variety {
+    id: String!
+    product: Product
+    name: String!
+    colors: [String]
+    tags: [String]
+}
+
+input AddVarietyInput {
+    product: String!
+    name: String!
+    colors: [String]
+    tags: [String]
 }

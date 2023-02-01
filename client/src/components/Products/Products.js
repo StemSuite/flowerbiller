@@ -1,10 +1,17 @@
-import ProductsList from "./ProductsList";
+import NewProductModal from "./modals/NewProduct";
+import NewVarietyModal from "./modals/NewVariety";
+import VarietiesList from "./VarietiesList";
 
 function Products() {
 
     return (
         <div>
-            <ProductsList />
+            <h2>Products</h2>
+            <div className="modalButtons">
+                <NewProductModal/>
+                <NewVarietyModal/>
+            </div>
+            <VarietiesList />
         </div>
     )
 }

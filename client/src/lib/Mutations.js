@@ -1,9 +1,7 @@
 export const ADD_SO_ITEM = `
     mutation addSOItem($standingOrderId: String! $item: StandingOrderItemInput!) {
         addSOItem(standingOrderId: $standingOrderId, item: $item) {
-            items {
-                prod
-            }
+            _id
         }
     }`;
 
@@ -32,7 +30,7 @@ export const ADD_EVENT_ITEM=`
     mutation addEventItem($eventID: String!, $item: EventItemInput!) {
         addEventItem(eventID: $eventID, item: $item) {
             items {
-                prod
+                _id
             }
         }
     }`;
@@ -43,3 +41,19 @@ export const DELETE_EVENT_ITEM=`
             _id
         }
     }`;
+
+export const ADD_VARIETY_MUTATION=`
+    mutation addVariety($variety: AddVarietyInput!) {
+        addVariety(variety: $variety) {
+            id
+        }
+    }
+`
+
+export const ADD_PRODUCT_MUTATION=`
+    mutation addProduct($product: AddProductInput!) {
+        addProduct(product: $product) {
+            id
+        }
+    }
+`

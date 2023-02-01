@@ -1,5 +1,5 @@
 import Purchase from '../../../models/purchase.js';
-import StandingOrder from '../../../models/standingOrder.js';
+import StandingOrder from '../../../models/standing_order.js';
 
 const purchaseMutations = {
     addPurchase: async(_, {purchase}) => {

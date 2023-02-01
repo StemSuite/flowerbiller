@@ -1,4 +1,8 @@
 type Query {
+    productTypes: [ProductType]
+
+    productType(id: String!): ProductType!
+
     products: [Product]
 
     product(id: String!): Product!
@@ -6,6 +10,12 @@ type Query {
     purchases: [Purchase]
     
     purchase(id: String!): Purchase!
+
+    varieties: [Variety]
+
+    variety(id: String): Variety!
+
+    varietiesByProdID(prodID: String!): [Variety]
 
     standingOrders: [StandingOrder]
 
@@ -29,7 +39,11 @@ type Query {
 }
 
 type Mutation {
+    addProductType(productType: AddProductTypeInput): ProductType!
+
     addProduct(product: AddProductInput!): Product!
+
+    addVariety(variety: AddVarietyInput): Variety!
 
     addPurchase(purchase: AddPurchaseInput!): Purchase!
 

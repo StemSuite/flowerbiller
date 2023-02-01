@@ -28,9 +28,9 @@ function EventItems(props) {
   }
 
   let fields = [ 
-    { header: 'Product', key: 'prod'},
-    { header: 'Len', key: 'len'},
-    { header: 'Variety', key: 'var'},
+    { header: 'Product', key: 'prodName'},
+    { header: 'Variety', key: 'varName'},
+    { header: 'Size', key: 'size'},
     { header: 'UoM', key: 'uom'},
     { header: 'QTY', key: 'quantity'},
    ]

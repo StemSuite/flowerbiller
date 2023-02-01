@@ -35,7 +35,7 @@ function FormModal(props) {
 
   return (
     <div>
-        <button onClick={openModal}>Create New</button>
+        <button className="openModalButton" onClick={openModal}>{props.title}</button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}

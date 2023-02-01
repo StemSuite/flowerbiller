@@ -1,4 +1,4 @@
-import StandingOrder from '../../../models/standingOrder.js';
+import StandingOrder from '../../../models/standing_order.js';
 
 const standingOrderMutations = {
     addStandingOrder: async (_, {standingOrder}) => {

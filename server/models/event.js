@@ -8,9 +8,8 @@ const eventSchema = new Schema({
     location: { type: String },
     date: { type: Date, required: true },
     items: [{
-        prod: String,
-        len: String,
-        var: String,
+        variety: { type: Schema.Types.ObjectId, ref: "variety" }, 
+        size: String,
         uom: String,
         quantity: Number
     }],

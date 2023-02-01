@@ -8,10 +8,8 @@ const standingOrderSchema = new Schema({
     shippingDay: { type: Number, required: true },
     shippingMethod: { type: Schema.Types.ObjectId, ref: "shippingMethod", required: true },
     items: [{
-        prod: String,
-        len: String,
-        var: String,
-        uom: String,
+        variety: { type: Schema.Types.ObjectId, ref: "variety" }, 
+        size: String,
         boxCount: Number,
         boxType: String,
         qtyPerBox: Number,
