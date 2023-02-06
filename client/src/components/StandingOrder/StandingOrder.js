@@ -19,7 +19,7 @@ function StandingOrder () {
   const { data, fetching, error } = standingOrder;
 
   useEffect(() => {
-    if (data === undefined) return 
+    if (data === undefined) return
     setItems(data.standingOrder.items)
   }, [data])
 
@@ -34,15 +34,15 @@ function StandingOrder () {
       <div id="info-title">
         <div>
           <label htmlFor="soVendor">Vendor</label>
-          <h4 name="soVendor" id="so-vendor">{info.vendor.shortHand}</h4>
+          <h4 name="soVendor" id="so-vendor">{info.venSH}</h4>
         </div>
         <div>
           <label htmlFor="soDates">Dates</label>
-          <h4 name="soDates" id="so-dates">{info.startDate} - {info.endDate}</h4>
+          <h4 name="soDates" id="so-dates">{info.fstartDate} - {info.fendDate}</h4>
         </div>
         <div>
           <label htmlFor="soShipping">Shipping</label>
-          <h4 name="soShipping" id="so-shipping">{daysOfTheWeek[info.shippingDay]}(s) via {info.shippingMethod.shortHand}</h4>
+          <h4 name="soShipping" id="so-shipping">{daysOfTheWeek[info.shippingDay]}(s) via {info.shipSH}</h4>
         </div>
       </div>
 

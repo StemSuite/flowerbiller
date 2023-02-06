@@ -31,11 +31,11 @@ function Event() {
             <div id="info-title">
                 <div>
                     <label htmlFor="eventStore">Store</label>
-                    <h4 name="eventStore" id="event-store">{data.event.store.name}</h4>
+                    <h4 name="eventStore" id="event-store">{data.event.store}</h4>
                 </div>
                 <div>
                     <label htmlFor="eventDate">Date</label>
-                    <h4 name="eventDate" id="event-date">{data.event.date}</h4>
+                    <h4 name="eventDate" id="event-date">{data.event.fdate}</h4>
                 </div>
                 <div>
                     <label htmlFor="eventTitle">Title</label>

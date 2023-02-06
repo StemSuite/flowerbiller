@@ -3,23 +3,25 @@ import { STANDING_ORDERS_QUERY } from "../../lib/Queries.js";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom"
 import NewStandingOrder from "./modals/NewStandingOrder.js";
+import { daysOfTheWeek } from "../../lib/data.js";
+
 
 function StandingOrders () {
 
   const [sorting, setSorting] = useState({ key: 'venSH', ascending: true });
   const [standingOrders, setStandingOrders] = useState([]);
 
-  useEffect(() => {
-    const currentSOCopy = [...standingOrders];
+  // useEffect(() => {
+  //   const currentSOCopy = [...standingOrders];
 
-    const sortedSOs = currentSOCopy.sort((a, b) => {
-      return a[sorting.key].localeCompare(b[sorting.key]);
-    });
+  //   const sortedSOs = currentSOCopy.sort((a, b) => {
+  //     return a[sorting.key].localeCompare(b[sorting.key]);
+  //   });
 
-    // setStandingOrders(
-    //   sorting.ascending ? sortedSOs : sortedSOs.reverse()
-    // );
-  }, [sorting, standingOrders]);
+  //   setStandingOrders(
+  //     sorting.ascending ? sortedSOs : sortedSOs.reverse()
+  //   );
+  // }, [sorting, standingOrders]);
   
     const [standingOrder] = useQuery({
       query: STANDING_ORDERS_QUERY,
@@ -37,8 +39,11 @@ function StandingOrders () {
 
     let fields = [
       {header: 'Vendor', key: "venSH"},
-      {header: 'Start Date', key: 'startDate'},
-      {header: 'End Date', key: 'endDate'}
+      {header: 'Shipping via', key: "shipSH"},
+      {header: 'Start Date', key: 'fstartDate'},
+      {header: 'End Date', key: 'fendDate'},
+      {header: 'Shipping Day', key: 'dayOfWeek'},
+      {header: '# of Items', key: 'itemCount'}
     ]
 
     function applySorting (key, ascending) {
@@ -50,7 +55,7 @@ function StandingOrders () {
      })
 
     let list = standingOrders.map(so => {
-      so.venSH = so.vendor.shortHand
+      so.dayOfWeek = daysOfTheWeek[so.shippingDay]
       return (
         <tr  key={so._id} >
           {fields.map((field, i) => <td key={i}>{so[field.key]}</td>)}

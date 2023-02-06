@@ -3,8 +3,7 @@ import Event from '../../../models/event.js';
 const eventMutations = {
     addEvent: async (_, { event }) => {
         let newEvent = new Event( event )
-        return await newEvent.save()
-            .then(res => res.populate('store'))
+        return newEvent.save()
     },
 
     addEventItem: async(_, {eventID, item}) => {

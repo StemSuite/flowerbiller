@@ -3,11 +3,13 @@ import StandingOrder from '../../../models/standing_order.js';
 const standingOrderMutations = {
     addStandingOrder: async (_, {standingOrder}) => {
         let newStandingOrder = new StandingOrder( standingOrder )
-        return await newStandingOrder.save()
-            .then(res => res.populate('vendor'))
+        return newStandingOrder.save()
     },
 
     addSOItem: async(_, {standingOrderId, item}) => {
+        item.totalQty = item.boxCount * item.qtyPerBox
+        item.totalPrice = item.totalQty * item.pricePerUnit
+
         return StandingOrder.findByIdAndUpdate(standingOrderId, 
             {$push: {items: item}}, 
             {new: true}

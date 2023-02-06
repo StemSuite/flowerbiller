@@ -8,5 +8,5 @@ type Vendor {
 input AddVendorInput {
     name: String!
     shortHand: String!
-    shippingMethods: [String!]
+    shippingMethods: [AddShippingMethodInput]
 }

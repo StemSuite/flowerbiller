@@ -1,33 +1,44 @@
-type EventItem {
-    _id: String!
-    prodName: String!
-    size: String!
-    varName: String!
-    uom: String!
-    quantity: Int!
-}
-
-input EventItemInput {
-    variety: String
-    size: String
-    uom: String!
-    quantity: Int!
-}
-
 type Event {
     _id: String!
-    store: Store!
+    store: String
     title: String!
     customer: String!
+    date: String
+    fdate: String
+    formdate: String
     location: String
-    date: String!
+    delivery: EventDelivery
+    pickUp: EventDelivery
     items: [EventItem]
+    itemCount: Int
 }
 
 input AddEventInput {
     store: String!
     title: String!
     customer: String!
-    location: String
     date: String!
+    location: String
+}
+
+type EventItem {
+    _id: String!
+    product: String!
+    variety: String!
+    size: String!
+    uom: String!
+    quantity: Int!
+}
+
+input EventItemInput {
+    product: String!
+    variety: String!
+    size: String!
+    uom: String!
+    quantity: Int!
+}
+
+type EventDelivery {
+    required: Boolean
+    time: String
 }

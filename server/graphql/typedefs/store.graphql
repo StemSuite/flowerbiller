@@ -2,6 +2,7 @@ type Store {
     id: String!
     number: Int
     name: String!
+    shortHand: String
     address: String
 
 }
@@ -9,5 +10,6 @@ type Store {
 input AddStoreInput {
     number: Int
     name: String!
+    shortHand: String
     address: String
 }

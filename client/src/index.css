@@ -49,7 +49,7 @@ code {
   width: 100px;
 }
 
-.purchaseForm #varietyField {
+.purchaseForm #variety-field {
   min-width: 100px;
   width: max-content;
 }

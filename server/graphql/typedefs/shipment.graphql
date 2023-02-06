@@ -1,0 +1,6 @@
+type Shipment {
+    shipSH: String!
+    shippingDate: String!
+    arrivalDate: String!
+    itemCount: Int!
+}

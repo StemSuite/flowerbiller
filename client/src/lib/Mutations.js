@@ -43,8 +43,8 @@ export const DELETE_EVENT_ITEM=`
     }`;
 
 export const ADD_VARIETY_MUTATION=`
-    mutation addVariety($variety: AddVarietyInput!) {
-        addVariety(variety: $variety) {
+    mutation addVariety($productID: String!, $variety: AddVarietyInput!) {
+        addVariety(productID: $productID, variety: $variety) {
             id
         }
     }

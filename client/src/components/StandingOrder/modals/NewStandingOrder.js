@@ -41,16 +41,19 @@ function NewSOForm(closeModal) {
   }
 
   function changeVen(event) {
-    let vendorID = event.target.value
-    let shippingMethodOptions = data.vendors.find(ven => ven.id === vendorID).shippingMethods
-    setVen(vendorID)
+    let vendorSH = event.target.value
+    let vendor = data.vendors.find(ven => ven.shortHand === vendorSH)
+    let shippingMethodOptions = vendor.shippingMethods
+
+    setVen(vendor)
     setShippingMethodOptions(shippingMethodOptions)
   }
 
   function changeShippingOptions(event) {
     let methodID = event.target.value
-    let shippingDays = shippingMethodOptions.find(method => method.id === methodID).shippingDays
-    setShippingMethod(methodID)
+    let shippingMethod = shippingMethodOptions.find(method => method.id === methodID)
+    let shippingDays = shippingMethod.shippingDays
+    setShippingMethod(shippingMethod)
     setShippingDayOptions(shippingDays)
   }
 
@@ -62,11 +65,12 @@ function NewSOForm(closeModal) {
     event.preventDefault()
 
     let newStandingOrder = {
-        vendor: selectedVen,
+        venSH: selectedVen.shortHand,
+        shipSH: selectedShippingMethod.shortHand,
         startDate: startDate,
         endDate: endDate,
-        shippingMethod: selectedShippingMethod,
-        shippingDay: Number(selectedShippingDay)
+        shippingDay: Number(selectedShippingDay),
+        daysToArrive: selectedShippingMethod.daysToArrive,
     } 
 
     addSO({standingOrder: newStandingOrder});
@@ -75,7 +79,7 @@ function NewSOForm(closeModal) {
 
   return (
     <form className="newStandingOrder" onSubmit={handleSubmit}>
-      <VendorField vendors={data.vendors} selectedVen={selectedVen} onChange={changeVen}/>
+      <VendorField vendors={data.vendors} selectedVen={selectedVen} changeVen={changeVen}/>
       <ShippingMethodField options={shippingMethodOptions} selectedMethod={selectedShippingMethod} onChange={changeShippingOptions}/>
       <div>
         <label htmlFor="startdate" className="date">Start Date</label>

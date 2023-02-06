@@ -22,8 +22,9 @@ function Events() {
     let fields = [
       {header: 'Customer', key: "customer"},
       {header: 'Title', key: "title"},
-      {header: 'Date', key: 'date'},
-      {header: 'Store', key: 'storeName'},
+      {header: 'Date', key: 'fdate'},
+      {header: 'Store', key: 'store'},
+      {header: '# of Items', key: 'itemCount'}
     ]
 
     let headers = fields.map((field, i) => {
@@ -31,7 +32,6 @@ function Events() {
     })
 
     let list = data.events.map(event => {
-      event.storeName = event.store.name
       return (
         <tr key={event._id}>
           {fields.map((field, i) => <td key={i}>{event[field.key]}</td>)}

@@ -7,10 +7,6 @@ type Query {
 
     product(id: String!): Product!
 
-    purchases: [Purchase]
-    
-    purchase(id: String!): Purchase!
-
     varieties: [Variety]
 
     variety(id: String): Variety!
@@ -36,6 +32,8 @@ type Query {
     event(id: String!): Event!
 
     events: [Event]
+
+    shipmentsByDates(startDate: String!, endDate: String!): [Shipment]
 }
 
 type Mutation {
@@ -43,11 +41,7 @@ type Mutation {
 
     addProduct(product: AddProductInput!): Product!
 
-    addVariety(variety: AddVarietyInput): Variety!
-
-    addPurchase(purchase: AddPurchaseInput!): Purchase!
-
-    deletePurchase(purchID: String!, standingOrderID: String!): Purchase!
+    addVariety(productID: String!, variety: AddVarietyInput!): Product!
 
     addSOItem(standingOrderId: String!, item: StandingOrderItemInput!): StandingOrder!
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMutation } from 'urql';
 import { ADD_EVENT } from '../../../lib/Mutations';
 import StoreField from '../../shared/InputFields/StoreField';
@@ -5,13 +6,14 @@ import FormModal from '../../shared/modals/FormModal';
 
 function NewEventForm(closeModal) {
 
+  const [store, setStore] = useState({})
+
   const [ , addEvent] = useMutation(ADD_EVENT)
   //   const [deliveryRequired, setDelivery] = useState('')
 
 
   // eventualy want to add functionality to put in delivery and pick up info
   //   function handleDeliveryChange(event) {
-  //     console.log(!deliveryRequired)
   //     setDelivery(!deliveryRequired)
   //   }
 
@@ -28,8 +30,9 @@ function NewEventForm(closeModal) {
 
   function handleSubmit(event) {
     event.preventDefault()
+
     let newEvent = {
-        store: event.target.newEventStore.value,
+        store: store.name,
         title: event.target.newEventTitle.value,
         customer: event.target.newEventCustomer.value,
         date: event.target.newEventDate.value
@@ -41,7 +44,7 @@ function NewEventForm(closeModal) {
 
   return (
     <form className="newEvent" onSubmit={handleSubmit}>
-        <StoreField name="newEventStore" htmlID="new-event-store"/>
+        <StoreField name="newEventStore" htmlID="new-event-store" setStore={setStore}/>
         <div>
           <label htmlFor="newEventTitle" className="event-title">Event Title</label>
           <input type="text" id="event-title" name="newEventTitle" className="event-title"></input>

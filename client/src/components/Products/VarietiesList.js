@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useQuery } from "urql"
 import { VARIETIES_QUERY } from "../../lib/Queries"
 
-function VarietiesList() {
+function VarietiesList({varieties, setVarieties}) {
 
-    let headers = ['Type', 'Product', 'Variety', 'Colors', 'Tags']
+    let headers = ['Product', 'Variety', 'Colors', 'Tags']
 
     const [fetchedVarieties] = useQuery({
         query: VARIETIES_QUERY
@@ -13,8 +13,9 @@ function VarietiesList() {
     const { data, fetching, error } = fetchedVarieties;
 
     useEffect(() => {
-        if (data === undefined) return 
-    }, [data])
+        if (data === undefined) return
+        setVarieties(data.varieties)
+    }, [data, setVarieties])
 
     if (fetching) return "Loading...";
     if (error) return <pre>{error.message}</pre>
@@ -28,11 +29,10 @@ function VarietiesList() {
     }
 
     function Varieties() {
-        return data.varieties.map(variety =>  {
-            return <tr key={variety.id}>
-                <td>{variety.product.type.name}</td>
-                <td>{variety.product.name}</td>
-                <td>{variety.name}</td>
+        return varieties.map((variety, i) =>  {
+            return <tr key={i}>
+                <td>{variety.product}</td>
+                <td>{variety.variety}</td>
                 <td>{variety.colors.map((color, i) => {
                     return <span key={i}>{variety.colors[i+1] ? `${color}, ` : color}</span>
                 })}</td>

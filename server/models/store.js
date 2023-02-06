@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const storeSchema = new Schema({
     number: Number,
-    name: String,
+    name: { type: String, required: true},
+    shortHand: String,
     address: String,
 });
 

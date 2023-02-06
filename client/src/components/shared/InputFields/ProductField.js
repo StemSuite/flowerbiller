@@ -1,24 +1,7 @@
-import { useQuery } from "urql";
-import { PRODUCTS_QUERY } from "../../../lib/Queries";
-
-function ProductField(props) {
-  let inputProd = props.inputProd
-  let setProduct = props.setProduct
-  let setUOM = props.setUOM
-  
-  const [fetchedProds] = useQuery({
-    query: PRODUCTS_QUERY
-  });
-
-  const { data, fetching, error } = fetchedProds;
-
-  if (fetching) return "Loading...";
-  if (error) return <pre>{error.message}</pre>
-
-  let products = data.products
+function ProductField({products, inputProd, setProduct, setUOM}) {
 
   function changeProduct(event) {
-    let product = data.products.find(prd => prd.name === event.target.value);
+    let product = products.find(prd => prd.name === event.target.value);
     if (setUOM) setUOM(product.uom);
 		setProduct(product || {});
 	}

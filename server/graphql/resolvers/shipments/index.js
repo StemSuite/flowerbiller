@@ -1,0 +1,1 @@
+export { default as shipmentQueries } from './queries.js';

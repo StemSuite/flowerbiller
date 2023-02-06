@@ -23,8 +23,8 @@ function SOItems(props) {
   }
 
   let fields = [ 
-    { header: 'Product', key: 'prodName'},
-    { header: 'Variety', key: 'varName'},
+    { header: 'Product', key: 'product'},
+    { header: 'Variety', key: 'variety'},
     { header: 'Size', key: 'size'},
     { header: 'Boxes', key: 'boxCount'},
     { header: 'Box Type', key: 'boxType'},
@@ -40,6 +40,7 @@ function SOItems(props) {
    })
 
   let prodList = sortedItems.map(item => {
+
     if (typeof item.pricePerUnit !== 'string') item.pricePerUnit = '$' + item.pricePerUnit.toFixed(2)
     if (typeof item.totalPrice !== 'string') item.totalPrice = '$' + item.totalPrice.toFixed(2)
     

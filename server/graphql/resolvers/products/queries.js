@@ -1,6 +1,5 @@
 import Product from '../../../models/product.js'
 import ProductType from '../../../models/product_type.js'
-import Variety from '../../../models/variety.js'
 
 const productQueries = {
     productTypes: async () => {
@@ -12,7 +11,7 @@ const productQueries = {
     },
 
     products: async () => {
-        return Product.find().populate('type')
+        return Product.find()
     },
     
     product: async (_, {id}) => {
@@ -20,16 +19,22 @@ const productQueries = {
     },
 
     varieties: async () => {
-       return Variety.find().populate({ path: 'product', populate: {path: 'type'} })
-    },
+        return Product.aggregate([
+            { $unwind: {
+                    path: "$varieties",
+                }
+            },
+             { $project: {
+                    product: "$name",
+                    variety: "$varieties.name",
+                    colors: "$varieties.colors",
+                    tags: "$varieties.tags"
+                }
+            },
+            { $sort : { product : 1, variety: 1 }}
+        ])
+    }
 
-    variety: async (_, {id}) => {
-        return Variety.findById(id)
-     },
-
-     varietiesByProdID: async (_, {prodID}) => {
-        return Variety.find({product: prodID})
-     },
 }
 
 export default productQueries;

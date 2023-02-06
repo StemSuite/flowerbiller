@@ -4,12 +4,14 @@ import { ADD_PRODUCT_MUTATION } from "../../../lib/Mutations";
 import FormModal from "../../shared/modals/FormModal";
 import ProductTypesField from "../../shared/InputFields/ProductTypeField";
 import UOMsField from "../../shared/InputFields/UOMsField";
+import DaysToExpField from "../../shared/InputFields/DaysToExpField";
 
 function NewProductForm(closeModal) {
     const [ , addProduct] = useMutation(ADD_PRODUCT_MUTATION)
 
     const [selectedType, setType] = useState(null)
     const [UOMs, setUOMs] = useState([])
+    const [expDays, setExpDays] = useState(null)
 
     function formatSizes(sizes) {
         return sizes.split(',').map(size => size.trim())
@@ -23,6 +25,7 @@ function NewProductForm(closeModal) {
             type: selectedType.id,
             name: event.target.newProduct.value,
             uom: event.target.uomField.value,
+            daysToExp: Number(event.target.expField.value)
         }
 
         if (event.target.sizesField.value) newProduct.sizes = formatSizes(event.target.sizesField.value)
@@ -35,9 +38,11 @@ function NewProductForm(closeModal) {
         <div>
             <ul id="instructions">
                 <li>Seperate Sizes by a comma (,) if there are multiple</li>
+                <li>Products will automatically be removed from inentory the # of days after thier arrival specified by 'Days to Expiration'</li>
+                <li>For the product to never expire delete any number in 'Days to Expiration' and leave it blank</li>
             </ul>
             <form className="newProduct" onSubmit={handleSubmit}>
-                <ProductTypesField setType={setType} setUOMs={setUOMs}/>
+                <ProductTypesField setType={setType} setUOMs={setUOMs} setExpDays={setExpDays}/>
                 <div>
                     <label htmlFor="newProduct" className="new-product">New Product</label>
                     <input type="text" id="new-product" name="newProduct"></input>
@@ -47,6 +52,7 @@ function NewProductForm(closeModal) {
                     <label htmlFor="sizesField" className="sizes-input">Size(s)</label>
                     <input type="text" id="sizes-input" name="sizesField"></input>
                 </div>
+                <DaysToExpField label={"Days to Expiration"} defaultDays={expDays}/>
                 <input id="submit" type="submit" value="Add" />
             </form>
         </div>

@@ -4,6 +4,7 @@ import { PRODUCT_TYPES_QUERY } from "../../../lib/Queries";
 function ProductTypesField(props) {
   let setType = props.setType
   let setUOMs = props.setUOMs
+  let setExpDays = props.setExpDays
   
   const [fetchedTypes] = useQuery({
     query: PRODUCT_TYPES_QUERY
@@ -17,15 +18,15 @@ function ProductTypesField(props) {
   let types = data.productTypes
 
   function changeType(event) {
-    console.log(data)
     let type = data.productTypes.find(type => type.name === event.target.value);
     if (setUOMs) setUOMs(type.uoms || []);
-	setType(type || {});
+    setExpDays(type.defaultDaysToExp)
+	  setType(type || {});
   }
 
   return (
     <div>
-      <label htmlFor="typeField">Product</label>
+      <label htmlFor="typeField">Product Type</label>
       <select name="typeField" id="type" onChange={changeType}>
         <option hidden> </option>
         {types.map(prod => {

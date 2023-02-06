@@ -5,8 +5,10 @@ const vendorSchema = new Schema({
     name: {type: String, required: true },
     shortHand: {type: String, required: true, maxLength: 4 },
     shippingMethods: [{
-        type: Schema.Types.ObjectId,
-        ref: "shippingMethod"
+        name: {type: String, required: true },
+        shortHand: {type: String, required: true },
+        shippingDays: {type: [Number], required: true },
+        daysToArrive: {type: Number, required: true },
     }],
 });
 

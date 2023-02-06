@@ -7,6 +7,7 @@ import StandingOrders from "./components/StandingOrder/StandingOrders.js";
 import Events from "./components/Events/Events.js";
 import Event from "./components/Events/Event.js";
 import Products from "./components/Products/Products.js";
+import Shipments from "./components/Shipments/Shipments.js";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/event/:id" element={<Event />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/shipments" element={<Shipments />} />
       </Routes>
     </BrowserRouter>
     </div>

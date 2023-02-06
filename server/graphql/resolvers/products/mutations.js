@@ -1,6 +1,5 @@
 import Product from '../../../models/product.js';
 import ProductType from '../../../models/product_type.js';
-import Variety from '../../../models/variety.js';
 
 const productMutations = {
 
@@ -14,9 +13,11 @@ const productMutations = {
         return newProduct.save()
     },
 
-    addVariety: async(_, {variety}) => {
-        let newVariety = new Variety (variety)
-        return newVariety.save()
+    addVariety: async(_, {productID, variety}) => {
+        return Product.findByIdAndUpdate(productID, 
+            {$push: {varieties: variety}},
+            {new: true}
+        )
     }
 }
 

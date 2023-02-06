@@ -1,42 +1,47 @@
+type StandingOrder {
+    _id: String!
+    venSH: String!
+    shipSH: String!
+    startDate: String!
+    fstartDate: String!
+    endDate: String
+    fendDate: String
+    shippingDay: Int!
+    daysToArrive: Int!
+    itemCount: Int
+    items: [StandingOrderItem]
+}
+
+input AddStandingOrderInput {
+    venSH: String!
+    shipSH: String!
+    startDate: String!
+    endDate: String
+    shippingDay: Int!
+    daysToArrive: Int!
+}
+
 type StandingOrderItem {
     _id: String!
-    prodName: String!
+    product: String!
+    variety: String
+    uom: String!
     size: String!
-    varName: String!
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!
-    uom: String!
     pricePerUnit: Float!
     totalQty: Int!
     totalPrice: Float!
 }
 
 input StandingOrderItemInput {
-    variety: String!
-    size: String
+    product: String!
+    variety: String
+    uom: String!
+    size: String!
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!
     pricePerUnit: Float!
-    totalQty: Int!
-    totalPrice: Float!
-}
-
-type StandingOrder {
-    _id: String!
-    vendor: Vendor!
-    startDate: String!
-    endDate: String
-    shippingMethod: ShippingMethod!
-    shippingDay: Int!
-    items: [StandingOrderItem]
-}
-
-input AddStandingOrderInput {
-    vendor: String!
-    startDate: String!
-    endDate: String
-    shippingMethod: String!
-    shippingDay: Int!
 }

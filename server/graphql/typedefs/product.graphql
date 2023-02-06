@@ -2,19 +2,23 @@ type ProductType {
     id: String!
     name: String!
     uoms: [String]
+    defaultDaysToExp: Int
 }
 
 input AddProductTypeInput {
     name: String!
-    uoms: [String]
+    uoms: [String!]
+    defaultDaysToExp: Int!
 }
 
 type Product {
     id: String!
-    type: ProductType!
+    type: String!
     name: String!
     uom: String!
     sizes: [String]
+    daysToExp: Int!
+    varieties: [Variety]
 }
 
 input AddProductInput {
@@ -22,18 +26,19 @@ input AddProductInput {
     name: String!
     uom: String!
     sizes: [String]
+    daysToExp: Int!
 }
 
 type Variety {
-    id: String!
-    product: Product
-    name: String!
+    _id: String
+    name: String
+    product: String
+    variety: String
     colors: [String]
     tags: [String]
 }
 
 input AddVarietyInput {
-    product: String!
     name: String!
     colors: [String]
     tags: [String]

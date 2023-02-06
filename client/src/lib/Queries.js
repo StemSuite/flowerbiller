@@ -4,52 +4,58 @@ export const PRODUCT_TYPES_QUERY =  `
             id
             name
             uoms
+            defaultDaysToExp
         }
     }`;
 
-export const PRODUCTS_QUERY =  `
+export const PRODUCTS_ONLY_QUERY =  `
     query products{
         products {
             id
             name
             uom
             sizes
+            varieties {
+                name
+            }
+        }
+    }`;
+
+export const PRODUCTS_AND_VARIETIES_QUERY =  `
+    query products{
+        products {
+            id
+            name
+            uom
+            sizes
+            varieties {
+                name
+            }
         }
     }`;
 
 export const VARIETIES_QUERY = `
-    query varieties{
+    query varieties {
         varieties {
-            id
-            product {
-                name
-                type {
-                    name
-                }
-            }
-            name
+            _id
+            product
+            variety
             colors
             tags
         }
-    }`;
-
-export const VARIETIES_BY_PRODUCT_ID_QUERY = `
-    query varietiesByProdID($prodID: String!) {
-        varietiesByProdID(prodID: $prodID) {
-            id
-            name
-        }
-    }`;
+    }
+`
 
 export const STANDING_ORDERS_QUERY = `
     query standingOrders {
         standingOrders {
             _id
-            vendor {
-                shortHand
-            }
-            startDate
-            endDate
+            venSH
+            shipSH
+            fstartDate
+            fendDate
+            shippingDay
+            itemCount
         }
     }`;
 
@@ -57,28 +63,24 @@ export const STANDING_ORDER_QUERY = `
     query standingOrder($id: String!) {
         standingOrder(id: $id) {
             _id
-        vendor {
-          shortHand
-        }
-        shippingMethod {
-          shortHand
-        }
-        startDate
-        endDate
-        shippingDay
-        items {
-            _id
-            prodName
-            size
-            varName
-            boxCount
-            boxType
-            qtyPerBox
-            uom
-            pricePerUnit
-            totalQty
-            totalPrice
-        }
+            venSH
+            shipSH
+            fstartDate
+            fendDate
+            shippingDay
+            items {
+                _id
+                product
+                variety
+                size
+                boxCount
+                boxType
+                qtyPerBox
+                uom
+                pricePerUnit
+                totalQty
+                totalPrice
+            }
       }
     }`;
 
@@ -91,6 +93,7 @@ export const VENDORS_QUERY = `
                 id
                 shortHand
                 shippingDays
+                daysToArrive
             }
         }
     }`;
@@ -99,13 +102,11 @@ export const EVENTS_QUERY = `
     query events {
         events {
             _id
-            store {
-                name
-            }
             title
             customer
-            location
-            date
+            store
+            fdate
+            itemCount
         }
     }`;
 
@@ -115,15 +116,13 @@ export const EVENT_QUERY = `
             _id
             title
             customer
-            date
-            store {
-                name
-            }
+            fdate
+            store
             items {
                 _id
-                prodName
+                product
+                variety
                 size
-                varName
                 uom
                 quantity
             }

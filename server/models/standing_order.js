@@ -2,20 +2,25 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const standingOrderSchema = new Schema({
-    vendor: { type: Schema.Types.ObjectId, ref: "vendor", required: true },
+    venSH: { type: String, required: true },
+    shipSH: { type: String, required: true },
     startDate: { type: Date, required: true },
-    endDate: { type: Date, },
+    fstartDate: { type: String },
+    endDate: { type: Date },
+    fendDate: { type: String },
     shippingDay: { type: Number, required: true },
-    shippingMethod: { type: Schema.Types.ObjectId, ref: "shippingMethod", required: true },
+    daysToArrive: { type: Number, required: true },
     items: [{
-        variety: { type: Schema.Types.ObjectId, ref: "variety" }, 
-        size: String,
-        boxCount: Number,
-        boxType: String,
-        qtyPerBox: Number,
-        pricePerUnit: Number,
-        totalQty: Number,
-        totalPrice: Number,
+        product: { type: String, required: true },
+        variety: { type: String, required: true },
+        uom: { type: String, required: true },
+        size: { type: String, required: true },
+        boxCount: { type: Number, required: true },
+        boxType: { type: String, required: true },
+        qtyPerBox: { type: Number, required: true },
+        pricePerUnit: { type: Number, required: true },
+        totalQty: { type: Number, required: true },
+        totalPrice: { type: Number, required: true },
     }],
 }, {timestamps: true})
 

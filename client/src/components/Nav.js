@@ -11,6 +11,7 @@ function Nav() {
           <li><NavLink to="/standing_orders">Standing Orders</NavLink></li>
           <li><NavLink to="/events">Events</NavLink></li>
           <li><NavLink to="/products">Products</NavLink></li>
+          <li><NavLink to="/shipments">Shipments</NavLink></li>
         </ul>
       </nav>
     </div>
