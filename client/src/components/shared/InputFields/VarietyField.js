@@ -1,6 +1,8 @@
 function VarietyField({product}) {
   
     let varieties = product.varieties || []
+
+    if (varieties.length > 1) varieties = varieties.sort((a, b) => a.name.localeCompare(b.name))
  
     return (
     <div>

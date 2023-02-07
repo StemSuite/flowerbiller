@@ -11,7 +11,7 @@ const productQueries = {
     },
 
     products: async () => {
-        return Product.find()
+        return Product.find().sort({ name: 1})
     },
     
     product: async (_, {id}) => {
@@ -25,6 +25,7 @@ const productQueries = {
                 }
             },
              { $project: {
+                    _id: "$varieties._id", 
                     product: "$name",
                     variety: "$varieties.name",
                     colors: "$varieties.colors",

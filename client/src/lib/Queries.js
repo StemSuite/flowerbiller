@@ -15,9 +15,6 @@ export const PRODUCTS_ONLY_QUERY =  `
             name
             uom
             sizes
-            varieties {
-                name
-            }
         }
     }`;
 

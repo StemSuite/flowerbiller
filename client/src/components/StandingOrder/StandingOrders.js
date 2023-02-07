@@ -5,10 +5,18 @@ import { NavLink } from "react-router-dom"
 import NewStandingOrder from "./modals/NewStandingOrder.js";
 import { daysOfTheWeek } from "../../lib/data.js";
 
+const fields = [
+  {header: 'Vendor', key: "venSH"},
+  {header: 'Shipping via', key: "shipSH"},
+  {header: 'Start Date', key: 'fstartDate'},
+  {header: 'End Date', key: 'fendDate'},
+  {header: 'Shipping Day', key: 'dayOfWeek'},
+  {header: '# of Items', key: 'itemCount'}
+]
+
 
 function StandingOrders () {
-
-  const [sorting, setSorting] = useState({ key: 'venSH', ascending: true });
+  const [sortValue, setSort] = useState({ key: 'venSH', ascending: true });
   const [standingOrders, setStandingOrders] = useState([]);
 
   // useEffect(() => {
@@ -37,21 +45,15 @@ function StandingOrders () {
     if (fetching) return "Loading...";
     if (error) return <pre>{error.message}</pre>
 
-    let fields = [
-      {header: 'Vendor', key: "venSH"},
-      {header: 'Shipping via', key: "shipSH"},
-      {header: 'Start Date', key: 'fstartDate'},
-      {header: 'End Date', key: 'fendDate'},
-      {header: 'Shipping Day', key: 'dayOfWeek'},
-      {header: '# of Items', key: 'itemCount'}
-    ]
-
-    function applySorting (key, ascending) {
-      setSorting({key: key, ascending: ascending})
-    }
+    function changeSort(key, ascending) {
+      setSort({key: key, ascending: ascending});
+    } 
 
     let headers = fields.map((field, i) => {
-      return <th className="sort-header" key={i} onClick={() => applySorting(field.key, !sorting.ascending)}>{field.header}</th>
+      if (field.sort) {
+        return <th className="sort-header" key={i} onClick={() => changeSort(field.key, !sortValue.ascending)}>{field.header}</th>
+      }
+      return <th className="static-header" key={i}>{field.header}</th>
      })
 
     let list = standingOrders.map(so => {

@@ -48,13 +48,16 @@ function NewVarietyModal({varieties, setVarieties}) {
             if (event.target.colors.value) newVariety.colors = formatWords(event.target.colors.value)
             if (event.target.tags.value) newVariety.tags = formatWords(event.target.tags.value)
 
-            addVariety({productID: selectedProduct.id, variety: newVariety});
-            setVarieties([...varieties].concat( {
-                                               product: selectedProduct.name, 
-                                               variety: newVariety.name,
-                                               colors: newVariety.colors || [],
-                                               tags: newVariety.tags || []
-                                            }))
+            addVariety({productID: selectedProduct.id, variety: newVariety})
+                .then(res => {
+                    setVarieties([...varieties].concat( {
+                        _id: res.data.addVariety.id,
+                        product: selectedProduct.name, 
+                        variety: newVariety.name,
+                        colors: newVariety.colors || [],
+                        tags: newVariety.tags || []
+                     }))
+                })
             closeModal();
         }
 

@@ -8,7 +8,7 @@ import EventItems from "./EventItems";
 function Event() {
     const id = useParams().id
     
-    const [prods, setProds] = useState([])
+    const [items, setItems] = useState([])
 
     const [event] = useQuery({
         query: EVENT_QUERY,
@@ -19,7 +19,7 @@ function Event() {
 
     useEffect(() => {
         if (data === undefined) return
-        setProds(data.event.items)
+        setItems(data.event.items)
     }, [data])
 
     if (fetching) return "Loading...";
@@ -50,7 +50,7 @@ function Event() {
                 <EventItemForm eventID={id}/>
             </div>
             <div>
-                <EventItems addedProds={prods} setProds={setProds} orderId={id}/>
+                <EventItems items={items} eventID={id}/>
             </div>
 		</div>
 	)

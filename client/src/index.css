@@ -201,7 +201,6 @@ form.newEvent #submit {
 }
 
 #product-table thead th{
-  text-decoration: underline;
   text-align: center;
   background-color: white;
   height: 25px;
@@ -233,7 +232,6 @@ form.newEvent #submit {
 }
 
 .list-display thead th{
-  text-decoration: underline;
   text-align: center;
   background-color: white;
   height: 25px;
@@ -298,4 +296,9 @@ form.newProduct input {
 form.newProduct #submit {
   margin-top: 32px;
   height: 27px;
+}
+
+.sort-header {
+  text-decoration: underline;
+  cursor: pointer;
 }

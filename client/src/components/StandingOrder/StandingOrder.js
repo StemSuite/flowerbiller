@@ -51,7 +51,7 @@ function StandingOrder () {
       </div>
 
       <div>
-        <SOItems addedProds={items} setProds={setItems} orderId={id}/>
+        <SOItems items={items} orderID={id}/>
       </div>
 
 		</div>
