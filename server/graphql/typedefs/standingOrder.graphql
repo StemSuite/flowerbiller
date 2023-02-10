@@ -26,7 +26,7 @@ type StandingOrderItem {
     product: String!
     variety: String
     uom: String!
-    size: String!
+    size: String
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!
@@ -39,7 +39,7 @@ input StandingOrderItemInput {
     product: String!
     variety: String
     uom: String!
-    size: String!
+    size: String
     boxCount: Int!
     boxType: String!
     qtyPerBox: Int!

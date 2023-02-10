@@ -19,11 +19,7 @@ const productMutations = {
             {_id: productID}, 
             {$push: {varieties: newVariety}},
             {returnDocument: 'after'}
-        )
-        .then(res => {
-            let id = res.varieties.find((variety) => variety.name === newVariety.name)._id
-            return {id: id}
-        })
+        ) 
     }
 }
 

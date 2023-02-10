@@ -41,7 +41,7 @@ type Mutation {
 
     addProduct(product: AddProductInput!): Product!
 
-    addVariety(productID: String!, variety: AddVarietyInput!): Product!
+    addVariety(productID: String!, variety: AddVarietyInput!): Variety!
 
     addSOItem(standingOrderId: String!, item: StandingOrderItemInput!): StandingOrder!
 
