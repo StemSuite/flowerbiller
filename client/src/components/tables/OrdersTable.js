@@ -2,6 +2,7 @@ import { TableContainer, Table, Thead, Tr, Tbody, Th, Icon, Td, LinkBox, LinkOve
 import React, { useEffect, useState } from "react";
 import sort from "../../lib/Sort.js";
 import { TbArrowsSort } from "react-icons/tb";
+import { daysOfTheWeek } from "../../lib/data.js";
 
 
 function OrdersTable({orders, fields, path}) {
@@ -20,12 +21,16 @@ function OrdersTable({orders, fields, path}) {
 
   function formatRow(order, field) {
     if (!order[field.key]) return "--"
+
+    if (field.key === 'shippingDay') return daysOfTheWeek[order.shippingDay]
+
     if (typeof order[field.key] === 'object' ) {
         if (order[field.key].length === 0) return "--"
-        return order[field.key].map((str, i) => {
+          return order[field.key].map((str, i) => {
             return <span key={i}>{order[field.key][i+1] ? `${str}, ` : str}</span>
         })
     }
+
     return order[field.key]
   }
 

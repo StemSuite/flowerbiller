@@ -1,10 +1,8 @@
+import { Box, FormLabel, Select } from "@chakra-ui/react";
 import { useQuery } from "urql";
 import { PRODUCT_TYPES_QUERY } from "../../../lib/Queries";
 
-function ProductTypesField(props) {
-  let setType = props.setType
-  let setUOMs = props.setUOMs
-  let setExpDays = props.setExpDays
+function ProductTypesField({value, changeType}) {
   
   const [fetchedTypes] = useQuery({
     query: PRODUCT_TYPES_QUERY
@@ -17,23 +15,27 @@ function ProductTypesField(props) {
 
   let types = data.productTypes
 
-  function changeType(event) {
+  function handleChange(event) {
     let type = data.productTypes.find(type => type.name === event.target.value);
-    if (setUOMs) setUOMs(type.uoms || []);
-    setExpDays(type.defaultDaysToExp)
-	  setType(type || {});
+    changeType(type)
   }
 
   return (
-    <div>
-      <label htmlFor="typeField">Product Type</label>
-      <select name="typeField" id="type" onChange={changeType}>
+    <Box  minWidth="fit-content">
+      <FormLabel textAlign="center">Product Type</FormLabel>
+      <Select
+        size="sm" 
+        name="productField"
+        minWidth="150px"
+        value={value}
+        onChange={handleChange}
+      >
         <option hidden> </option>
-        {types.map(prod => {
-          return <option value={prod.name} key={prod.id}>{prod.name}</option>;
+        {types.map(type => {
+          return <option value={type.name} key={type.id}>{type.name}</option>;
         })}
-      </select>
-    </div>
+      </Select>
+    </Box>
   )
 }
 

@@ -30,23 +30,23 @@ function Event() {
     return (
         <>
             <Heading sx={pageHeaderStyle}>Event</Heading>
-            <Flex mx="20%" justifySelf="center" alignSelf="center">
-                <Box textAlign="center">
+            <Flex mx="20%" justifySelf="center" alignSelf="center" >
+                <Box textAlign="center" minWidth="100px">
                     <Text textDecor="underline" fontSize="lg">Store</Text>
                     <Text>{data.event.store}</Text>
                 </Box>
                 <Spacer/>
-                <Box textAlign="center">
+                <Box textAlign="center" minWidth="100px">
                     <Text textDecor="underline" fontSize="lg">Date</Text>
                     <Text>{data.event.fdate}</Text>
                 </Box>
                 <Spacer/>
-                <Box textAlign="center">
+                <Box textAlign="center" minWidth="100px">
                     <Text textDecor="underline" fontSize="lg">Title</Text>
                     <Text>{data.event.title}</Text>
                 </Box>
                 <Spacer/>
-                <Box textAlign="center">
+                <Box textAlign="center" minWidth="100px">
                     <Text textDecor="underline" fontSize="lg">Customer</Text>
                     <Text>{data.event.customer}</Text>
                 </Box>

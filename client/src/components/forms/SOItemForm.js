@@ -20,7 +20,7 @@ function SOItemForm(props) {
   const [selectedBoxType, setBoxType] = useState("")
   const [inputBoxCount, setBoxCount] = useState("")
   const [inputQtyPerBox, setQtyPerBox] = useState("")
-  const [inputpricePerUnit, setPricePerUnit] = useState(0.00)
+  const [inputpricePerUnit, setPricePerUnit] = useState("")
   const [prodUOM, setUOM] = useState(null)
   const inputProd = useRef(selectedProduct);
 
@@ -56,7 +56,8 @@ function SOItemForm(props) {
     setBoxType("")
     setBoxCount("")
     setQtyPerBox("")
-    setPricePerUnit(0.00)
+    setPricePerUnit("")
+    setUOM(null)
   }
 
   function addProduct(e) {
@@ -74,9 +75,8 @@ function SOItemForm(props) {
 
     addSOItem({standingOrderId: props.standingOrderId, item: newProd})
 
-    resetFields()
     setProduct({});
-    setUOM(null)
+    resetFields()
     inputProd.current.focus();
   }
 

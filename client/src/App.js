@@ -1,6 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout.js";
-import Landing from "./pages/Landing.js";
+import Home from "./pages/Home.js";
 import StandingOrder from "./pages/StandingOrder.js";
 import StandingOrders from "./pages/StandingOrders.js";
 import Events from "./pages/Events.js";
@@ -11,7 +11,7 @@ import Shipments from "./pages/Shipments.js";
 const router = createBrowserRouter(
   createRoutesFromElements (
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Landing />} />
+      <Route index element={<Home />} />
       <Route path="/standing_orders" element={<StandingOrders />} />
       <Route path="/standing_order/:id" element={<StandingOrder />} />
       <Route path="/events" element={<Events />} />

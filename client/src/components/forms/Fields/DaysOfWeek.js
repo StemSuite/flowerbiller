@@ -1,17 +1,29 @@
+import { Box, FormLabel, Select } from "@chakra-ui/react";
 import { daysOfTheWeek } from "../../../lib/data";
 
-function DaysOfWeek(props) {
+function DaysOfWeek({selectedDay, changeDay, options, label}) {
+
+    function handleChange(event) {
+      let day = event.target.value
+      changeDay(day)
+    }
     
     return (
-      <div>
-        <label htmlFor="daysOfWeek">{props.label}</label>
-        <select value={props.selectedDay} onChange={props.onChange} name="daysOfWeek" id="daysOfWeek">
-          <option hidden> </option>
-          {props.options.map(key => {
+      <Box>
+        <FormLabel textAlign="center">{label}</FormLabel>
+        <Select
+          size="sm" 
+          name="productField"
+          minWidth="150px"
+          value={selectedDay}
+          onChange={handleChange}
+        >
+          {options.map(key => {
             return <option key={key} value={key}>{daysOfTheWeek[key]}</option>;
           })}
-        </select>
-      </div>
+
+        </Select>
+      </Box>
   )
   }
   

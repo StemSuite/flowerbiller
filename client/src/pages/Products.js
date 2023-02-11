@@ -1,7 +1,7 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useState } from "react";
-import NewProductModal from "../components/modals/NewProduct";
-import NewVarietyModal from "../components/modals/NewVariety";
+import AddProductForm from "../components/forms/AddProductForm";
+import AddVarietyForm from "../components/forms/AddVarietyForm";
 import VarietiesList from "../components/tables/VarietiesList";
 import { pageHeaderStyle } from "../styles/styles";
 
@@ -11,8 +11,8 @@ function Products() {
         <div>
             <Heading sx={pageHeaderStyle}>Products</Heading>
             <Flex>
-                <NewProductModal/>
-                <NewVarietyModal varieties={varieties} setVarieties={setVarieties}/>
+                <AddProductForm/>
+                <AddVarietyForm/>
             </Flex>
             <VarietiesList varieties={varieties} setVarieties={setVarieties}/>
         </div>

@@ -1,10 +1,10 @@
 import { useQuery } from "urql";
 import { EVENTS_QUERY } from "../lib/Queries.js";
 import { useEffect, useState } from "react";
-import NewEvent from "../components/modals/NewEvent.js";
 import { Flex, Heading } from "@chakra-ui/react";
 import { pageHeaderStyle } from "../styles/styles.js";
 import EventsTable from "../components/tables/EventsTable.js";
+import AddEventForm from "../components/forms/AddEventForm.js";
 
 function Events() {
 
@@ -28,7 +28,7 @@ function Events() {
         <>
       <Heading sx={pageHeaderStyle}>Events</Heading>
         <Flex>
-          <NewEvent/>
+          <AddEventForm/>
         </Flex>
       <EventsTable events={events}/>
     </>

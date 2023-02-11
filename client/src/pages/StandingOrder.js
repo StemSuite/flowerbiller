@@ -33,18 +33,18 @@ function StandingOrder () {
 	return (
 		<>
 			<Heading sx={pageHeaderStyle}>Standing Order</Heading>
-      <Flex mx="20%" justifySelf="center" alignSelf="center">
-        <Box textAlign="center">
+      <Flex mx="20%" justifySelf="center" alignSelf="center" >
+        <Box textAlign="center" minWidth="100px"> 
           <Text textDecor="underline" fontSize="lg">Vendor</Text>
           <Text>{info.venSH}</Text>
         </Box>
         <Spacer/>
-        <Box textAlign="center">
+        <Box textAlign="center" minWidth="100px">
           <Text textDecor="underline" fontSize="lg">Dates</Text>
           <Text>{info.fstartDate} - {info.fendDate}</Text>
         </Box>
         <Spacer/>
-        <Box textAlign="center">
+        <Box textAlign="center" minWidth="100px">
           <Text textDecor="underline" fontSize="lg">Shipping</Text>
           <Text>{daysOfTheWeek[info.shippingDay]}(s) via {info.shipSH}</Text>
         </Box>

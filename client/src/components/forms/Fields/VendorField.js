@@ -1,16 +1,29 @@
+import { Box, FormLabel, Select } from "@chakra-ui/react";
 
-function VendorField({input, vendors, selectedVen, changeVen}) {
+function VendorField({vendors, selectedVen, changeVen}) {
+
+  function handleChange(event) {
+    let venSH = event.target.value
+    changeVen(venSH)
+  }
 
   return (
-    <div>
-      <label htmlFor="venField">Vendor</label>
-      <select ref={input} value={selectedVen.shortHand} onChange={changeVen} name="venField" id="venField">
+    <Box>
+      <FormLabel textAlign="center">Vendor</FormLabel>
+      <Select
+        size="sm" 
+        name="productField"
+        minWidth="150px"
+        value={selectedVen.shortHand}
+        onChange={handleChange}
+      >
         <option hidden> </option>
         {vendors.map(vendor => {
           return <option value={vendor.shortHand} key={vendor.id}>{vendor.shortHand}</option>;
         })}
-      </select>
-    </div>
+
+      </Select>
+    </Box>
   )
 }
 

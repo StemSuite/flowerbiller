@@ -24,7 +24,6 @@ function sortByTotalQty(prods) {
 }
 
 function sortByCustomer(items) {
-    console.log(items)
     return items.sort((a, b) => {
         if (a.customer !== b.customer) return a.customer.localeCompare(b.customer)
         return 0;

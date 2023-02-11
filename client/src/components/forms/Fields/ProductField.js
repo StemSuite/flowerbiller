@@ -16,7 +16,8 @@ function ProductField({inputProd, products, value, changeProduct}) {
         name="productField"
         minWidth="150px"
         value={value}
-        onChange={handleChange}>
+        onChange={handleChange}
+      >
       <option hidden> </option>
         {products.map(prod => {
           return <option value={prod.name} key={prod.id}>{prod.name}</option>;

@@ -1,18 +1,28 @@
-function ShippingMethodField(props) {
-    let methods = props.options
-    let selected = props.selectedOption
-    let changeShippingMethod = props.onChange
+import { Box, FormLabel, Select } from "@chakra-ui/react";
+
+function ShippingMethodField({shippingMethods, selectedMethod, changeMethod}) {
+
+  function handleChange(event) {
+    let shipSH = event.target.value
+    changeMethod(shipSH)
+  }
   
     return (
-      <div>
-        <label htmlFor="shippingMethodField">Shipping Method</label>
-        <select value={selected} onChange={changeShippingMethod} name="shippingMethodField" id="shippingMethodField">
+      <Box>
+        <FormLabel textAlign="center">Shipping Method</FormLabel>
+        <Select
+           size="sm" 
+           name="productField"
+           minWidth="150px"
+           value={selectedMethod.shortHand}
+           onChange={handleChange}
+        >
           <option hidden> </option>
-          {methods.map(method => {
-            return <option value={method.id} key={method.id}>{method.shortHand}</option>;
+          {shippingMethods.map(method => {
+            return <option key={method.id}>{method.shortHand}</option>;
           })}
-        </select>
-      </div>
+        </Select>
+      </Box>
     )
   }
   

@@ -5,7 +5,7 @@ function BoxTypeField({value, setBoxType}) {
   
   return (
     <Box minWidth="fit-content">
-      <FormLabel textAlign="block" >Box Type</FormLabel>
+      <FormLabel textAlign="block">Box Type</FormLabel>
       <Select 
         size="sm" 
         name="boxField"

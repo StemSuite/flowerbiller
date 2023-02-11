@@ -15,7 +15,7 @@ function EventItemForm(props) {
     const [selectedProduct, setProduct] = useState({});
     const [selectedVariety, setVariety] = useState("")
     const [selectedSize, setSize] = useState("")
-    const [inputQty, setQty] = useState(0)
+    const [inputQty, setQty] = useState("")
     const [prodUOM, setUOM] = useState(null)
     const inputProd = useRef(selectedProduct);
   
@@ -44,10 +44,10 @@ function EventItemForm(props) {
     }
 
     function resetFields() {
+      setQty("")
       setProduct("")
       setVariety("")
       setSize("")
-      setQty(0)
     }
   
     function addProduct(e) {
@@ -72,24 +72,24 @@ function EventItemForm(props) {
       <Form onSubmit={addProduct} >
         <FormControl as="fieldset" p="20px" >
           <HStack spacing="10px" justifyContent="center" >
-          <ProductField 
-            inputProd={inputProd} 
-            products={products}
-            changeProduct={changeProduct}
-            value={selectedProduct.name || ""} 
-          />
-          <VarietyField product={selectedProduct} setVariety={setVariety}/>
-          <LengthField validSizes={selectedProduct.sizes} setSize={setSize}/>
-          <QuantityField 
-            label={"QTY"} 
-            name={"quantity"} 
-            value={inputQty}
-            setValue={setQty}
-            uom={prodUOM}
-          />
-          <Box alignSelf="end">
-            <AddButton text={"add"}/>
-          </Box>
+            <ProductField 
+              inputProd={inputProd} 
+              products={products}
+              changeProduct={changeProduct}
+              value={selectedProduct.name || ""} 
+            />
+            <VarietyField product={selectedProduct} setVariety={setVariety}/>
+            <LengthField validSizes={selectedProduct.sizes} setSize={setSize}/>
+            <QuantityField 
+              label={"QTY"} 
+              name={"quantity"} 
+              value={inputQty}
+              setValue={setQty}
+              uom={prodUOM}
+            />
+            <Box alignSelf="end">
+              <AddButton text={"add"}/>
+            </Box>
           </HStack>
         </FormControl>
       </Form>

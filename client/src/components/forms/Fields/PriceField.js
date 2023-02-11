@@ -11,9 +11,11 @@ function PriceField({value, setPrice}) {
         name="priceField"
         value={value}
         onChange={(value) => setPrice(value)}
-        min="0.00"
+        min={0}
+        placeholder={"0.00"}
         width="100px"
         size="sm"
+        onSubmit={(e) => e.target.value = ""}
         >
           <NumberInputField/>
       </NumberInput>
