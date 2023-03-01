@@ -17,6 +17,12 @@ type Query {
 
     standingOrder(id: String!): StandingOrder!
 
+    shipments: [Shipment]
+
+    shipment(id: String!): Shipment!
+
+    shipmentItems(shipmentID: String!): [Purchase]
+
     shippingMethods: [ShippingMethod]
 
     shippingMethod(id: String!): ShippingMethod!
@@ -33,6 +39,10 @@ type Query {
 
     events: [Event]
 
+    eventItems(eventID: String!): [SoldItem]
+
+    eventsItems: [SoldItem]
+
     shipmentsByDates(startDate: String!, endDate: String!): [Shipment]
 }
 
@@ -43,7 +53,7 @@ type Mutation {
 
     addVariety(productID: String!, variety: AddVarietyInput!): Variety!
 
-    addSOItem(standingOrderId: String!, item: StandingOrderItemInput!): StandingOrder!
+    addSOItem(standingOrderId: String!, item: AddIncomingItemInput!): StandingOrder!
 
     deleteSOItem(standingOrderId: String!, itemId: String!): StandingOrder
 
@@ -57,7 +67,8 @@ type Mutation {
 
     addEvent(event: AddEventInput): Event!
 
-    addEventItem(eventID: String!, item: EventItemInput): Event!
+    addEventItem(eventID: String!, item: AddSoldItemInput): SoldItem!
 
-    deleteEventItem(eventID: String!, itemID: String!): Event
+
+    # deleteEventItem(eventID: String!, itemID: String!): Event
 }

@@ -1,38 +1,49 @@
-import { useQuery } from "urql";
-import { EVENTS_QUERY } from "../lib/Queries.js";
-import { useEffect, useState } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
-import { pageHeaderStyle } from "../styles/styles.js";
-import EventsTable from "../components/tables/EventsTable.js";
-import AddEventForm from "../components/forms/AddEventForm.js";
+import { Button, Flex, Heading } from '@chakra-ui/react';
+import { pageHeaderStyle } from '../styles/styles.js';
+import EventsTable from '../components/tables/EventsTable.js';
+import AddEventForm from '../components/forms/AddEventForm.js';
+import { useState } from 'react';
+import EventsItemsTable from '../components/tables/EventsItemsTable.js';
 
 function Events() {
 
-  const [events, setEvents] = useState([])
+	const [ table, setTable ] = useState( <EventsTable /> );
 
-  const [fetchedEvents] = useQuery({
-    query: EVENTS_QUERY
-  })
+	function handleTableChange( table ) {
+		if ( table === 'events' ) {
+			return setTable( <EventsTable /> );
+		} else if ( table === 'items' ) {
+			return setTable( <EventsItemsTable/> );
+		}
+	}
 
-   const { data, fetching, error } = fetchedEvents;
-  
-    useEffect(() => {
-      if (data === undefined) return
-      setEvents(data.events)
-    }, [data])
-
-    if (fetching) return "Loading...";
-    if (error) return <pre>{error.message}</pre>
-
-    return (
-        <>
-      <Heading sx={pageHeaderStyle}>Events</Heading>
-        <Flex>
-          <AddEventForm/>
-        </Flex>
-      <EventsTable events={events}/>
-    </>
-    )
+	return (
+		<>
+			<Heading sx={pageHeaderStyle}>Events</Heading>
+			<Flex>
+				<AddEventForm/>
+			</Flex>
+			<Flex my="20px" justifyContent="center">
+				<Button 
+					variant='link' 
+					mx="20px" 
+					textDecor="underline" 
+					onClick={() => handleTableChange( 'events' )}
+				>
+            Events
+				</Button>
+				<Button 
+					variant='link' 
+					mx="20px" 
+					textDecor="underline" 
+					onClick={() => handleTableChange( 'items' )}
+				>
+            Items
+				</Button>
+			</Flex>
+			{table}
+		</>
+	);
 }
 
-export default Events
+export default Events;

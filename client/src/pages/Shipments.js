@@ -1,29 +1,37 @@
-import { Heading } from "@chakra-ui/react"
-import { pageHeaderStyle } from "../styles/styles"
+import { Flex, Heading } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'urql';
+import ShipmentsTable from '../components/tables/ShipmentsTable';
+import { SHIPMENTS_QUERY } from '../lib/Queries';
+import { pageHeaderStyle } from '../styles/styles';
 
 function Shipments () {
+	const [ shipments, setShipments ] = useState( [] );
 
-    let fields = [
-        {header: 'Shipping Method', key: "shippingMethod"},
-        {header: 'Shipping Date', key: 'shippingDate'},
-        {header: 'Arrival Date', key: 'arrivalDate'},
-        {header: '# of Items', key: 'itemCount'}
-      ]
+	const [fetchedShipments] = useQuery({
+		query: SHIPMENTS_QUERY
+	});
 
-    let headers = fields.map((field, i) => {
-    return <th className="sort-header" key={i}>{field.header}</th>
-    })
+	const { data, fetching, error } = fetchedShipments;
 
-    return (
-        <div>
-            <Heading sx={pageHeaderStyle}>Shipments</Heading>
-            <table>
-            <thead>
-                <tr>{headers}</tr>
-            </thead>
-          </table>
-        </div>
-    )
+	useEffect( () => {
+		if ( data === undefined ) return;
+		setShipments( data.shipments );
+	}, [data] );
+
+
+	if ( fetching ) return 'Loading...';
+	if ( error ) return <pre>{error.message}</pre>;
+
+	return (
+		<div>
+			<Heading sx={pageHeaderStyle}>Shipments</Heading>
+			<Flex>
+
+			</Flex>
+			<ShipmentsTable shipments={shipments} />
+		</div>
+	);
 }
 
-export default Shipments
+export default Shipments;

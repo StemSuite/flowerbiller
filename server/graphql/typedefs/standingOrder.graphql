@@ -8,8 +8,8 @@ type StandingOrder {
     fendDate: String
     shippingDay: Int!
     daysToArrive: Int!
-    itemCount: Int
-    items: [StandingOrderItem]
+    itemCount: Int!
+    items: [IncomingItem]
 }
 
 input AddStandingOrderInput {
@@ -19,29 +19,4 @@ input AddStandingOrderInput {
     endDate: String
     shippingDay: Int!
     daysToArrive: Int!
-}
-
-type StandingOrderItem {
-    _id: String!
-    product: String!
-    variety: String
-    uom: String!
-    size: String
-    boxCount: Int!
-    boxType: String!
-    qtyPerBox: Int!
-    pricePerUnit: Float!
-    totalQty: Int!
-    totalPrice: Float!
-}
-
-input StandingOrderItemInput {
-    product: String!
-    variety: String
-    uom: String!
-    size: String
-    boxCount: Int!
-    boxType: String!
-    qtyPerBox: Int!
-    pricePerUnit: Float!
 }

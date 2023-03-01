@@ -1,27 +1,70 @@
 import StandingOrder from '../../../models/standing_order.js';
+import purchaseMutations from '../purchases/mutations.js';
+import shipmentMutations from '../shipments/mutations.js';
+import moment from 'moment';
 
 const standingOrderMutations = {
-    addStandingOrder: async (_, {standingOrder}) => {
-        let newStandingOrder = new StandingOrder( standingOrder )
-        return newStandingOrder.save()
-    },
+	addStandingOrder: async ( _, { standingOrder }) => {
+		let newStandingOrder = new StandingOrder( standingOrder );
+		return newStandingOrder.save();
+	},
 
-    addSOItem: async(_, {standingOrderId, item}) => {
-        item.totalQty = item.boxCount * item.qtyPerBox
-        item.totalPrice = item.totalQty * item.pricePerUnit
+	addSOItem: async( _, { standingOrderId, item }) => {
 
-        return StandingOrder.findByIdAndUpdate(standingOrderId, 
-            {$push: {items: item}}, 
-            {new: true}
-        )
-    },
+		item.totalQty = item.boxCount * item.qtyPerBox;
+		item.totalPrice = item.totalQty * item.pricePerUnit;
 
-    deleteSOItem: async(_, {standingOrderId, itemId}) => {
-        return StandingOrder.findByIdAndUpdate(standingOrderId, 
-            {$pull: {items: {_id: itemId}}},
-            {new: true}
-        )
-    },
-}
+		return StandingOrder.findByIdAndUpdate( standingOrderId, 
+			{ $push: { items: item } }, 
+			{ new: true }
+		)
+			.then( standingOrder => {
+				let startDate = moment.utc( standingOrder.startDate );
+				let endDate = moment.utc( standingOrder.endDate );
+    
+				let newPurchase = standingOrder.items.slice( -1 )[0].toObject();
+				let weeksOut = 0;
+
+				while ( startDate.day() !== standingOrder.shippingDay ) startDate.add( 1, 'day' );
+				let shippingDate = startDate;
+       
+				while ( shippingDate <= endDate && weeksOut <= 16 ) {
+					let arrivalDate = moment( shippingDate ).add( standingOrder.daysToArrive, 'days' ).format( 'YYYY-MM-DD' );
+					let shipment = {  
+						shipSH: standingOrder.shipSH, 
+						shippingDate: shippingDate.format( 'YYYY-MM-DD' ),
+						arrivalDate: arrivalDate
+					};
+ 
+					shipmentMutations.incShipmentItemCount( shipment, item.boxCount )
+						.then( shipment => {
+							if ( !newPurchase.standingOrderItem ) {
+								Object.defineProperty( newPurchase, 'standingOrderItem',
+									Object.getOwnPropertyDescriptor( newPurchase, '_id' ) );
+								delete newPurchase['_id'];
+							}
+
+							newPurchase.shipment = shipment._id;
+							newPurchase.shippingDate = shippingDate.format( 'YYYY-MM-DD' ),
+							newPurchase.arrivalDate = arrivalDate;
+							newPurchase.expirationDate = moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' );
+       
+							purchaseMutations.addSOPurchase( newPurchase );
+						});
+					weeksOut += 1;
+					shippingDate.add( 7, 'days' );
+				}
+				return standingOrder;
+			});
+
+	},
+
+	deleteSOItem: async( _, { standingOrderId, itemId }) => {
+		return StandingOrder.findByIdAndUpdate( standingOrderId, 
+			{ $pull: { items: { _id: itemId } } },
+			{ new: true }
+		);
+	},
+};
 
 export default standingOrderMutations;

@@ -25,6 +25,7 @@ export const PRODUCTS_AND_VARIETIES_QUERY =  `
             name
             uom
             sizes
+            daysToExp
             varieties {
                 name
             }
@@ -41,7 +42,7 @@ export const VARIETIES_QUERY = `
             tags
         }
     }
-`
+`;
 
 export const STANDING_ORDERS_QUERY = `
     query standingOrders {
@@ -98,7 +99,7 @@ export const VENDORS_QUERY = `
 export const EVENTS_QUERY = `
     query events {
         events {
-            _id
+            id
             title
             customer
             store
@@ -110,27 +111,82 @@ export const EVENTS_QUERY = `
 export const EVENT_QUERY = `
     query event($id: String!) {
         event(id: $id) {
-            _id
+            id
             title
             customer
             fdate
             store
-            items {
-                _id
-                product
-                variety
-                size
-                uom
-                quantity
-            }
         }
     }`;
+
+export const EVENT_ITEMS_QUERY = `
+    query eventItems($eventID: String!) {
+        eventItems(eventID: $eventID) {
+            id
+            product
+            variety
+            size
+            uom
+            quantity
+        }
+    }
+`;
+
+export const EVENTS_ITEMS_QUERY = `
+    query eventsItems {
+        eventsItems {
+            id
+            product
+            uom
+            fdate
+        }
+    }
+`;
+
 
 export const STORES_QUERY = `
     query stores {
         stores {
             id
             name
+        }
+    }`;
+
+export const SHIPMENTS_QUERY = `
+    query shipments {
+        shipments {
+            id
+            shipSH
+            fshippingDate
+            farrivalDate
+            itemCount
+        }
+    }`;
+
+export const SHIPMENT_QUERY = `
+    query shimpent($id: String!) {
+        shipment(id: $id) {
+            id
+            shipSH
+            fshippingDate
+            farrivalDate
+        }
+    }`;
+
+export const SHIPMENT_ITEMS_QUERY = `
+    query shipmentItems($shipmentID: String!) {
+        shipmentItems(shipmentID: $shipmentID) {
+            id
+            product
+            variety
+            size
+            boxCount
+            boxType
+            qtyPerBox
+            uom
+            pricePerUnit
+            totalQty
+            totalPrice
         }
     }
 `;

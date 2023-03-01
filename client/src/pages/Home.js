@@ -1,11 +1,11 @@
-function Home(props) {
+function Home() {
   
-    return(
-      <div>
+	return(
+		<div>
        Home page under construction
-      </div>
-    )
-  }
+		</div>
+	);
+}
   
-  export default Home;
+export default Home;
   

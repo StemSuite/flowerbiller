@@ -1,0 +1,48 @@
+type IncomingItem {
+    _id: String!
+    itemDescription: String
+    product: String!
+    variety: String
+    uom: String!
+    size: String
+    boxCount: Int
+    boxType: String
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    totalQty: Int!
+    totalPrice: Float!
+}
+
+input AddIncomingItemInput {
+    product: String!
+    variety: String
+    uom: String!
+    size: String
+    boxCount: Int
+    boxType: String
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    daysToExp: Int!
+}
+
+type SoldItem {
+    id: String!
+    eventID: String
+    product: String!
+    variety: String
+    size: String
+    uom: String!
+    quantity: Int!
+    dateSold: String!
+    fdate: String!
+}
+
+input AddSoldItemInput {
+    eventID: String
+    product: String!
+    variety: String
+    size: String
+    uom: String!
+    quantity: Int!
+    dateSold: String!
+}

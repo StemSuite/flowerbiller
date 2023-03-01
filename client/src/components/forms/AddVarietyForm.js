@@ -1,131 +1,131 @@
-import { useState, useEffect } from "react";
-import { useMutation } from "urql";
-import { ADD_VARIETY_MUTATION } from "../../lib/Mutations";
-import ProductField from "../forms/Fields/ProductField";
-import { PRODUCTS_ONLY_QUERY } from "../../lib/Queries";
-import { useQuery } from "urql";
-import { Form } from "react-router-dom";
-import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Stack } from "@chakra-ui/react";
-import AddModal from "../modals/AddModal";
+import { useState, useEffect } from 'react';
+import { useMutation } from 'urql';
+import { ADD_VARIETY_MUTATION } from '../../lib/Mutations';
+import ProductField from '../forms/Fields/ProductField';
+import { PRODUCTS_ONLY_QUERY } from '../../lib/Queries';
+import { useQuery } from 'urql';
+import { Form } from 'react-router-dom';
+import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
+import AddModal from '../modals/AddModal';
 
-function AddVarietyForm(closeModal) {
-    const [products, setProducts] = useState([])
-    const [selectedProduct, setProduct] = useState({})
-    const [inputVariety, setVariety] = useState("")
-    const [inputColors, setColors] = useState("")
-    const [inputTags, setTags] = useState("")
+function AddVarietyForm() {
+	const [ products, setProducts ] = useState( [] );
+	const [ selectedProduct, setProduct ] = useState({});
+	const [ inputVariety, setVariety ] = useState( '' );
+	const [ inputColors, setColors ] = useState( '' );
+	const [ inputTags, setTags ] = useState( '' );
     
-    const [ , addVariety] = useMutation(ADD_VARIETY_MUTATION)
+	const [ , addVariety ] = useMutation( ADD_VARIETY_MUTATION );
 
-    const [fetchedProds] = useQuery({
-        query: PRODUCTS_ONLY_QUERY
-    });
+	const [fetchedProds] = useQuery({
+		query: PRODUCTS_ONLY_QUERY
+	});
 
-    const { data, fetching, error } = fetchedProds;       
+	const { data, fetching, error } = fetchedProds;       
     
-    useEffect(() => {
-        if (data === undefined) return
-        setProducts(data.products)
-    }, [data, setProducts])
+	useEffect( () => {
+		if ( data === undefined ) return;
+		setProducts( data.products );
+	}, [ data, setProducts ] );
     
-    if (fetching) return "Loading...";
-    if (error) return <pre>{error.message}</pre>
-    
-
-    function changeProduct(productName) {
-        let product = products.find(prd => prd.name === productName);
-        setVariety("")
-        setProduct(product || {});
-    }
-
-    function resetInputs() {
-        setProducts([])
-        setProduct({})
-        setVariety("")
-        setColors("")
-        setTags("")
-    }
+	if ( fetching ) return 'Loading...';
+	if ( error ) return <pre>{error.message}</pre>;
     
 
-    function formatWords(words) {
-        return words.split(',').map(str => {
-            str = str.toLowerCase().trim()
-            str = str[0].toUpperCase() + str.slice(1)
-            return str
-        })
-    }
+	function changeProduct( productName ) {
+		let product = products.find( prd => prd.name === productName );
+		setVariety( '' );
+		setProduct( product || {});
+	}
 
-    function handleAddVariety() {
-        let newVariety = {
-            name: inputVariety
-        } 
+	function resetInputs() {
+		setProducts( [] );
+		setProduct({});
+		setVariety( '' );
+		setColors( '' );
+		setTags( '' );
+	}
+    
 
-        if (inputColors) newVariety.colors = formatWords(inputColors)
-        if (inputTags) newVariety.tags = formatWords(inputTags)
+	function formatWords( words ) {
+		return words.split( ',' ).map( str => {
+			str = str.toLowerCase().trim();
+			str = str[0].toUpperCase() + str.slice( 1 );
+			return str;
+		});
+	}
 
-        addVariety({productID: selectedProduct.id, variety: newVariety})
-        resetInputs()
-    }
+	function handleAddVariety() {
+		let newVariety = {
+			name: inputVariety
+		}; 
 
-    let form = (
-        <>
-            <Form>
-                <FormControl as="fieldset" p="20px">
-                    <Stack>
-                        <HStack spacing="10px" justifyContent="center">
-                            <ProductField 
-                                products={products}
-                                changeProduct={changeProduct}
-                                value={selectedProduct.name || ""} 
-                            />
-                            <Box  minWidth="fit-content">
-                            <FormLabel textAlign="center">Variety Name</FormLabel>
-                            <Input
-                                size="sm" 
-                                name="varietyField" 
-                                value={inputVariety} 
-                                onChange={(e) => setVariety(e.target.value)}
-                            >    
-                            </Input>
-                        </Box>
-                        </HStack>
-                        <HStack spacing="10px" justifyContent="center">
-                            <Box  minWidth="fit-content">
-                                <FormLabel textAlign="center">Colors</FormLabel>
-                                <Input
-                                    size="sm" 
-                                    name="sizesField" 
-                                    value={inputColors} 
-                                    onChange={(e) => setColors(e.target.value)}
-                                >    
-                                </Input>
-                                <FormHelperText  maxW="150px" textAlign="center">
+		if ( inputColors ) newVariety.colors = formatWords( inputColors );
+		if ( inputTags ) newVariety.tags = formatWords( inputTags );
+
+		addVariety({ productID: selectedProduct.id, variety: newVariety });
+		resetInputs();
+	}
+
+	let form = (
+		<>
+			<Form>
+				<FormControl as="fieldset" p="20px">
+					<Stack>
+						<HStack spacing="10px" justifyContent="center">
+							<ProductField 
+								products={products}
+								changeProduct={changeProduct}
+								value={selectedProduct.name || ''} 
+							/>
+							<Box  minWidth="fit-content">
+								<FormLabel textAlign="center">Variety Name</FormLabel>
+								<Input
+									size="sm" 
+									name="varietyField" 
+									value={inputVariety} 
+									onChange={( e ) => setVariety( e.target.value )}
+								>    
+								</Input>
+							</Box>
+						</HStack>
+						<HStack spacing="10px" justifyContent="center">
+							<Box  minWidth="fit-content">
+								<FormLabel textAlign="center">Colors</FormLabel>
+								<Input
+									size="sm" 
+									name="sizesField" 
+									value={inputColors} 
+									onChange={( e ) => setColors( e.target.value )}
+								>    
+								</Input>
+								<FormHelperText  maxW="150px" textAlign="center">
                                     Seperate multiple by comma (,)
-                                </FormHelperText>
-                            </Box>
-                            <Box  minWidth="fit-content">
-                                <FormLabel textAlign="center">Tags</FormLabel>
-                                <Input
-                                    size="sm" 
-                                    name="sizesField" 
-                                    value={inputTags} 
-                                    onChange={(e) => setTags(e.target.value)}
-                                >    
-                                </Input>
-                                <FormHelperText  maxW="150px" textAlign="center">
+								</FormHelperText>
+							</Box>
+							<Box  minWidth="fit-content">
+								<FormLabel textAlign="center">Tags</FormLabel>
+								<Input
+									size="sm" 
+									name="sizesField" 
+									value={inputTags} 
+									onChange={( e ) => setTags( e.target.value )}
+								>    
+								</Input>
+								<FormHelperText  maxW="150px" textAlign="center">
                                     Seperate multiple by comma (,)
-                                </FormHelperText>
-                            </Box>
-                        </HStack>
-                    </Stack>
-                </FormControl>
-            </Form>
-        </>
-    )
+								</FormHelperText>
+							</Box>
+						</HStack>
+					</Stack>
+				</FormControl>
+			</Form>
+		</>
+	);
 
-    return (
-        <AddModal title={"New Variety"} modalBody={form} onSumbit={handleAddVariety} />
-    )
+	return (
+		<AddModal title={'New Variety'} modalBody={form} onSumbit={handleAddVariety} />
+	);
 }
 
 export default AddVarietyForm;

@@ -1,6 +1,12 @@
 type Shipment {
+    id: String!
     shipSH: String!
     shippingDate: String!
+    fshippingDate: String
     arrivalDate: String!
+    farrivalDate: String
     itemCount: Int!
+    boxCharge: Float
+    cubicFeet: Float
+    pricePerCF: Float
 }

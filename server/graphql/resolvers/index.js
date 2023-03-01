@@ -5,6 +5,7 @@ import { vendorQueries, vendorMutations } from "./vendors/index.js";
 import { storeQueries, storeMutations } from "./stores/index.js";
 import { eventMutations, eventQueries } from "./events/index.js";
 import { shipmentQueries }  from "./shipments/index.js"
+import { soldItemMutations, soldItemQueries} from "./soldItems/index.js"
 
 const resolvers = {
     Query: {
@@ -14,7 +15,8 @@ const resolvers = {
         ...vendorQueries,
         ...storeQueries,
         ...eventQueries,
-        ...shipmentQueries
+        ...shipmentQueries,
+        ...soldItemQueries
     },
     Mutation: {
         ...productMutations,
@@ -22,7 +24,8 @@ const resolvers = {
         ...shippingMethodMutations,
         ...vendorMutations,
         ...storeMutations,
-        ...eventMutations
+        ...eventMutations,
+        ...soldItemMutations
     }
 }
 

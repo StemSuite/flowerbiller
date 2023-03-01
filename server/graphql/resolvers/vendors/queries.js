@@ -1,13 +1,13 @@
-import Vendor from '../../../models/vendor.js'
+import Vendor from '../../../models/vendor.js';
 
 const vendorQueries = {
-    vendors: async () => {
-        return Vendor.find()
-    },
+	vendors: async () => {
+		return Vendor.find();
+	},
     
-    vendor: async (_, args) => {
-        return Vendor.findById(args.id)
-    }
-}
+	vendor: async ( _, args ) => {
+		return Vendor.findById( args.id );
+	}
+};
 
 export default vendorQueries;
