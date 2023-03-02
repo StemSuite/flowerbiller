@@ -1,7 +1,7 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import OpenModalButton from '../buttons/OpenModalButton';
 
-function AddModal({ title, onSumbit, modalBody }) {
+function AddModal({ title, onSumbit, modalBody, disabled }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	function handleSubmit() {
@@ -21,7 +21,7 @@ function AddModal({ title, onSumbit, modalBody }) {
 						{modalBody}
 					</ModalBody>
 					<ModalFooter>
-						<Button bg="green.400" color="white" onClick={handleSubmit}>Sumbit</Button>
+						<Button bg="green.400" color="white" onClick={handleSubmit} isDisabled={disabled}>Sumbit</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

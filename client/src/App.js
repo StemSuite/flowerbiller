@@ -8,6 +8,8 @@ import Event from './pages/Event.js';
 import Products from './pages/Products.js';
 import Shipments from './pages/Shipments.js';
 import Shipment from './pages/Shipment.js';
+import PreBooks from './pages/PreBooks.js';
+import PreBook from './pages/PreBook.js';
 
 const router = createBrowserRouter(
 	createRoutesFromElements (
@@ -20,6 +22,8 @@ const router = createBrowserRouter(
 			<Route path="/products" element={<Products />} />
 			<Route path="/shipments" element={<Shipments />} />
 			<Route path="/shipment/:id" element={<Shipment />} />
+			<Route path="/prebooks" element={<PreBooks />} />
+			<Route path="/prebook/:id" element={<PreBook />} />
 		</Route>
 	)
 );

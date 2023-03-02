@@ -45,13 +45,25 @@ export const ADD_VARIETY_MUTATION=`
         addVariety(productID: $productID, variety: $variety) {
             _id
         }
-    }
-`;
+    }`;
 
 export const ADD_PRODUCT_MUTATION=`
     mutation addProduct($product: AddProductInput!) {
         addProduct(product: $product) {
             id
         }
-    }
-`;
+    }`;
+
+export const ADD_PREBOOK_MUTATION = `
+    mutation addPreBook($preBook: AddPreBookInput!) {
+        addPreBook(preBook: $preBook) {
+            id
+        }
+    }`;
+
+export const ADD_PREBOOK_ITEM = `
+    mutation addPreBookItem($preBookId: String! $item: AddIncomingItemInput!) {
+        addPreBookItem(preBookId: $preBookId, item: $item) {
+            id
+        }
+    }`;

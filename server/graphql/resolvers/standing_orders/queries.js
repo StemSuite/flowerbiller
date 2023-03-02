@@ -10,7 +10,7 @@ const standingOrderQueries = {
 				startDate: 1,
 				fstartDate: { $dateToString: { format: '%m/%d/%Y', date: '$startDate' } },
 				fendDate: { $dateToString: { format: '%m/%d/%Y', date: '$endDate' } },
-				itemCount: { '$sum': { '$size': '$items' } }
+				itemCount: { '$sum': '$items.boxCount' }
 			}
 			},
 			{ $sort : { startDate : -1 } }

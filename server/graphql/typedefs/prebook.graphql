@@ -1,0 +1,39 @@
+type PreBook {
+    id: String!
+    vendor: PreBookVen!
+    venSH: String
+    shippingMethod: PreBookShippingMethod!
+    shipSH: String
+    shippingDate: String!
+    fshippingDate: String
+    arrivalDate: String
+    itemCount: Int
+}
+
+type PreBookVen {
+    name: String!
+    shortHand: String!
+}
+
+type PreBookShippingMethod {
+    name: String!
+    shortHand: String!
+}
+
+
+input AddPreBookInput {
+    vendor: AddPreBookVen!
+    shippingMethod: AddPreBookShippingMethod!
+    shippingDate: String!
+    daysToArrive: Int!
+}
+
+input AddPreBookVen {
+    name: String!
+    shortHand: String!
+}
+
+input AddPreBookShippingMethod {
+    name: String!
+    shortHand: String!
+}

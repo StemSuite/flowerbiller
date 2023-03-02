@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';
-import DaysOfWeek from './Fields/DaysOfWeek';
 import VendorField from './Fields/VendorField';
 import ShippingMethodField from './Fields/ShippingMethodField';
-import { ADD_STANDING_ORDER } from '../../lib/Mutations';
+import { ADD_PREBOOK_MUTATION } from '../../lib/Mutations';
 import { VENDORS_QUERY } from '../../lib/Queries';
 import { Form } from 'react-router-dom';
-import { Box, FormControl, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
+import { Box, FormControl, FormErrorMessage, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
 import AddModal from '../modals/AddModal';
 
-function AddSOForm() {
+function AddPreBookForm() {
 
-	const [ , addSO ] = useMutation( ADD_STANDING_ORDER );
+	const [ , addPreBook ] = useMutation( ADD_PREBOOK_MUTATION );
 
 	const [ selectedVen, setVen ] = useState( '' );
 	const [ shippingMethodOptions, setShippingMethodOptions ] = useState( [] );
 	const [ selectedShippingMethod, setShippingMethod ] = useState( '' );
-	const [ selectedShippingDay, setShippingDay ] = useState( '' );
+	const [ inputShippingDate, setShippingDate ] = useState( '' );
 	const [ shippingDayOptions, setShippingDayOptions ] = useState( [] );
-	const [ inputStartDate, setStartDate ] = useState( '' );
-	const [ inputEndDate, setEndDate ] = useState( '' );
+	const [ validDate, setValidDate ] = useState( false );
+	const [ disabled, setDisabled ] = useState( true );
+
 
 	const [fetchedVendors] = useQuery({
 		query: VENDORS_QUERY
@@ -36,7 +36,6 @@ function AddSOForm() {
 
 	function changeVen( venSH ) {
 		let vendor = data.vendors.find( ven => ven.shortHand === venSH );
-
 		setVen( vendor );
 		setShippingMethodOptions( vendor.shippingMethods );
 	}
@@ -48,27 +47,41 @@ function AddSOForm() {
 		setShippingDayOptions( shippingDays );
 	}
 
-	function changeShippingDay( day ) {
-		setShippingDay( day );
+	
+	function handleShippingDateChange( e ) {
+		setShippingDate( e.target.value );
+		let newDate = new Date ( e.target.value );
+		if( shippingDayOptions.includes( newDate.getDay() + 1 ) ) {
+			setValidDate( false );
+			setDisabled ( false );
+		}else {
+			setValidDate( true );
+			setDisabled ( true );
+		}
+
 	}
 
-	function handleAddSO() {
+	function handleAddPreBook() {
 
-		let newStandingOrder = {
-			venSH: selectedVen.shortHand,
-			shipSH: selectedShippingMethod.shortHand,
-			startDate: inputStartDate,
-			endDate: inputEndDate,
-			shippingDay: Number( selectedShippingDay ),
-			daysToArrive: selectedShippingMethod.daysToArrive,
+		let newPreBook = {
+			vendor : {
+				name: selectedVen.name,
+				shortHand: selectedVen.shortHand
+			},
+			shippingMethod: {
+				name: selectedShippingMethod.name,
+				shortHand: selectedShippingMethod.shortHand
+			},
+			shippingDate: inputShippingDate,
+			daysToArrive: selectedShippingMethod.daysToArrive
 		}; 
 
-		addSO({ standingOrder: newStandingOrder });
+		addPreBook({ preBook: newPreBook });
 	}
 
 	let form = (
 		<Form>
-			<FormControl as="fieldset" p="20px">
+			<FormControl isRequired as="fieldset" p="20px">
 				<Stack>
 					<HStack spacing="10px" justifyContent="center">
 						<VendorField 
@@ -84,44 +97,30 @@ function AddSOForm() {
 					</HStack>
 					<HStack spacing="10px" justifyContent="center">
 						<Box>
-							<FormLabel textAlign="center">Start Date</FormLabel>
-							<Input
-								type="date"
-								size="sm" 
-								name="startDatField" 
-								value={inputStartDate} 
-								onChange={( e ) => setStartDate( e.target.value )}
-							>
-							</Input>
+							<FormControl isRequired isInvalid={validDate}>
+								<FormLabel textAlign="center">Shipping Date</FormLabel>
+								<Input
+									type="date"
+									size="sm" 
+									name="startDatField" 
+									value={inputShippingDate} 
+									onChange={handleShippingDateChange}
+								>
+								</Input>
+								<FormErrorMessage maxW="150px" textAlign="center">{selectedShippingMethod.shortHand} does not ship that day of the week</FormErrorMessage>
+							</FormControl>
 						</Box>
-						<Box>
-							<FormLabel textAlign="center">End Date</FormLabel>
-							<Input
-								type="date"
-								size="sm" 
-								name="endDateField" 
-								value={inputEndDate} 
-								onChange={( e ) => setEndDate( e.target.value )}
-							>
-							</Input>
-						</Box>
-						<DaysOfWeek
-							label={'Shipping Day'}
-							selectedDay={selectedShippingDay} 
-							changeDay={changeShippingDay} 
-							options={shippingDayOptions} 
-						/>
 					</HStack>
 				</Stack>
-			</FormControl>{}
+			</FormControl>
 		</Form>
 	);
 
 	return (
-		<AddModal title={'New Standing Order'} modalBody={form} onSumbit={handleAddSO} />
+		<AddModal title={'New Pre-Booking'} modalBody={form} onSumbit={handleAddPreBook} disabled={disabled}/>
 	);
 }
 
 
 
-export default AddSOForm;
+export default AddPreBookForm;

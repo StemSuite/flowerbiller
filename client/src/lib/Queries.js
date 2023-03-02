@@ -86,9 +86,11 @@ export const VENDORS_QUERY = `
     query vendors {
         vendors {
             id
+            name
             shortHand
             shippingMethods {
                 id
+                name
                 shortHand
                 shippingDays
                 daysToArrive
@@ -188,5 +190,42 @@ export const SHIPMENT_ITEMS_QUERY = `
             totalQty
             totalPrice
         }
-    }
-`;
+    }`;
+
+export const PREBOOKS_QUERY = `
+    query preBooks {
+        preBooks {
+            id
+            venSH
+            shipSH
+            fshippingDate
+            itemCount
+        }
+    }`;
+
+export const PREBOOK_QUERY = `
+    query preBook($id: String!) {
+        preBook(id: $id) {
+            id
+            venSH
+            shipSH
+            fshippingDate
+        }
+    }`;
+
+export const PREBOOK_ITEMS_QUERY = `
+    query preBookItems($preBookId: String!) {
+        preBookItems(preBookId: $preBookId) {
+            id
+            product
+            variety
+            size
+            boxCount
+            boxType
+            qtyPerBox
+            uom
+            pricePerUnit
+            totalQty
+            totalPrice
+        }
+    }`;

@@ -44,6 +44,12 @@ type Query {
     eventsItems: [SoldItem]
 
     shipmentsByDates(startDate: String!, endDate: String!): [Shipment]
+
+    preBooks: [PreBook]
+
+    preBook(id: String!): PreBook!
+
+    preBookItems(preBookId: String!): [Purchase]
 }
 
 type Mutation {
@@ -68,6 +74,10 @@ type Mutation {
     addEvent(event: AddEventInput): Event!
 
     addEventItem(eventID: String!, item: AddSoldItemInput): SoldItem!
+
+    addPreBook(preBook: AddPreBookInput!): PreBook!
+
+    addPreBookItem(preBookId: String!, item: AddIncomingItemInput): Purchase!
 
 
     # deleteEventItem(eventID: String!, itemID: String!): Event

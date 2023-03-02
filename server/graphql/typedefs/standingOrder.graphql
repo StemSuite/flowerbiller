@@ -8,7 +8,7 @@ type StandingOrder {
     fendDate: String
     shippingDay: Int!
     daysToArrive: Int!
-    itemCount: Int!
+    itemCount: Int
     items: [IncomingItem]
 }
 

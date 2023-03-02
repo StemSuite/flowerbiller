@@ -1,6 +1,6 @@
 import {  useState, useRef, useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { ADD_SO_ITEM } from '../../lib/Mutations.js';
+import { ADD_PREBOOK_ITEM } from '../../lib/Mutations.js';
 import ProductField from './Fields/ProductField.js';
 import LengthField from './Fields/SizeField.js';
 import VarietyField from './Fields/VarietyField.js';
@@ -12,7 +12,7 @@ import { Box, FormControl, HStack } from '@chakra-ui/react';
 import AddButton from '../buttons/AddButton.js';
 import { Form } from 'react-router-dom';
 
-function SOItemForm({ standingOrder }) {
+function PreBookItemForm({ preBook }) {
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
@@ -25,7 +25,7 @@ function SOItemForm({ standingOrder }) {
 	const inputProd = useRef( selectedProduct );
 
 
-	const [ , addSOItem ] = useMutation( ADD_SO_ITEM );
+	const [ , addPreBookItem ] = useMutation( ADD_PREBOOK_ITEM );
 
 	const [fetchedProds] = useQuery({
 		query: PRODUCTS_AND_VARIETIES_QUERY
@@ -75,7 +75,7 @@ function SOItemForm({ standingOrder }) {
 			daysToExp: selectedProduct.daysToExp                
 		};
 
-		addSOItem({ standingOrderId: standingOrder._id, item: newItem });
+		addPreBookItem({ preBookId: preBook.id, item: newItem });
 
 		setProduct({});
 		resetFields();
@@ -118,4 +118,4 @@ function SOItemForm({ standingOrder }) {
 	);
 }
 
-export default SOItemForm;
+export default PreBookItemForm;

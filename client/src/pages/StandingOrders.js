@@ -1,6 +1,6 @@
 import { useQuery } from 'urql';
 import { STANDING_ORDERS_QUERY } from '../lib/Queries.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Flex, Heading } from '@chakra-ui/react';
 import { pageHeaderStyle } from '../styles/styles.js';
 import SOsTable from '../components/tables/SOsTable.js';
@@ -8,9 +8,12 @@ import AddSOForm from '../components/forms/AddSOForm.js';
 
 function StandingOrders () {
 	const [ standingOrders, setStandingOrders ] = useState( [] );
+
+	const context = useMemo( () => ({ additionalTypenames: ['StandingOrder'] }), [] );
   
 	const [fetchedStandingOrders] = useQuery({
 		query: STANDING_ORDERS_QUERY,
+		context: context
 	});
 
 	const { data, fetching, error } = fetchedStandingOrders;

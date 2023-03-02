@@ -7,6 +7,7 @@ function EventsTable() {
 	const [ events, setEvents ] = useState( [] );
 
 	const context = useMemo( () => ({ additionalTypenames: ['Event'] }), [] );
+	
 	const [fetchedEvents] = useQuery({
 		query: EVENTS_QUERY,
 		context: context
