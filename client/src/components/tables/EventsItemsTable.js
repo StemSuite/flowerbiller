@@ -1,4 +1,4 @@
-import ItemsList from './ItemsList.js';
+import ItemsList from './components/ItemsList.js';
 import { useQuery } from 'urql';
 import { useEffect, useState } from 'react';
 import { EVENTS_ITEMS_QUERY } from '../../lib/Queries.js';
@@ -22,9 +22,19 @@ function EventsItemsTable() {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [ 
-		{ header: 'Product', key: 'product', sort: true },
-		{ header: 'UoM', key: 'uom' },
-		{ header: 'Event Date', key: 'fdate' },
+		{ 
+			header: 'Product', 
+			sort: 'product', 
+			format: ( item ) => item.product
+		},
+		{ 
+			header: 'Qty', 
+			format: ( item ) => item.uom
+		},
+		{ 
+			header: 'Event Date', 
+			format: ( item ) => item.fdate
+		},
 	];
 
 	return (

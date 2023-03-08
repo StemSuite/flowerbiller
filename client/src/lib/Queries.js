@@ -179,16 +179,19 @@ export const SHIPMENT_ITEMS_QUERY = `
     query shipmentItems($shipmentID: String!) {
         shipmentItems(shipmentID: $shipmentID) {
             id
-            product
-            variety
-            size
-            boxCount
-            boxType
-            qtyPerBox
-            uom
-            pricePerUnit
-            totalQty
-            totalPrice
+            vendor
+            item {
+                product
+                variety
+                size
+                boxCount
+                boxType
+                qtyPerBox
+                uom
+                pricePerUnit
+                totalQty
+                totalPrice
+            }
         }
     }`;
 
@@ -216,16 +219,17 @@ export const PREBOOK_QUERY = `
 export const PREBOOK_ITEMS_QUERY = `
     query preBookItems($preBookId: String!) {
         preBookItems(preBookId: $preBookId) {
-            id
-            product
-            variety
-            size
-            boxCount
-            boxType
-            qtyPerBox
-            uom
-            pricePerUnit
-            totalQty
-            totalPrice
+            item {
+                product
+                variety
+                size
+                boxCount
+                boxType
+                qtyPerBox
+                uom
+                pricePerUnit
+                totalQty
+                totalPrice
+            }
         }
     }`;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'urql';
 import { EVENTS_QUERY } from '../../lib/Queries.js';
-import OrdersTable from './OrdersTable.js';
+import ItemsList from './components/ItemsList.js';
 
 function EventsTable() {
 	const [ events, setEvents ] = useState( [] );
@@ -24,16 +24,32 @@ function EventsTable() {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [
-		{ header: 'Customer', key: 'customer', sort: true },
-		{ header: 'Title', key: 'title' },
-		{ header: 'Date', key: 'fdate' },
-		{ header: 'Store', key: 'store' },
-		{ header: '# of Items', key: 'itemCount' }
+		{ 
+			header: 'Customer', 
+			sort: 'customer',
+			format: ( event ) => event.customer
+		},
+		{ 
+			header: 'Title', 
+			format: ( event ) => event.title
+		},
+		{ 
+			header: 'Customer', 
+			format: ( event ) => event.fdate
+		},
+		{ 
+			header: 'Store', 
+			format: ( event ) => event.store
+		},
+		{ 
+			header: 'Item Count', 
+			format: ( event ) => event.itemCount
+		},
 	];
 
 	return (
-		<OrdersTable
-			orders={events}
+		<ItemsList
+			items={events}
 			fields={fields}
 			path={'event'}
 		/>

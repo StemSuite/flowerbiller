@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useQuery } from 'urql';
 import { VARIETIES_QUERY } from '../../lib/Queries';
-import ItemsList from './ItemsList';
+import { arrayItems } from './ItemFormats';
+import ItemsList from './components/ItemsList';
 
 function VarietiesList({ varieties, setVarieties }) {
 
@@ -20,10 +21,23 @@ function VarietiesList({ varieties, setVarieties }) {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [ 
-		{ header: 'Product', key: 'product', sort: true },
-		{ header: 'Variety', key: 'variety' },
-		{ header: 'Colors', key: 'colors' },
-		{ header: 'Tags', key: 'tags' },
+		{ 
+			header: 'Product',
+			sort: 'product',
+			format: ( product ) => product.product
+		},
+		{ 
+			header: 'Variety', 
+			format: ( product ) => product.variety
+		},
+		{ 
+			header: 'Colors', 
+			format: ( product ) => arrayItems( product.colors )
+		},
+		{ 
+			header: 'Tags', 
+			format: ( product ) => arrayItems( product.tags )
+		},
 	];
 
 	return (

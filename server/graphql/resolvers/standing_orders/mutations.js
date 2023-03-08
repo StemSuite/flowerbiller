@@ -10,7 +10,7 @@ const standingOrderMutations = {
 	},
 
 	addSOItem: async( _, { standingOrderId, item }) => {
-
+		
 		item.totalQty = item.boxCount * item.qtyPerBox;
 		item.totalPrice = item.totalQty * item.pricePerUnit;
 
@@ -20,15 +20,18 @@ const standingOrderMutations = {
 		)
 			.then( standingOrder => {
 				let startDate = moment.utc( standingOrder.startDate );
-				let endDate = moment.utc( standingOrder.endDate );
-    
-				let newPurchase = standingOrder.items.slice( -1 )[0].toObject();
+				let endDate = moment.utc( standingOrder.endDate ) || null;
+				
+				let newPurchase = { standingOrder: standingOrder._id, vendor: standingOrder.venSH };
+				newPurchase.item = standingOrder.items.slice( -1 )[0].toObject();
+
 				let weeksOut = 0;
 
-				while ( startDate.day() !== standingOrder.shippingDay ) startDate.add( 1, 'day' );
+				while ( startDate.day() !== standingOrder.shippingDay ) {
+					startDate.add( 1, 'day' );}
 				let shippingDate = startDate;
        
-				while ( shippingDate <= endDate && weeksOut <= 16 ) {
+				while ( shippingDate <= endDate && weeksOut <= 15 ) {
 					let arrivalDate = moment( shippingDate ).add( standingOrder.daysToArrive, 'days' ).format( 'YYYY-MM-DD' );
 					let shipment = {  
 						shipSH: standingOrder.shipSH, 
@@ -39,9 +42,10 @@ const standingOrderMutations = {
 					shipmentMutations.incShipmentItemCount( shipment, item.boxCount )
 						.then( shipment => {
 							if ( !newPurchase.standingOrderItem ) {
+
 								Object.defineProperty( newPurchase, 'standingOrderItem',
-									Object.getOwnPropertyDescriptor( newPurchase, '_id' ) );
-								delete newPurchase['_id'];
+									Object.getOwnPropertyDescriptor( newPurchase.item, '_id' ) );
+								delete newPurchase.item['_id'];
 							}
 
 							newPurchase.shipment = shipment._id;

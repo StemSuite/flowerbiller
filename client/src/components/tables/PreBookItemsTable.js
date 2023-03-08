@@ -1,7 +1,8 @@
-import ItemsList from './ItemsList.js';
+import ItemsList from './components/ItemsList.js';
 import { useQuery } from 'urql';
 import { useEffect, useMemo, useState } from 'react';
 import { PREBOOK_ITEMS_QUERY } from '../../lib/Queries.js';
+import { boxes, fullProduct, price, qtyUom } from './ItemFormats.js';
 
 function PreBookItemsTable({ preBookId }) {
 	const [ items, setItems ] = useState( [] );
@@ -25,16 +26,31 @@ function PreBookItemsTable({ preBookId }) {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [ 
-		{ header: 'Product', key: 'product', sort: true },
-		{ header: 'Variety', key: 'variety' },
-		{ header: 'Size', key: 'size' },
-		{ header: 'Boxes', key: 'boxCount' },
-		{ header: 'Box Type', key: 'boxType' },
-		{ header: 'Qty/Box', key: 'qtyPerBox' },
-		{ header: 'UoM', key: 'uom' },
-		{ header: '$/Unit', key: 'pricePerUnit' },
-		{ header: 'Total Qty', key: 'totalQty', sort: true },
-		{ header: 'Total $', key: 'totalPrice' },
+		{ 
+			header: 'Product', 
+			sort: 'product', 
+			format: ( purchase ) => fullProduct( purchase.item )
+		},
+		{ 
+			header: 'Boxes', 
+			format: ( purchase ) => boxes( purchase.item )
+		},
+		{ 
+			header: 'Qty/Box',
+			format: ( purchase ) => qtyUom( purchase.item.qtyPerBox, purchase.item.uom )
+		},
+		{ 
+			header: '$/Unit', 
+			format: ( purchase ) => price( purchase.item.pricePerUnit )
+		},
+		{ 
+			header: 'Total Qty', 
+			format: ( purchase ) => qtyUom( purchase.item.totalQty, purchase.item.uom ) 
+		},
+		{ 
+			header: 'Total $', 
+			format: ( purchase ) => price( purchase.item.totalPrice )
+		},
 	];
 
 	return (

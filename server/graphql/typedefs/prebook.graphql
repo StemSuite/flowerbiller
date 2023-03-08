@@ -1,6 +1,6 @@
 type PreBook {
     id: String!
-    vendor: PreBookVen!
+    vendor: String!
     venSH: String
     shippingMethod: PreBookShippingMethod!
     shipSH: String

@@ -1,8 +1,9 @@
-import ItemsList from './ItemsList.js';
+import ItemsList from './components/ItemsList.js';
 import { DELETE_EVENT_ITEM } from '../../lib/Mutations.js';
 import { useMutation, useQuery } from 'urql';
 import { useEffect, useMemo, useState } from 'react';
 import { EVENT_ITEMS_QUERY } from '../../lib/Queries.js';
+import { fullProduct, qtyUom } from './ItemFormats.js';
 
 function EventItems({ eventID }) {
 
@@ -29,11 +30,15 @@ function EventItems({ eventID }) {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [ 
-		{ header: 'Product', key: 'product', sort: true },
-		{ header: 'Variety', key: 'variety' },
-		{ header: 'Size', key: 'size' },
-		{ header: 'UoM', key: 'uom' },
-		{ header: 'QTY', key: 'quantity' },
+		{ 
+			header: 'Product', 
+			sort: 'product', 
+			format: ( item ) => fullProduct( item )
+		},
+		{ 
+			header: 'Qty', 
+			format: ( item ) => qtyUom( item.quantity, item.uom ) 
+		},
 	];
 
 	function handleDeleteItem( itemID ) {

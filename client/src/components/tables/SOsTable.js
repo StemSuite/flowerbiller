@@ -1,18 +1,41 @@
-import OrdersTable from './OrdersTable.js';
+import ItemsList from './components/ItemsList.js';
+import { dayOfWeek } from './ItemFormats.js';
 
 function SOsTable({ standingOrders }) {
 	const fields = [
-		{ header: 'Vendor', key: 'venSH', sort: true },
-		{ header: 'Shipping via', key: 'shipSH' },
-		{ header: 'Start Date', key: 'fstartDate' },
-		{ header: 'End Date', key: 'fendDate' },
-		{ header: 'Shipping Day', key: 'shippingDay' },
-		{ header: '# of Items', key: 'itemCount' }
+		{ 
+			header: 'Vendor', 
+			sort: 'venSH',
+			format: ( order ) => order.venSH
+		},
+		{ 
+			header: 'Vendor', 
+			sort: 'shipSH',
+			format: ( order ) => order.shipSH
+		},
+		{ 
+			header: 'Start Date', 
+			sort: 'fstartDate',
+			format: ( order ) => order.fstartDate
+		},
+		{ 
+			header: 'End Date', 
+			sort: 'fendDate',
+			format: ( order ) => order.fendDate
+		},
+		{ 
+			header: 'Shipping Day', 
+			format: ( order ) => dayOfWeek( order.shippingDay )
+		},
+		{ 
+			header: 'Item Count', 
+			format: ( order ) => order.itemCount
+		},
 	];
 
 	return (
-		<OrdersTable
-			orders={standingOrders}
+		<ItemsList
+			items={standingOrders}
 			fields={fields}
 			path={'standing_order'}
 		/>

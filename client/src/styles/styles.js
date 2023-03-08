@@ -11,3 +11,8 @@ export const pageHeaderStyle = {
 	textDecor: 'underline',
 	m: '10px'
 };
+
+export const lineItemStyle = {
+	maxHeight: '25px',
+	textAlign: 'center'
+};

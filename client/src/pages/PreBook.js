@@ -37,7 +37,7 @@ function PreBook () {
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
-					<Text textDecor="underline" fontSize="lg">Shipping Date</Text>
+					<Text textDecor="underline" fontSize="lg">Shipping</Text>
 					<Text>{preBook.fshippingDate} via {preBook.shipSH}</Text>
 				</Box>
 			</Flex>

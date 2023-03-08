@@ -75,6 +75,7 @@ function PreBookItemForm({ preBook }) {
 			daysToExp: selectedProduct.daysToExp                
 		};
 
+		console.log( newItem );
 		addPreBookItem({ preBookId: preBook.id, item: newItem });
 
 		setProduct({});

@@ -13,6 +13,7 @@ function AddSOForm() {
 
 	const [ , addSO ] = useMutation( ADD_STANDING_ORDER );
 
+	const [ disableSubmit, setDisable ] = useState( true );
 	const [ selectedVen, setVen ] = useState( '' );
 	const [ shippingMethodOptions, setShippingMethodOptions ] = useState( [] );
 	const [ selectedShippingMethod, setShippingMethod ] = useState( '' );
@@ -34,11 +35,19 @@ function AddSOForm() {
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
 
+	function checkDisable( ...fields ) {
+		for ( let i = 0; i < fields.length; i += 1 ) {
+			if ( !fields[i] ) return true;
+		}
+
+		return false;
+	}
+
 	function changeVen( venSH ) {
 		let vendor = data.vendors.find( ven => ven.shortHand === venSH );
-
 		setVen( vendor );
 		setShippingMethodOptions( vendor.shippingMethods );
+		setDisable( checkDisable( inputStartDate, selectedShippingDay, selectedShippingMethod ) );
 	}
 
 	function changeShippingOptions( shipSH ) {
@@ -46,10 +55,28 @@ function AddSOForm() {
 		let shippingDays = shippingMethod.shippingDays;
 		setShippingMethod( shippingMethod );
 		setShippingDayOptions( shippingDays );
+		setDisable( checkDisable( inputStartDate, selectedShippingDay, selectedVen ) );
 	}
 
 	function changeShippingDay( day ) {
 		setShippingDay( day );
+		setDisable( checkDisable( inputStartDate, selectedVen, selectedShippingMethod ) );
+	}
+
+	function handleStartDateChange( e ) {
+		setStartDate( e.target.value );
+		setDisable( checkDisable( selectedShippingDay, selectedVen, selectedShippingMethod ) );
+	}
+
+	function resetForm() {
+		setDisable( true );
+		setVen( '' );
+		setShippingMethodOptions( [] );
+		setShippingMethod( '' );
+		setShippingDay( '' );
+		setShippingDayOptions( [] );
+		setStartDate( '' );
+		setEndDate( '' );
 	}
 
 	function handleAddSO() {
@@ -62,13 +89,14 @@ function AddSOForm() {
 			shippingDay: Number( selectedShippingDay ),
 			daysToArrive: selectedShippingMethod.daysToArrive,
 		}; 
-
+	
 		addSO({ standingOrder: newStandingOrder });
+		resetForm();
 	}
 
 	let form = (
 		<Form>
-			<FormControl as="fieldset" p="20px">
+			<FormControl isRequired as="fieldset" p="20px">
 				<Stack>
 					<HStack spacing="10px" justifyContent="center">
 						<VendorField 
@@ -90,20 +118,22 @@ function AddSOForm() {
 								size="sm" 
 								name="startDatField" 
 								value={inputStartDate} 
-								onChange={( e ) => setStartDate( e.target.value )}
+								onChange={handleStartDateChange}
 							>
 							</Input>
 						</Box>
 						<Box>
-							<FormLabel textAlign="center">End Date</FormLabel>
-							<Input
-								type="date"
-								size="sm" 
-								name="endDateField" 
-								value={inputEndDate} 
-								onChange={( e ) => setEndDate( e.target.value )}
-							>
-							</Input>
+							<FormControl isRequired={false} as="fieldset" p="20px">
+								<FormLabel textAlign="center">End Date</FormLabel>
+								<Input
+									type="date"
+									size="sm" 
+									name="endDateField" 
+									value={inputEndDate} 
+									onChange={( e ) => setEndDate( e.target.value )}
+								>
+								</Input>
+							</FormControl>
 						</Box>
 						<DaysOfWeek
 							label={'Shipping Day'}
@@ -118,7 +148,7 @@ function AddSOForm() {
 	);
 
 	return (
-		<AddModal title={'New Standing Order'} modalBody={form} onSumbit={handleAddSO} />
+		<AddModal title={'New Standing Order'} modalBody={form} onSumbit={handleAddSO} disabled={disableSubmit}/>
 	);
 }
 

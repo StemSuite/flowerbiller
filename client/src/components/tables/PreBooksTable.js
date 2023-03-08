@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'urql';
 import { PREBOOKS_QUERY } from '../../lib/Queries.js';
-import OrdersTable from './OrdersTable.js';
-
+import ItemsList from './components/ItemsList.js';
 
 function PreBooksTable() {
 
@@ -27,15 +26,29 @@ function PreBooksTable() {
 	if ( error ) return <pre>{error.message}</pre>;
 
 	const fields = [
-		{ header: 'Shipping Date', key: 'fshippingDate', sort: true },
-		{ header: 'Vendor', key: 'venSH', sort: true },
-		{ header: 'Shipping Method', key: 'shipSH' },
-		{ header: '# of Items', key: 'itemCount' }
+		{ 
+			header: 'Shipping Date', 
+			sort: 'fshippingDate',
+			format: ( order ) => order.fshippingDate
+		},
+		{ 
+			header: 'Vendor', 
+			sort: 'venSH',
+			format: ( order ) => order.venSH
+		},
+		{ 
+			header: 'Shipping Method', 
+			format: ( order ) => order.shipSH
+		},
+		{ 
+			header: '# of Items', 
+			format: ( order ) => order.itemCount
+		}
 	];
 
 	return (
-		<OrdersTable
-			orders={preBooks}
+		<ItemsList
+			items={preBooks}
 			fields={fields}
 			path={'prebook'}
 		/>

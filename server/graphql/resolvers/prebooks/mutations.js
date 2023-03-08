@@ -29,13 +29,20 @@ const preBookMutations = {
 
 				return shipmentMutations.incShipmentItemCount( shipment, item.boxCount )
 					.then( shipment => {
+						item.totalQty = item.boxCount * item.qtyPerBox;
+						item.totalPrice = item.totalQty * item.pricePerUnit;
 
-						item.preBook = preBook._id;
-						item.shipment = shipment._id;
-						item.shippingDate = moment.utc( shipment.shippingDate ).format( 'YYYY-MM-DD' ),
-						item.arrivalDate = moment.utc( shipment.arrivalDate ).format( 'YYYY-MM-DD' );
-						item.expirationDate = moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' );
-						return purchaseMutations.addSOPurchase( item );
+						let newPurchase = {
+							preBook: preBook._id, 
+							shipment: shipment._id,
+							vendor: preBook.vendor.shortHand,
+							shippingDate: moment.utc( shipment.shippingDate ).format( 'YYYY-MM-DD' ),
+							arrivalDate: moment.utc( shipment.arrivalDate ).format( 'YYYY-MM-DD' ),
+							expirationDate: moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' ),
+							item: item
+						};
+
+						return purchaseMutations.addSOPurchase( newPurchase );
 					});
 			});
 	}

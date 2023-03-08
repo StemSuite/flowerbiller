@@ -1,6 +1,5 @@
 type IncomingItem {
-    _id: String!
-    itemDescription: String
+    _id: String
     product: String!
     variety: String
     uom: String!

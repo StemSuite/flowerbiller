@@ -1,18 +1,34 @@
-import OrdersTable from './OrdersTable';
+import ItemsList from './components/ItemsList';
 
 function ShipmentsTable ({ shipments }) {
 
 	let fields = [
-		{ header: 'Shipping Date', key: 'fshippingDate', sort: true },
-		{ header: 'Arrival Date', key: 'farrivalDate', sort: true },
-		{ header: 'Shipping Method', key: 'shipSH', sort: true },
-		{ header: '# of Items', key: 'itemCount' }
+		{ 
+			header: 'Shipping Date', 
+			sort: 'fshippingDate',
+			format: ( shipment ) => shipment.fshippingDate
+		},
+		{ 
+			header: 'Shipping Date', 
+			sort: 'fshippingDate',
+			format: ( shipment ) => shipment.fshippingDate
+		},
+		{ 
+			header: 'Shipping Method', 
+			sort: 'shipSH',
+			format: ( shipment ) => shipment.shipSH
+		},
+		{ 
+			header: '# of Items', 
+			key: 'itemCount',
+			format: ( shipment ) => shipment.itemCount
+		}
 	];
 
 
 	return (
-		<OrdersTable
-			orders={shipments}
+		<ItemsList
+			items={shipments}
 			fields={fields}
 			path={'shipment'}
 		/>
