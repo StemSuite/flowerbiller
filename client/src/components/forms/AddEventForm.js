@@ -29,7 +29,6 @@ function AddEventForm() {
 			customer: inputCustomer,
 			title: inputTitle,
 			date: inputDate,
-			itemCount: 0
 		};
 
 		addEvent({ event: newEvent });

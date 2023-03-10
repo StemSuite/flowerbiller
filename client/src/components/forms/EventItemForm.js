@@ -10,7 +10,7 @@ import QuantityField from './Fields/QuantityField.js';
 import AddButton from '../buttons/AddButton.js';
 import { PRODUCTS_AND_VARIETIES_QUERY } from '../../lib/Queries';
 
-function EventItemForm({ eventID, eventDate }) {
+function EventItemForm({ event }) {
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
@@ -45,27 +45,32 @@ function EventItemForm({ eventID, eventDate }) {
 
 	function resetFields() {
 		setQty( '' );
-		setProduct( '' );
+		setProduct({});
 		setVariety( '' );
 		setSize( '' );
 	}
   
 	function addProduct( e ) {
 		e.preventDefault();
+
 		let newProd = {
-			eventID: eventID,
 			product: selectedProduct.name,
 			variety: selectedVariety,
 			size: selectedSize,
 			uom: prodUOM,
 			quantity: Number( inputQty ),
-			dateSold: eventDate
+		};
+
+		let newSale = {
+			store: event.store,
+			eventID: event._id,
+			dateSold: event.fdate,
+			item: newProd
 		};
       
-		addEventItem({ eventID: eventID, item: newProd });
+		addEventItem({ newSale: newSale });
   
 		resetFields();
-		setProduct({});
 		setUOM( null );
 		inputProd.current.focus();
 	}

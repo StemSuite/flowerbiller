@@ -1,0 +1,33 @@
+type Sale {
+    id: String!
+    store: String!
+    eventID: String
+    dateSold: String!
+    fdate: String!
+    item: SaleItem
+}
+
+type SaleItem {
+    _id: String!
+    product: String!
+    variety: String
+    size: String
+    uom: String!
+    quantity: Int!
+}
+
+input AddSaleInput {
+    store: String!
+    eventID: String
+    dateSold: String!
+    item: AddSaleItemInput
+}
+
+input AddSaleItemInput {
+    product: String!
+    variety: String
+    size: String
+    uom: String!
+    quantity: Int!
+}
+

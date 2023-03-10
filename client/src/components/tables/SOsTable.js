@@ -9,7 +9,7 @@ function SOsTable({ standingOrders }) {
 			format: ( order ) => order.venSH
 		},
 		{ 
-			header: 'Vendor', 
+			header: 'Shipping via', 
 			sort: 'shipSH',
 			format: ( order ) => order.shipSH
 		},

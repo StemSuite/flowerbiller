@@ -23,7 +23,6 @@ function ItemsList({ items, handleDeleteItem, fields, path }) {
 	}
 
 	function Items({ items }) {
-		console.log( items );
 		if ( path ) return <LinkedLine items={items} fields={fields} path={path}/>;
 		return <PlainLine items={items} fields={fields} />;
 	}

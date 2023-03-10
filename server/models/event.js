@@ -8,7 +8,7 @@ const eventSchema = new Schema({
 	date: { type: Date, required: true },
 	fdate: String,
 	location: { type: String },
-	itemCount: { type: Number, required: true }
+	itemCount: Number
 }, { timestamps: true });
 
 const Event = mongoose.model( 'event', eventSchema );

@@ -5,7 +5,6 @@ function sortByProduct( prods ) {
 			a = a.item;
 			b= b.item;
 		}
-		console.log( a, b );
 		if ( a.product !== b.product ) return a.product.localeCompare( b.product );
 		if ( a.variety !== b.variety ) return a.variety.localeCompare( b.variety );
 		if ( a.size !== b.size ) return parseInt( a.size ) < parseInt( b.size );
@@ -62,6 +61,16 @@ function sortByShipSH( items ) {
 	});
 }
 
+function sortByDate( items ) {
+	return items.sort( ( a, b ) => {
+		a.date = new Date ( a.fdate );
+		b.date = new Date ( b.fdate );
+		if ( a.date > b.date ) return 1;
+		if ( a.date < b.date ) return -1;
+		return 0;
+	});
+}
+
 function sortByDateShipping( items ) {
 	return items.sort( ( a, b ) => {
 		a.shippingDate = new Date ( a.fshippingDate );
@@ -90,6 +99,7 @@ const sort = {
 	'venSH': sortByVenSH,
 	'shipSH': sortByShipSH,
 	'description': sortByProduct,
+	'fdate': sortByDate,
 	'fshippingDate': sortByDateShipping,
 	'farrivalDate': sortByArrivalDate,
 };

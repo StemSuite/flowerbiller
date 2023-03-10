@@ -1,7 +1,8 @@
 import Purchase from '../../../models/purchase.js';
 
 const purchaseMutations = {
-	addSOPurchase: async ( newPurchase ) => {
+	addPurchase: async ( newPurchase ) => {
+		if ( !newPurchase.inventory ) newPurchase.inventory = newPurchase.item.totalQty;
 		return new Purchase ( newPurchase ).save();
 	}
 };

@@ -22,13 +22,13 @@ export const ADD_STANDING_ORDER = `
 export const ADD_EVENT =`
     mutation addEvent($event: AddEventInput!) {
         addEvent(event: $event) {
-            id
+            _id
         }
     }`;
 
 export const ADD_EVENT_ITEM=`
-    mutation addEventItem($eventID: String!, $item: AddSoldItemInput!) {
-        addEventItem(eventID: $eventID, item: $item) {
+    mutation addEventItem($newSale: AddSaleInput!) {
+        addEventItem(newSale: $newSale) {
             id
         }
     }`;

@@ -101,7 +101,7 @@ export const VENDORS_QUERY = `
 export const EVENTS_QUERY = `
     query events {
         events {
-            id
+            _id
             title
             customer
             store
@@ -113,7 +113,7 @@ export const EVENTS_QUERY = `
 export const EVENT_QUERY = `
     query event($id: String!) {
         event(id: $id) {
-            id
+            _id
             title
             customer
             fdate
@@ -125,25 +125,30 @@ export const EVENT_ITEMS_QUERY = `
     query eventItems($eventID: String!) {
         eventItems(eventID: $eventID) {
             id
-            product
-            variety
-            size
-            uom
-            quantity
+            item {
+                product
+                variety
+                size
+                uom
+                quantity
+            }
         }
-    }
-`;
+    }`;
 
 export const EVENTS_ITEMS_QUERY = `
     query eventsItems {
         eventsItems {
             id
-            product
-            uom
             fdate
+            item {
+                product
+                variety
+                size
+                uom
+                quantity
+            }
         }
-    }
-`;
+    }`;
 
 
 export const STORES_QUERY = `
@@ -231,5 +236,16 @@ export const PREBOOK_ITEMS_QUERY = `
                 totalQty
                 totalPrice
             }
+        }
+    }`;
+
+export const INVENTORY_QUERY = `
+    query invetory($date: String!) {
+        inventory(date: $date) {
+            product
+            variety
+            size
+            uom
+            qtyAvailable
         }
     }`;

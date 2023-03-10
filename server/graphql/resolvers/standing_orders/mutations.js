@@ -53,7 +53,7 @@ const standingOrderMutations = {
 							newPurchase.arrivalDate = arrivalDate;
 							newPurchase.expirationDate = moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' );
        
-							purchaseMutations.addSOPurchase( newPurchase );
+							purchaseMutations.addPurchase( newPurchase );
 						});
 					weeksOut += 1;
 					shippingDate.add( 7, 'days' );

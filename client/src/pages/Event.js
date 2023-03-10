@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'urql';
 import { EVENT_QUERY } from '../lib/Queries';
@@ -9,16 +9,19 @@ import { pageHeaderStyle } from '../styles/styles';
 
 function Event() {
 	const id = useParams().id;
+
+	const [ event, setEvent ] = useState( [] );
     
-	const [event] = useQuery({
+	const [fetchedEvent] = useQuery({
 		query: EVENT_QUERY,
 		variables: { id },
 	});
 
-	const { data, fetching, error } = event;
+	const { data, fetching, error } = fetchedEvent;
 
 	useEffect( () => {
 		if ( data === undefined ) return;
+		setEvent( data.event );
 	}, [data] );
 
 	if ( fetching ) return 'Loading...';
@@ -30,25 +33,25 @@ function Event() {
 			<Flex mx="20%" justifySelf="center" alignSelf="center" >
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Store</Text>
-					<Text>{data.event.store}</Text>
+					<Text>{event.store}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Date</Text>
-					<Text>{data.event.fdate}</Text>
+					<Text>{event.fdate}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Title</Text>
-					<Text>{data.event.title}</Text>
+					<Text>{event.title}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Customer</Text>
-					<Text>{data.event.customer}</Text>
+					<Text>{event.customer}</Text>
 				</Box>
 			</Flex>
-			<EventItemForm eventID={id} eventDate={data.event.fdate}/>
+			<EventItemForm event={event} />
 			<EventItems eventID={id} />
 		</>
 	);

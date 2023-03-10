@@ -40,7 +40,10 @@ function SOItems({ items, orderID }) {
 	}
 
 	return (
-		<ItemsList items={items} fields={fields} handleDeleteItem={handleDeleteItem}/>
+		<ItemsList 
+			items={items} 
+			fields={fields} 
+			handleDeleteItem={handleDeleteItem}/>
 	);
 }
 

@@ -13,22 +13,23 @@ function StandingOrder () {
 
 	const [ items, setItems ] = useState( [] );
 
-	const [standingOrder] = useQuery({
+	const [fetchedStandingOrder] = useQuery({
 		query: STANDING_ORDER_QUERY,
 		variables: { id },
 	});
 
-	const { data, fetching, error } = standingOrder;
+	const { data, fetching, error } = fetchedStandingOrder;
 
 	useEffect( () => {
 		if ( data === undefined ) return;
 		setItems( data.standingOrder.items );
+		console.log( data.standingOrder.items );
 	}, [data] );
 
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
 
-	let info = data.standingOrder;
+	let standingOrder = data.standingOrder;
 
 	return (
 		<>
@@ -36,20 +37,20 @@ function StandingOrder () {
 			<Flex mx="20%" justifySelf="center" alignSelf="center" >
 				<Box textAlign="center" minWidth="100px"> 
 					<Text textDecor="underline" fontSize="lg">Vendor</Text>
-					<Text>{info.venSH}</Text>
+					<Text>{standingOrder.venSH}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Dates</Text>
-					<Text>{info.fstartDate} - {info.fendDate}</Text>
+					<Text>{standingOrder.fstartDate} - {standingOrder.fendDate}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Shipping</Text>
-					<Text>{daysOfTheWeek[info.shippingDay]}(s) via {info.shipSH}</Text>
+					<Text>{daysOfTheWeek[standingOrder.shippingDay]}(s) via {standingOrder.shipSH}</Text>
 				</Box>
 			</Flex>
-			<SOItemForm standingOrder={info} />
+			<SOItemForm orderID={standingOrder._id} />
 			<SOItems items={items} orderID={id}/>
 		</>
 	);

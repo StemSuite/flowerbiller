@@ -1,4 +1,6 @@
 type Query {
+    inventory(date: String!): [InventoryItem]
+
     productTypes: [ProductType]
 
     productType(id: String!): ProductType!
@@ -39,9 +41,9 @@ type Query {
 
     events: [Event]
 
-    eventItems(eventID: String!): [SoldItem]
+    eventItems(eventID: String!): [Sale]
 
-    eventsItems: [SoldItem]
+    eventsItems: [Sale]
 
     shipmentsByDates(startDate: String!, endDate: String!): [Shipment]
 
@@ -56,6 +58,8 @@ type Mutation {
     addProductType(productType: AddProductTypeInput): ProductType!
 
     addProduct(product: AddProductInput!): Product!
+
+    addPurchase(newPruchase: AddIncomingItemInput): Purchase!
 
     addVariety(productID: String!, variety: AddVarietyInput!): Variety!
 
@@ -73,11 +77,12 @@ type Mutation {
 
     addEvent(event: AddEventInput): Event!
 
-    addEventItem(eventID: String!, item: AddSoldItemInput): SoldItem!
+    addEventItem(newSale: AddSaleInput!): Sale!
 
     addPreBook(preBook: AddPreBookInput!): PreBook!
 
     addPreBookItem(preBookId: String!, item: AddIncomingItemInput): Purchase!
+
 
 
     # deleteEventItem(eventID: String!, itemID: String!): Event

@@ -1,5 +1,6 @@
 type Purchase {
     id: String!
+    inventory: Int!
     shipment: String!
     vendor: String!
     standingOrder: String!
@@ -8,4 +9,30 @@ type Purchase {
     arrivalDate: String!
     expirationDate: String
     item: IncomingItem!
+}
+
+type IncomingItem {
+    _id: String
+    product: String!
+    variety: String
+    uom: String!
+    size: String
+    boxCount: Int
+    boxType: String
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    totalQty: Int!
+    totalPrice: Float!
+}
+
+input AddIncomingItemInput {
+    product: String!
+    variety: String
+    uom: String!
+    size: String
+    boxCount: Int
+    boxType: String
+    qtyPerBox: Int!
+    pricePerUnit: Float!
+    daysToExp: Int!
 }

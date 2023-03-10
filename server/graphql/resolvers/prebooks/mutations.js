@@ -42,7 +42,7 @@ const preBookMutations = {
 							item: item
 						};
 
-						return purchaseMutations.addSOPurchase( newPurchase );
+						return purchaseMutations.addPurchase( newPurchase );
 					});
 			});
 	}

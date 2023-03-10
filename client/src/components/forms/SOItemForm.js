@@ -12,7 +12,7 @@ import { Box, FormControl, HStack } from '@chakra-ui/react';
 import AddButton from '../buttons/AddButton.js';
 import { Form } from 'react-router-dom';
 
-function SOItemForm({ standingOrder }) {
+function SOItemForm({ orderID }) {
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
@@ -51,13 +51,12 @@ function SOItemForm({ standingOrder }) {
 
 	function resetFields() {
 		setPricePerUnit( '' );
-		setProduct( '' );
+		setProduct({});
 		setVariety( '' );
 		setSize( '' );
 		setBoxType( '' );
 		setBoxCount( '' );
 		setQtyPerBox( '' );
-		setUOM( null );
 	}
 
 	function addProduct( e ) {
@@ -75,10 +74,10 @@ function SOItemForm({ standingOrder }) {
 			daysToExp: selectedProduct.daysToExp                
 		};
 
-		addSOItem({ standingOrderId: standingOrder._id, item: newItem });
+		addSOItem({ standingOrderId: orderID, item: newItem });
 
-		setProduct({});
 		resetFields();
+		setUOM( null );
 		inputProd.current.focus();
 	}
 

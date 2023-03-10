@@ -34,7 +34,7 @@ function EventsTable() {
 			format: ( event ) => event.title
 		},
 		{ 
-			header: 'Customer', 
+			header: 'Date', 
 			format: ( event ) => event.fdate
 		},
 		{ 

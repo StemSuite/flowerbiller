@@ -9,12 +9,12 @@ function ShipmentsTable ({ shipments }) {
 			format: ( shipment ) => shipment.fshippingDate
 		},
 		{ 
-			header: 'Shipping Date', 
-			sort: 'fshippingDate',
-			format: ( shipment ) => shipment.fshippingDate
+			header: 'Arrival Date', 
+			sort: 'farrivalDate',
+			format: ( shipment ) => shipment.farrivalDate
 		},
 		{ 
-			header: 'Shipping Method', 
+			header: 'Shipping via', 
 			sort: 'shipSH',
 			format: ( shipment ) => shipment.shipSH
 		},

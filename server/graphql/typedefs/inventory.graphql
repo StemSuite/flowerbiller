@@ -1,0 +1,7 @@
+type InventoryItem {
+    product: String!
+    variety: String
+    size: String
+    uom: String!
+    qtyAvailable: Int
+}

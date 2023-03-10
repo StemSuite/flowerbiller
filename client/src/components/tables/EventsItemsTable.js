@@ -2,6 +2,7 @@ import ItemsList from './components/ItemsList.js';
 import { useQuery } from 'urql';
 import { useEffect, useState } from 'react';
 import { EVENTS_ITEMS_QUERY } from '../../lib/Queries.js';
+import { fullProduct, qtyUom } from './ItemFormats.js';
 
 function EventsItemsTable() {
 
@@ -16,6 +17,7 @@ function EventsItemsTable() {
 	useEffect( () => {
 		if ( data === undefined ) return;
 		setItems( data.eventsItems );
+		console.log( data.eventsItems );
 	}, [data] );
 
 	if ( fetching ) return 'Loading...';
@@ -23,17 +25,18 @@ function EventsItemsTable() {
 
 	const fields = [ 
 		{ 
+			header: 'Event Date',
+			sort: 'fdate',
+			format: ( sale ) => sale.fdate
+		},
+		{ 
 			header: 'Product', 
 			sort: 'product', 
-			format: ( item ) => item.product
+			format: ( sale ) => fullProduct( sale.item )
 		},
 		{ 
 			header: 'Qty', 
-			format: ( item ) => item.uom
-		},
-		{ 
-			header: 'Event Date', 
-			format: ( item ) => item.fdate
+			format: ( sale ) => qtyUom( sale.item.quantity, sale.item.uom ) 
 		},
 	];
 

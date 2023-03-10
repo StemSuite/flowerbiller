@@ -1,16 +1,20 @@
 import Event from '../../../models/event.js';
+import Sale from '../../../models/sale.js';
+import moment from 'moment';
 
 const eventMutations = {
 	addEvent: async ( _, { event }) => {
+		event.itemCount = 0;
 		let newEvent = new Event( event );
 		return newEvent.save();
 	},
 
-	// addEventItem: async(_, {eventID, item}) => {
-	//     return Event.findByIdAndUpdate(eventID,
-	//         {$push: {items: item}}, 
-	//         {new: true}
-	//     )},
+	addEventItem: async( _, { newSale }) => {
+		newSale.dateSold = moment.utc( new Date ( newSale.dateSold ) ).format( 'YYYY-MM-DD' );
+		newSale = new Sale( newSale );
+		Event.findByIdAndUpdate( newSale.eventID, { $inc: { itemCount: 1 } }).exec();
+		return newSale.save();
+	}
 
 	// deleteEventItem: async(_, {eventID, itemID}) => {
 	//     return Event.findByIdAndUpdate(eventID, 

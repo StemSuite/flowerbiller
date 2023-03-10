@@ -1,5 +1,5 @@
 type Event {
-    id: String!
+    _id: String!
     store: String
     title: String!
     customer: String!
@@ -9,14 +9,13 @@ type Event {
     location: String
     delivery: Boolean
     pickUp: Boolean
-    itemCount: Int!
+    itemCount: Int
 }
+
 
 input AddEventInput {
     store: String!
     title: String!
     customer: String!
     date: String!
-    itemCount: Int!
-    location: String
 }
