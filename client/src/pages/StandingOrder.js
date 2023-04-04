@@ -23,7 +23,6 @@ function StandingOrder () {
 	useEffect( () => {
 		if ( data === undefined ) return;
 		setItems( data.standingOrder.items );
-		console.log( data.standingOrder.items );
 	}, [data] );
 
 	if ( fetching ) return 'Loading...';

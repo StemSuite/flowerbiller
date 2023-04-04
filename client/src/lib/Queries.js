@@ -138,7 +138,7 @@ export const EVENT_ITEMS_QUERY = `
 export const EVENTS_ITEMS_QUERY = `
     query eventsItems {
         eventsItems {
-            id
+            _id
             fdate
             item {
                 product
@@ -146,6 +146,16 @@ export const EVENTS_ITEMS_QUERY = `
                 size
                 uom
                 quantity
+            }
+            filledFrom
+            fillOptions {
+                id
+                vendor
+                arrivalDate
+                item {
+                    product
+                    variety
+                }
             }
         }
     }`;

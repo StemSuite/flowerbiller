@@ -12,7 +12,7 @@ const standingOrderMutations = {
 	addSOItem: async( _, { standingOrderId, item }) => {
 		
 		item.totalQty = item.boxCount * item.qtyPerBox;
-		item.totalPrice = item.totalQty * item.pricePerUnit;
+		item.totalPrice = ( item.totalQty * item.pricePerUnit.toFixed( 2 ) );
 
 		return StandingOrder.findByIdAndUpdate( standingOrderId, 
 			{ $push: { items: item } }, 
@@ -49,8 +49,8 @@ const standingOrderMutations = {
 							}
 
 							newPurchase.shipment = shipment._id;
-							newPurchase.shippingDate = shippingDate.format( 'YYYY-MM-DD' ),
-							newPurchase.arrivalDate = arrivalDate;
+							newPurchase.shippingDate = moment.utc( shipment.shippingDate ).format( 'YYYY-MM-DD' ),
+							newPurchase.arrivalDate = moment.utc( shipment.arrivalDate ).format( 'YYYY-MM-DD' ),
 							newPurchase.expirationDate = moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' );
        
 							purchaseMutations.addPurchase( newPurchase );

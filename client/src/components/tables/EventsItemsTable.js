@@ -3,6 +3,7 @@ import { useQuery } from 'urql';
 import { useEffect, useState } from 'react';
 import { EVENTS_ITEMS_QUERY } from '../../lib/Queries.js';
 import { fullProduct, qtyUom } from './ItemFormats.js';
+import PullFromField from '../forms/Fields/PullFromField.js';
 
 function EventsItemsTable() {
 
@@ -17,7 +18,6 @@ function EventsItemsTable() {
 	useEffect( () => {
 		if ( data === undefined ) return;
 		setItems( data.eventsItems );
-		console.log( data.eventsItems );
 	}, [data] );
 
 	if ( fetching ) return 'Loading...';
@@ -38,8 +38,11 @@ function EventsItemsTable() {
 			header: 'Qty', 
 			format: ( sale ) => qtyUom( sale.item.quantity, sale.item.uom ) 
 		},
+		{ 
+			header: 'Pulled From', 
+			format: ( sale ) => <PullFromField item={sale}/>
+		},
 	];
-
 	return (
 		<ItemsList
 			items={items}

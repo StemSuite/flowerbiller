@@ -5,16 +5,17 @@ import ProductField from '../forms/Fields/ProductField';
 import { PRODUCTS_ONLY_QUERY } from '../../lib/Queries';
 import { useQuery } from 'urql';
 import { Form } from 'react-router-dom';
-import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
+import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Stack, useToast } from '@chakra-ui/react';
 import AddModal from '../modals/AddModal';
 
 function AddVarietyForm() {
+	const toast = useToast();
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ inputVariety, setVariety ] = useState( '' );
 	const [ inputColors, setColors ] = useState( '' );
 	const [ inputTags, setTags ] = useState( '' );
-    
+
 	const [ , addVariety ] = useMutation( ADD_VARIETY_MUTATION );
 
 	const [fetchedProds] = useQuery({
@@ -39,8 +40,6 @@ function AddVarietyForm() {
 	}
 
 	function resetInputs() {
-		setProducts( [] );
-		setProduct({});
 		setVariety( '' );
 		setColors( '' );
 		setTags( '' );
@@ -55,6 +54,16 @@ function AddVarietyForm() {
 		});
 	}
 
+	function successToast() {
+		toast({
+			title: 'Variety created.',
+			description: `${selectedProduct.name}, ${inputVariety} added!`,
+			status: 'success',
+			duration: 3000,
+			isClosable: true,
+		});
+	}
+
 	function handleAddVariety() {
 		let newVariety = {
 			name: inputVariety
@@ -64,6 +73,7 @@ function AddVarietyForm() {
 		if ( inputTags ) newVariety.tags = formatWords( inputTags );
 
 		addVariety({ productID: selectedProduct.id, variety: newVariety });
+		successToast();
 		resetInputs();
 	}
 
@@ -124,7 +134,7 @@ function AddVarietyForm() {
 	);
 
 	return (
-		<AddModal title={'New Variety'} modalBody={form} onSumbit={handleAddVariety} />
+		<AddModal title={'New Variety'} modalBody={form} onSumbit={handleAddVariety} preventClose={true} />
 	);
 }
 

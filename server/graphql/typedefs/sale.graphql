@@ -1,10 +1,12 @@
 type Sale {
-    id: String!
+    _id: String!
     store: String!
     eventID: String
     dateSold: String!
     fdate: String!
     item: SaleItem
+    filledFrom: String
+    fillOptions: [Purchase]
 }
 
 type SaleItem {

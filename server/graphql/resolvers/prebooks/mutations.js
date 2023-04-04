@@ -15,7 +15,7 @@ const preBookMutations = {
 	},
 
 	addPreBookItem: async( _, { preBookId, item }) => {
-		item.totalQty = item.boxCount * item.qtyPerBox;
+		item.totalQty = ( item.boxCount * item.qtyPerBox ).toFixed( 2 );
 		item.totalPrice = item.totalQty * item.pricePerUnit;
 
 		return PreBook.findByIdAndUpdate( preBookId, { $inc: { itemCount: item.boxCount } })
@@ -42,7 +42,8 @@ const preBookMutations = {
 							item: item
 						};
 
-						return purchaseMutations.addPurchase( newPurchase );
+						purchaseMutations.addPurchase( newPurchase );
+						return preBook;
 					});
 			});
 	}

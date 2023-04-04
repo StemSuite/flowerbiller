@@ -3,7 +3,7 @@ type Purchase {
     inventory: Int!
     shipment: String!
     vendor: String!
-    standingOrder: String!
+    standingOrder: String
     standingOrderItem: String
     preBook: String
     arrivalDate: String!

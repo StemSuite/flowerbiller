@@ -8,7 +8,7 @@ const productSchema = new Schema({
 	sizes: [String],
 	daysToExp: { type: Number, required: false },
 	varieties: [{
-		name: { type: String, required: true, unique: true },
+		name: { type: String, required: true },
 		colors: [String],
 		tags: [String],
 	}]

@@ -10,6 +10,7 @@ const purchaseSchema = new Schema({
 	shippingDate: { type: Date, required: true },
 	arrivalDate: { type: Date, required: true },
 	expirationDate: { type: Date, required: false },
+	inventory: { type: Number, required: true },
 	item: { 
 		product: { type: String, required: true },
 		variety: { type: String, required: true },

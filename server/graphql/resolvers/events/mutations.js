@@ -1,5 +1,5 @@
 import Event from '../../../models/event.js';
-import Sale from '../../../models/sale.js';
+import saleMutations from '../sales/mutations.js';
 import moment from 'moment';
 
 const eventMutations = {
@@ -11,9 +11,8 @@ const eventMutations = {
 
 	addEventItem: async( _, { newSale }) => {
 		newSale.dateSold = moment.utc( new Date ( newSale.dateSold ) ).format( 'YYYY-MM-DD' );
-		newSale = new Sale( newSale );
 		Event.findByIdAndUpdate( newSale.eventID, { $inc: { itemCount: 1 } }).exec();
-		return newSale.save();
+		return saleMutations.addSale( newSale );
 	}
 
 	// deleteEventItem: async(_, {eventID, itemID}) => {

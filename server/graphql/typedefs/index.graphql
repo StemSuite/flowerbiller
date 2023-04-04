@@ -79,6 +79,8 @@ type Mutation {
 
     addEventItem(newSale: AddSaleInput!): Sale!
 
+    addSale(newSale: AddSaleInput!): Sale!
+
     addPreBook(preBook: AddPreBookInput!): PreBook!
 
     addPreBookItem(preBookId: String!, item: AddIncomingItemInput): Purchase!

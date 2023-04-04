@@ -13,6 +13,7 @@ const SaleSchema = new Schema({
 		uom: { type: String, required: true },
 		quantity: { type: Number, required: true },
 	},
+	filledFrom: { type: Schema.Types.ObjectId, ref: 'purchase', required: false },
 }, { timestamps: true });
 
 const Sale = mongoose.model( 'sale', SaleSchema );

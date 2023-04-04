@@ -1,12 +1,12 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import OpenModalButton from '../buttons/OpenModalButton';
 
-function AddModal({ title, onSumbit, modalBody, disabled }) {
+function AddModal({ title, onSumbit, preventClose, modalBody, disabled }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	function handleSubmit() {
 		onSumbit();
-		onClose();
+		if ( !preventClose ) onClose();
 	}
 
 	return (
