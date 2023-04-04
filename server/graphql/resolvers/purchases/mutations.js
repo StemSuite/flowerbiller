@@ -40,6 +40,12 @@ const purchaseMutations = {
 		return Purchase.findByIdAndUpdate( insertedPurchase._id,
 			{ $set: { inventory: currentInventory } }
 		);
+	},
+
+	updateInventory: async ( _, { id, qty }) => {
+		return Purchase.findByIdAndUpdate( id,
+			{ $inc: { inventory: qty } }
+		);
 	}
 };
 

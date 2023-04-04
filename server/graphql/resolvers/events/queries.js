@@ -41,7 +41,7 @@ const EventQueries = {
 				$lookup:
 					{
 						from: 'purchases',
-						let: { product: '$item.product', variety: '$item.variety', dateSold: '$dateSold' },
+						let: { product: '$item.product', variety: '$item.variety', dateSold: '$dateSold', filledFrom: '$filledFrom' },
 						pipeline: [
 							{ $match: 
 								{ $expr: 
@@ -49,8 +49,8 @@ const EventQueries = {
 										[
 											{ $lte: [ '$arrivalDate', { '$toDate': '$$dateSold' } ] },
 											{ $gte: [ '$expirationDate', { '$toDate': '$$dateSold' } ] },
-											{ $eq: [ '$item.product', '$$product' ] },
-											{ $eq: [ '$item.variety', '$$variety' ] },
+											{ $eq: [ '$item.product', '$$product' ] }, 
+											{ $or: [ { $eq: [ '$item.variety', '$$variety' ] }, { $eq: [ '$item.variety', 'Ast' ] } ] },
 										]
 									}
 								}
@@ -67,11 +67,7 @@ const EventQueries = {
 				fdate: { $dateToString: { format: '%m/%d/%Y', date: '$dateSold' } }
 			} },
 			{ $sort: { 'soldDate': 1, 'item.product': 1, 'item.variety': 1 } }
-		] ).then( res => {
-			// eslint-disable-next-line no-undef
-			res.forEach( re => console.log( re ) );
-			return res;
-		});
+		] );
 	}
 
 };

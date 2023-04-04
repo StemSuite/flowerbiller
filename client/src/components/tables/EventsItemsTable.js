@@ -39,8 +39,8 @@ function EventsItemsTable() {
 			format: ( sale ) => qtyUom( sale.item.quantity, sale.item.uom ) 
 		},
 		{ 
-			header: 'Pulled From', 
-			format: ( sale ) => <PullFromField item={sale}/>
+			header: 'Pull From', 
+			format: ( sale ) => <PullFromField sale={sale}/>
 		},
 	];
 	return (

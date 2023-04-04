@@ -85,7 +85,7 @@ type Mutation {
 
     addPreBookItem(preBookId: String!, item: AddIncomingItemInput): Purchase!
 
+    updateInventory(id: String!, qty: Int!): Purchase!
 
-
-    # deleteEventItem(eventID: String!, itemID: String!): Event
+    updateFilledFrom(id: String!, newFilledFrom: String): Sale!
 }

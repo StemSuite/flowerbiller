@@ -32,6 +32,19 @@ const saleMutations = {
 				}
 				return new Sale( newSale ).save();
 			}); 
+	},
+
+	updateFilledFrom: async ( _, { id, newFilledFrom }) => {
+
+		if ( newFilledFrom ){
+			return Sale.findByIdAndUpdate( id,
+				{ $set: { filledFrom: newFilledFrom } }
+			);
+		}else {
+			return Sale.findByIdAndUpdate( id,
+				{ $unset: { filledFrom: '' } }
+			);
+		}
 	}
 };
 

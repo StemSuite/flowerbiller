@@ -124,7 +124,7 @@ export const EVENT_QUERY = `
 export const EVENT_ITEMS_QUERY = `
     query eventItems($eventID: String!) {
         eventItems(eventID: $eventID) {
-            id
+            _id
             item {
                 product
                 variety

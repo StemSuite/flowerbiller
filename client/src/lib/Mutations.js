@@ -29,7 +29,7 @@ export const ADD_EVENT =`
 export const ADD_EVENT_ITEM=`
     mutation addEventItem($newSale: AddSaleInput!) {
         addEventItem(newSale: $newSale) {
-            id
+            _id
         }
     }`;
 
@@ -67,3 +67,18 @@ export const ADD_PREBOOK_ITEM = `
             id
         }
     }`;
+
+export const UPDATE_INVENTORY_MUTATION = `
+    mutation updateInventory($id: String! $qty: Int!) {
+        updateInventory(id: $id, qty: $qty) {
+            id
+        }
+    }`;
+
+export const UPDATE_FILLEDFROM_MUTATION = `
+    mutation updateFilledFrom($id: String! $newFilledFrom: String) {
+        updateFilledFrom(id: $id, newFilledFrom: $newFilledFrom) {
+            _id
+        }
+    }`;
+
