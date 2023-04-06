@@ -82,3 +82,9 @@ export const UPDATE_FILLEDFROM_MUTATION = `
         }
     }`;
 
+export const ADD_BILL_MUTATION = `
+    mutation addBill($newBill: AddBillInput!) {
+        addBill(newBill: $newBill) {
+            _id
+        }
+    }`;

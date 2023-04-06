@@ -52,6 +52,10 @@ type Query {
     preBook(id: String!): PreBook!
 
     preBookItems(preBookId: String!): [Purchase]
+
+    bills: [Bill]
+
+    bill(id: String!): Bill!
 }
 
 type Mutation {
@@ -88,4 +92,6 @@ type Mutation {
     updateInventory(id: String!, qty: Int!): Purchase!
 
     updateFilledFrom(id: String!, newFilledFrom: String): Sale!
+
+    addBill(newBill: AddBillInput!): Bill!
 }

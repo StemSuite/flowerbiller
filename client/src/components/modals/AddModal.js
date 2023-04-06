@@ -21,7 +21,7 @@ function AddModal({ title, onSumbit, preventClose, modalBody, disabled }) {
 						{modalBody}
 					</ModalBody>
 					<ModalFooter>
-						<Button bg="green.400" color="white" onClick={handleSubmit} isDisabled={disabled}>Sumbit</Button>
+						<Button bg="green.400" color="white" onClick={handleSubmit} isDisabled={disabled}>Submit</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

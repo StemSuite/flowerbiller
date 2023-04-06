@@ -1,0 +1,14 @@
+type Bill {
+    _id: String!
+    store: String!
+    date: String!
+    fdate: String
+    markUpPercent: Int!
+}
+
+
+input AddBillInput {
+    store: String!
+    date: String!
+    markUpPercent: Int!
+}

@@ -10,9 +10,9 @@ function PullFromField({ sale }) {
 
 	function isAst( option ) {
 		if ( option.item.variety === 'Ast' ) {
-			return <option key={option.id} value={option.id}>{`(Ast) ${option.vendor} arr. on ${option.arrivalDate}`}</option>;
+			return <option key={option.id} value={option.id}>{`(Ast) ${option.vendor} arr: ${option.arrivalDate}`}</option>;
 		}
-		return <option key={option.id} value={option.id}>{`${option.vendor} arr. on ${option.arrivalDate}`}</option>;
+		return <option key={option.id} value={option.id}>{`${option.vendor} arr: ${option.arrivalDate}`}</option>;
 	}
 
 	function selectedOption() {

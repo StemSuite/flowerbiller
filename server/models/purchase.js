@@ -13,7 +13,7 @@ const purchaseSchema = new Schema({
 	inventory: { type: Number, required: true },
 	item: { 
 		product: { type: String, required: true },
-		variety: { type: String, required: true },
+		variety: { type: String, required: false },
 		uom: { type: String, required: true },
 		size: { type: String, required: false },
 		boxCount: { type: Number, required: true },

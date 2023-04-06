@@ -22,6 +22,7 @@ import {
 	TbTruckDelivery,
 	TbSettings,
 	TbCalendar,
+	TbReceipt,
 } from 'react-icons/tb';
 
 import { GiBarracksTent } from 'react-icons/gi';
@@ -34,6 +35,7 @@ const LinkItems = [
 	{ name: 'Pre-Bookings', icon: TbCalendar, to: 'prebooks' },
 	{ name: 'Events', icon: GiBarracksTent, to: 'events' },
 	{ name: 'Shipments', icon: TbTruckDelivery, to: 'shipments' },
+	{ name: 'Billing', icon: TbReceipt, to: 'billing' },
 	{ name: 'Settings', icon: TbSettings },
 ];
 

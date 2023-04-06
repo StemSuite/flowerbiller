@@ -1,7 +1,7 @@
 import Event from '../../../models/event.js';
 import Sale from '../../../models/sale.js';
 
-const EventQueries = {
+const eventQueries = {
 	events: async () => {
 		return Event.aggregate( [
 			{ $project: {
@@ -72,4 +72,4 @@ const EventQueries = {
 
 };
 
-export default EventQueries;
+export default eventQueries;

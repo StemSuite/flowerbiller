@@ -10,6 +10,8 @@ import Shipments from './pages/Shipments.js';
 import Shipment from './pages/Shipment.js';
 import PreBooks from './pages/PreBooks.js';
 import PreBook from './pages/PreBook.js';
+import Billing from './pages/Billing.js';
+import Bill from './pages/Bill.js';
 
 const router = createBrowserRouter(
 	createRoutesFromElements (
@@ -24,6 +26,8 @@ const router = createBrowserRouter(
 			<Route path="/shipment/:id" element={<Shipment />} />
 			<Route path="/prebooks" element={<PreBooks />} />
 			<Route path="/prebook/:id" element={<PreBook />} />
+			<Route path="/billing" element={<Billing />} />
+			<Route path="/bill/:id" element={<Bill />} />
 		</Route>
 	)
 );

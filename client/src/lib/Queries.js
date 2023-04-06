@@ -259,3 +259,22 @@ export const INVENTORY_QUERY = `
             qtyAvailable
         }
     }`;
+
+export const BILLS_QUERY = `
+    query bills {
+        bills {
+            _id
+            fdate
+            store
+        }
+    }`;
+
+export const BILL_QUERY = `
+    query bill($id: String!) {
+        bill(id: $id) {
+            _id
+            fdate
+            store
+            markUpPercent
+        }
+    }`;
