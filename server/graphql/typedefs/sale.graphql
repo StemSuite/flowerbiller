@@ -28,11 +28,10 @@ input AddSaleInput {
 }
 
 input EditSaleQtyInput {
-    product: String!
-    variety: String
-    size: String
-    uom: String
-    quantity: Int
+    billID: String!
+    store: String!
+    dateSold: String!
+    item: AddSaleItemInput!
 }
 
 input AddSaleItemInput {

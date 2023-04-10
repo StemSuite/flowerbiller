@@ -1,7 +1,7 @@
 import { Box, Center, HStack, NumberInput, NumberInputField, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { ADD_BILL_ITEM, UPDATE_SALE_QTY_MUATION } from '../../lib/Mutations';
+import { UPDATE_SALE_QTY_MUATION } from '../../lib/Mutations';
 import {  BILL_INVENTORY_QUERY } from '../../lib/Queries';
 import ItemsList from './components/ItemsList';
 import { fullProduct } from './ItemFormats';
@@ -14,38 +14,29 @@ function changeBillQtyInput( bill, line ) {
 	const [ currentQty, setCurrentQty ] = useState( qty );
 
 	const [ , updateSaleQty ] = useMutation( UPDATE_SALE_QTY_MUATION );
-	const [ , addBillItem ] = useMutation( ADD_BILL_ITEM );
 
 	function handleInputChange( inputValue ) {
 		let newQuantity = Number( inputValue );
 		if ( currentQty !== newQuantity ) {
 			setCurrentQty( newQuantity );
-			if ( line.soldQty.length > 0 ) {
-				updateSaleQty({ id: line.soldQty[0].saleID, newQuantity: Number( inputValue ) });
-				if ( inputValue == 0 ) line.soldQty = [];
-			}else {
 
-				let newItem = {
-					product: line.item.product,
-					variety: line.item.variety,
-					size: line.item.size,
-					uom: line.item.uom,
-					quantity:  Number( inputValue )
+			let item = {
+				product: line.item.product,
+				variety: line.item.variety,
+				size: line.item.size,
+				uom: line.item.uom,
+				quantity:  Number( inputValue )
 
-				};
+			};
+			
+			let sale = {
+				billID: bill._id,
+				store: bill.store,
+				dateSold: bill.fdate,
+				item: item
+			};
 
-				let newSale = {
-					billID: bill._id,
-					store: bill.store,
-					dateSold: bill.fdate,
-					item: newItem
-				};
-
-				addBillItem({ newSale: newSale }).then( res => {
-					let data = res.data.addBillItem;
-					line.soldQty.unshift({ saleID: data._id, qtySold: data.item.quantity });
-				});
-			}
+			updateSaleQty({ sale: sale });
 		}
 	}
 

@@ -89,19 +89,9 @@ export const ADD_BILL_MUTATION = `
         }
     }`;
 
-export const ADD_BILL_ITEM=`
-    mutation addBillItem($newSale: AddSaleInput!) {
-        addBillItem(newSale: $newSale) {
-            _id
-            item {
-                quantity
-            }
-        }
-    }`;
-
 export const UPDATE_SALE_QTY_MUATION = `
-    mutation updateSaleQty($id: String!, $newQuantity: Int) {
-        updateSaleQty(id: $id, newQuantity: $newQuantity) {
+    mutation updateSaleQty($sale: EditSaleQtyInput!) {
+        updateSaleQty(sale: $sale) {
             _id
         }
     }`;

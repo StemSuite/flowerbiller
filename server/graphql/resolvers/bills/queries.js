@@ -46,7 +46,9 @@ const billQueries = {
 									}
 								}
 					},
-					{ $project: { _id: 0, saleID: '$_id', qtySold: '$item.quantity' } }
+					{ $sort: { updatedAt: 1 } },
+					{ $limit: 1 },
+					{ $project: { _id: 0, saleID: '$_id', qtySold: '$item.quantity' }, }
 				],
 				as: 'sold'
 			} },

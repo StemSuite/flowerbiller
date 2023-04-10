@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Bill from '../../../models/bill.js';
 import Sale from '../../../models/sale.js';
 
@@ -8,21 +7,34 @@ const billMutations = {
 		return new Bill( newBill ).save();
 	},
 
-	addBillItem: async ( _ , { newSale }) => {
-		newSale.dateSold = moment.utc( new Date ( newSale.dateSold ) ).format( 'YYYY-MM-DD' );
-		return new Sale( newSale ).save();
-	},
+	updateSaleQty: async ( _ , { sale }) => {
+		sale.dateSold = new Date ( sale.dateSold );
+		if ( sale.item.quantity === 0 ) {
+			return Sale.deleteMany(
+				{
+					billID: sale.billID,
+					'item.product': sale.item.product,
+					'item.variety': sale.item.variety,
+					'item.size': sale.item.size
+				}
 
-	updateSaleQty: async ( _ , { id, newQuantity }) => {
-		if ( newQuantity == 0 ) {
-			return Sale.findByIdAndDelete(
-				{ _id: id },
 			);
 		}
 		return Sale.findOneAndUpdate(
-			{ _id: id },
-			{ 'item.quantity': newQuantity },
-			{ $returnDocument: 'after' }
+			{
+				billID: sale.billID,
+				store: sale.store,
+				dateSold: sale.dateSold,
+				'item.product': sale.item.product,
+				'item.variety': sale.item.variety,
+				'item.size': sale.item.size
+			},
+			{ 'item.quantity': sale.item.quantity },
+			{ 
+				upsert: true,
+				returnDocument: 'after',
+				sort: { updatedAt: 1 },
+			}
 		);
 	},
     

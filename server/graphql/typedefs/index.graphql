@@ -97,11 +97,9 @@ type Mutation {
 
     addBill(newBill: AddBillInput!): Bill!
 
-    addBillItem(newSale: AddSaleInput!): Sale!
-
     addVendorShippingMethod(id: String!, shippingMethod: EditShippingMethodInput!): Vendor!
 
     removeVendorShippingMethod(id: String!, shippingMethod: EditShippingMethodInput!): Vendor!
 
-    updateSaleQty(id: String!, newQuantity: Int): Sale!
+    updateSaleQty(sale: EditSaleQtyInput!): Sale
 }
