@@ -28,7 +28,8 @@ function QuantityField({ uom, label, name, value, setValue, helperText }) {
 					value={value}
 					onChange={( value ) => setValue( value )}
 				>
-					<NumberInputField />
+					<NumberInputField
+					/>
 				</NumberInput>
 				{uomDisplay()}
 			</HStack>

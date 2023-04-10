@@ -4,6 +4,8 @@ import { useQuery } from 'urql';
 import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
 import { pageHeaderStyle } from '../styles/styles';
 import { BILL_QUERY } from '../lib/Queries';
+// import BillItemForm from '../components/forms/BillItemForm';
+import BillItemsTable from '../components/tables/BillItemTable';
 
 function Bill() {
 	const id = useParams().id;
@@ -29,6 +31,7 @@ function Bill() {
 		<>
 			<Heading sx={pageHeaderStyle}>Bill</Heading>
 			<Flex mx="20%" justifySelf="center" alignSelf="center" >
+				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Date</Text>
 					<Text>{bill.fdate}</Text>
@@ -45,6 +48,8 @@ function Bill() {
 				</Box>
 				<Spacer/>
 			</Flex>
+			{/* <BillItemForm bill={bill} /> */}
+			<BillItemsTable bill={bill}/>
 		</>
 	);
 }

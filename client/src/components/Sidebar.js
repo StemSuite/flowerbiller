@@ -36,7 +36,7 @@ const LinkItems = [
 	{ name: 'Events', icon: GiBarracksTent, to: 'events' },
 	{ name: 'Shipments', icon: TbTruckDelivery, to: 'shipments' },
 	{ name: 'Billing', icon: TbReceipt, to: 'billing' },
-	{ name: 'Settings', icon: TbSettings },
+	{ name: 'Settings', icon: TbSettings, to: 'settings' },
 ];
 
 export default function SimpleSidebar({ children }) {

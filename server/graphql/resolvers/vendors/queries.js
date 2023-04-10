@@ -5,8 +5,8 @@ const vendorQueries = {
 		return Vendor.find();
 	},
     
-	vendor: async ( _, args ) => {
-		return Vendor.findById( args.id );
+	vendor: async ( _, { id }) => {
+		return Vendor.findById( id );
 	}
 };
 

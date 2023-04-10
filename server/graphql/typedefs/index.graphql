@@ -56,6 +56,8 @@ type Query {
     bills: [Bill]
 
     bill(id: String!): Bill!
+
+    billInventory(date: String!, billID: String!): [billInventoryItem]
 }
 
 type Mutation {
@@ -94,4 +96,12 @@ type Mutation {
     updateFilledFrom(id: String!, newFilledFrom: String): Sale!
 
     addBill(newBill: AddBillInput!): Bill!
+
+    addBillItem(newSale: AddSaleInput!): Sale!
+
+    addVendorShippingMethod(id: String!, shippingMethod: EditShippingMethodInput!): Vendor!
+
+    removeVendorShippingMethod(id: String!, shippingMethod: EditShippingMethodInput!): Vendor!
+
+    updateSaleQty(id: String!, newQuantity: Int): Sale!
 }

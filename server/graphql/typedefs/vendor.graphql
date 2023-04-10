@@ -3,10 +3,23 @@ type Vendor {
     name: String!
     shortHand: String!
     shippingMethods: [ShippingMethod]
+    boxes: [box]
 }
 
 input AddVendorInput {
     name: String!
     shortHand: String!
-    shippingMethods: [AddShippingMethodInput]
+}
+
+type box {
+    id: String!
+    type: String!
+    avgCBF: Float
+    perOfFullBox: Int
+}
+
+input AddBoxInput {
+    type: String!
+    avgCBF: Float
+    perOfFullBox: Int
 }

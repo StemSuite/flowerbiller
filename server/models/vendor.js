@@ -10,6 +10,11 @@ const vendorSchema = new Schema({
 		shippingDays: { type: [Number], required: true },
 		daysToArrive: { type: Number, required: true },
 	}],
+	boxes: [{
+		type: { type: String, required: true },
+		avgCBF: { type: Number, required: false },
+		perOfFullBox: { type: Number, required: false },
+	}]
 });
 
 const Vendor = mongoose.model( 'vendor', vendorSchema );

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import ItemsList from './components/ItemsList.js';
 import { DELETE_EVENT_ITEM } from '../../lib/Mutations.js';
 import { useMutation, useQuery } from 'urql';
@@ -40,7 +39,6 @@ function EventItems({ eventID }) {
 
 	useEffect( () => {
 		if ( data === undefined ) return;
-		console.log( data );
 		setItems( data.eventItems );
 	}, [data] );
 

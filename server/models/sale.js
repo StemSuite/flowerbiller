@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const SaleSchema = new Schema({
 	store: { type: String, required: true },
 	eventID: { type: Schema.Types.ObjectId, ref: 'event', required: false },
+	billID: { type: Schema.Types.ObjectId, ref: 'bill', required: false },
 	dateSold: { type: Date, required: true },
 	fdate: String,
 	item: {

@@ -12,3 +12,11 @@ input AddShippingMethodInput {
     shippingDays: [Int]
     daysToArrive: Int
 }
+
+input EditShippingMethodInput {
+    id: String
+    name: String
+    shortHand: String
+    shippingDays: [Int]
+    daysToArrive: Int!
+}

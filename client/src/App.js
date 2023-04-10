@@ -12,6 +12,9 @@ import PreBooks from './pages/PreBooks.js';
 import PreBook from './pages/PreBook.js';
 import Billing from './pages/Billing.js';
 import Bill from './pages/Bill.js';
+import Settings from './pages/Settings.js';
+import Vendors from './pages/Vendors.js';
+import Vendor from './pages/Vendor.js';
 
 const router = createBrowserRouter(
 	createRoutesFromElements (
@@ -28,6 +31,9 @@ const router = createBrowserRouter(
 			<Route path="/prebook/:id" element={<PreBook />} />
 			<Route path="/billing" element={<Billing />} />
 			<Route path="/bill/:id" element={<Bill />} />
+			<Route path="/settings" element={<Settings />} />
+			<Route path="/vendors" element={<Vendors />} />
+			<Route path="/vendor/:id" element={<Vendor/>} />
 		</Route>
 	)
 );

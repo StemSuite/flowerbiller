@@ -98,6 +98,20 @@ export const VENDORS_QUERY = `
         }
     }`;
 
+export const VENDOR_QUERY = `
+    query vendor($id: String!) {
+        vendor(id: $id) {
+            id
+            name
+            shortHand
+            shippingMethods {
+                name
+            }
+        }
+
+    }
+`;
+
 export const EVENTS_QUERY = `
     query events {
         events {
@@ -276,5 +290,31 @@ export const BILL_QUERY = `
             fdate
             store
             markUpPercent
+        }
+    }`;
+
+export const BILL_INVENTORY_QUERY = `
+    query billInventory($date: String!, $billID: String!) {
+        billInventory(date: $date, billID: $billID) {
+            item {
+                product
+                variety
+                size
+                uom
+            }
+            soldQty {
+                saleID
+                qtySold
+            }
+        }
+    }`;
+
+export const SHIPPING_METHODS_QUERY = `
+    query shippingMethods {
+        shippingMethods {
+            name
+            shortHand
+            shippingDays
+            daysToArrive
         }
     }`;

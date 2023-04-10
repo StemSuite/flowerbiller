@@ -2,6 +2,7 @@ type Sale {
     _id: String!
     store: String!
     eventID: String
+    billID: String
     dateSold: String!
     fdate: String!
     item: SaleItem
@@ -21,8 +22,17 @@ type SaleItem {
 input AddSaleInput {
     store: String!
     eventID: String
+    billID: String
     dateSold: String!
     item: AddSaleItemInput
+}
+
+input EditSaleQtyInput {
+    product: String!
+    variety: String
+    size: String
+    uom: String
+    quantity: Int
 }
 
 input AddSaleItemInput {

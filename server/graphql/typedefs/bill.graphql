@@ -12,3 +12,13 @@ input AddBillInput {
     date: String!
     markUpPercent: Int!
 }
+
+type billInventoryItem {
+    item: IncomingItem
+    soldQty: [SaleItemQty]
+}
+
+type SaleItemQty {
+    saleID: String!
+    qtySold: Int
+}

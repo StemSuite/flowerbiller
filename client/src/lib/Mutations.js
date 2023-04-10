@@ -88,3 +88,41 @@ export const ADD_BILL_MUTATION = `
             _id
         }
     }`;
+
+export const ADD_BILL_ITEM=`
+    mutation addBillItem($newSale: AddSaleInput!) {
+        addBillItem(newSale: $newSale) {
+            _id
+            item {
+                quantity
+            }
+        }
+    }`;
+
+export const UPDATE_SALE_QTY_MUATION = `
+    mutation updateSaleQty($id: String!, $newQuantity: Int) {
+        updateSaleQty(id: $id, newQuantity: $newQuantity) {
+            _id
+        }
+    }`;
+
+export const ADD_VENDOR_MUTATION = `
+    mutation addVendor($vendor: AddVendorInput!) {
+        addVendor(vendor: $vendor) {
+            id
+        }
+    }`;
+
+export const ADD_VENDOR_SHIPPING_METHOD_MUTATION = `
+    mutation addVendorShippingMethod($id: String!, $shippingMethod: EditShippingMethodInput!) {
+        addVendorShippingMethod(id: $id, shippingMethod: $shippingMethod) {
+            id
+        }
+    }`;
+
+export const REMOVE_VENDOR_SHIPPING_METHOD_MUTATION = `
+    mutation removeVendorShippingMethod($id: String!, $shippingMethod: EditShippingMethodInput!) {
+        removeVendorShippingMethod(id: $id, shippingMethod: $shippingMethod) {
+            id
+        }
+    }`;
