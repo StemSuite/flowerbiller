@@ -8,6 +8,7 @@ import VarietyField from './Fields/VarietyField.js';
 import QuantityField from './Fields/QuantityField.js';
 import AddButton from '../buttons/AddButton.js';
 import { PRODUCTS_AND_VARIETIES_QUERY } from '../../lib/Queries';
+// eslint-disable-next-line import/named
 import { ADD_BILL_ITEM } from '../../lib/Mutations.js';
 
 function BillItemForm ({ bill }) {

@@ -19,7 +19,7 @@ function ShipmentsTable ({ shipments }) {
 			format: ( shipment ) => shipment.shipSH
 		},
 		{ 
-			header: '# of Items', 
+			header: 'Box Count', 
 			key: 'itemCount',
 			format: ( shipment ) => shipment.itemCount
 		}

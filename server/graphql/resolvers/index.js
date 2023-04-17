@@ -9,6 +9,7 @@ import { shipmentQueries }  from './shipments/index.js';
 import { saleMutations, saleQueries } from './sales/index.js';
 import { preBookMutations, preBookQueries } from './prebooks/index.js';
 import { billMutations, billQueries } from './bills/index.js';
+import { boxMutations, boxtQueries } from './boxes/index.js';
 
 const resolvers = {
 	Query: {
@@ -22,7 +23,8 @@ const resolvers = {
 		...shipmentQueries,
 		...saleQueries,
 		... preBookQueries,
-		... billQueries
+		... billQueries,
+		... boxtQueries
 	},
 	Mutation: {
 		...productMutations,
@@ -34,7 +36,8 @@ const resolvers = {
 		...eventMutations,
 		...saleMutations,
 		... preBookMutations,
-		... billMutations
+		... billMutations,
+		... boxMutations
 	}
 };
 

@@ -107,6 +107,11 @@ export const VENDOR_QUERY = `
             shippingMethods {
                 name
             }
+            boxes {
+                type
+                perOfFB
+				CBF
+            }
         }
 
     }
@@ -316,5 +321,15 @@ export const SHIPPING_METHODS_QUERY = `
             shortHand
             shippingDays
             daysToArrive
+        }
+    }`;
+
+export const BOXES_QUERY = `
+    query boxes {
+        boxes {
+            _id
+            type
+            perOfFB
+            CBF
         }
     }`;

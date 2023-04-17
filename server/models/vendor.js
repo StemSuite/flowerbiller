@@ -12,8 +12,8 @@ const vendorSchema = new Schema({
 	}],
 	boxes: [{
 		type: { type: String, required: true },
-		avgCBF: { type: Number, required: false },
-		perOfFullBox: { type: Number, required: false },
+		perOfFB: { type: Number, required: true },
+		CBF: { type: Number, required: true },
 	}]
 });
 

@@ -1,10 +1,25 @@
-import { Box, Checkbox, Flex, Heading, List, ListItem, Spacer, Text } from '@chakra-ui/react';
+import { Box, Checkbox, Flex, Heading, HStack, List, ListItem, NumberInput, NumberInputField, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'urql';
-import { ADD_VENDOR_SHIPPING_METHOD_MUTATION, REMOVE_VENDOR_SHIPPING_METHOD_MUTATION } from '../lib/Mutations';
-import { SHIPPING_METHODS_QUERY, VENDOR_QUERY } from '../lib/Queries';
+import SaveButton from '../components/buttons/SaveButton';
+import { ADD_VENDOR_BOX_MUTATION, ADD_VENDOR_SHIPPING_METHOD_MUTATION, REMOVE_VENDOR_BOX_MUTATION, REMOVE_VENDOR_SHIPPING_METHOD_MUTATION, UPDATE_VENDOR_BOX_CBF } from '../lib/Mutations';
+import { BOXES_QUERY, SHIPPING_METHODS_QUERY, VENDOR_QUERY } from '../lib/Queries';
 import { pageHeaderStyle } from '../styles/styles';
+
+function CheckItem({ checked, handleChange, label }) {
+	return (
+		<ListItem marginLeft="50px" marginY="10px">
+			<Checkbox 
+				size="md"
+				isChecked={checked}
+				onChange={handleChange}
+			>
+				{label}
+			</Checkbox>
+		</ListItem>
+	);
+}
 
 function ShippingMethodsList({ vendor }) {
 
@@ -47,25 +62,110 @@ function ShippingMethodsList({ vendor }) {
 			}
 		}
 
+		return <CheckItem key={method.name} checked={checked} handleChange={handleChange} label={method.name} />;
+	}
+
+	return (
+		<>
+			<Heading size="md" marginTop="50px">Shipping Methods</Heading>
+			<List>
+				{methods.map( method => shippingMethod( method ) ) }
+			</List>
+		</>
+	);
+
+}
+
+function BoxesList({ vendor }) {
+	let vendorBoxes = {};
+	if( vendor.boxes ) {
+		vendor.boxes.forEach( box => {
+			vendorBoxes[box.type] = box;
+		});
+	
+	}
+	const [ , addVendorBox ] = useMutation( ADD_VENDOR_BOX_MUTATION );
+	const [ , removeVendorBox ] = useMutation( REMOVE_VENDOR_BOX_MUTATION );
+
+	const [ boxes, setBoxes ] = useState( [] );
+
+	const [fetchedBoxes] = useQuery({
+		query: BOXES_QUERY
+	});
+	
+	const { data, fetching, error } = fetchedBoxes;
+
+	useEffect( () => {
+		if ( data === undefined ) return;
+		setBoxes( data.boxes );
+	}, [data] );
+
+	if ( fetching ) return 'Loading...';
+	if ( error ) return <pre>{error.message}</pre>;
+
+	function boxLine( box ) {
+
+		let checked = !!vendorBoxes[box.type];
+
+		function handleChange( e ) {
+	
+			if ( e.target.checked ) {
+
+				let editedBox = {
+					type: box.type,
+					perOfFB: box.perOfFB,
+					CBF: box.CBF
+				};
+
+				addVendorBox({ id: vendor.id, box: editedBox });
+			}else {
+				removeVendorBox({ id: vendor.id, boxType: box.type });
+			}
+		}
+
+		function CBFInput() {
+			const [ cbfInput, setCBF ] = useState( vendorBoxes[box.type].CBF );
+			const [ , updateCBF ] = useMutation( UPDATE_VENDOR_BOX_CBF );
+
+			function handleSave() {
+				let boxToUpdate = {
+					type: box.type,
+					CBF: Number( Number( cbfInput ).toFixed( 2 ) )
+				};
+
+				if ( cbfInput !== vendorBoxes[box.type].CBF ) {
+					updateCBF({ id: vendor.id, box: boxToUpdate });
+				}	
+			}
+
+			return (
+				<HStack>
+					<NumberInput value={cbfInput} size="sm" width="75px" isDisabled={!checked}>
+						<NumberInputField onChange={( e ) => setCBF( e.target.value )}/>
+					</NumberInput>
+					<Text>CBF</Text>
+					<SaveButton text={'Save'} disabled={!checked} clickAction={handleSave} />
+				</HStack>
+			);
+		}
+
 		return (
-			<ListItem marginLeft="50px">
-				<Checkbox 
-					size="md"
-					isChecked={checked}
-					onChange={handleChange}
-				>
-					{method.name}
-				</Checkbox>
-			</ListItem>
+			<HStack key={box.type}>
+				<CheckItem checked={checked} handleChange={handleChange} label={box.type} />
+				{checked ? <CBFInput /> : <></>}
+			</HStack>
 		);
 	}
 
 	return (
-		<List>
-			{methods.map( method => shippingMethod( method ) ) }
-		</List>
+		<>
+			<Heading size="md" marginTop="50px">Boxes</Heading>
+			<List>
+				{boxes.map( box => boxLine( box ) ) }
+			</List>
+		</>
 	);
-
+	
 }
 
 function Vendor() {
@@ -102,8 +202,8 @@ function Vendor() {
 					<Text>{vendor.shortHand}</Text>
 				</Box>
 			</Flex>
-			<Heading size="md" marginTop="50px">Shipping Methods</Heading>
 			<ShippingMethodsList vendor={vendor}/>
+			<BoxesList vendor={vendor}/>
 		</>
 	);
 }

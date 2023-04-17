@@ -11,6 +11,12 @@ const purchaseSchema = new Schema({
 	arrivalDate: { type: Date, required: true },
 	expirationDate: { type: Date, required: false },
 	inventory: { type: Number, required: true },
+	box: [{
+		type: { type: String, required: true },
+		perOfFB: { type: Number, required: true },
+		CBF: { type: Number, required: true },
+	}],
+	landedPrice: { type: Number, required: false },
 	item: { 
 		product: { type: String, required: true },
 		variety: { type: String, required: false },

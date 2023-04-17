@@ -15,6 +15,7 @@ import Bill from './pages/Bill.js';
 import Settings from './pages/Settings.js';
 import Vendors from './pages/Vendors.js';
 import Vendor from './pages/Vendor.js';
+import Boxes from './pages/Boxes.js';
 
 const router = createBrowserRouter(
 	createRoutesFromElements (
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
 			<Route path="/settings" element={<Settings />} />
 			<Route path="/vendors" element={<Vendors />} />
 			<Route path="/vendor/:id" element={<Vendor/>} />
+			<Route path="/boxes" element={<Boxes/>} />
 		</Route>
 	)
 );

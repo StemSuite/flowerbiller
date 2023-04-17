@@ -8,6 +8,8 @@ type Purchase {
     preBook: String
     arrivalDate: String!
     expirationDate: String
+    landedPrice: Float
+    box: [Box]
     item: IncomingItem!
 }
 

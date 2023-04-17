@@ -91,6 +91,12 @@ function sortByArrivalDate( items ) {
 	});
 }
 
+function sortByType ( items ) {
+	return items.sort( ( a, b ) => {
+		return a.type.localeCompare( b.type );
+	});
+}
+
 const sort = {
 	'product': sortByProduct,
 	'totalQty': sortByTotalQty,
@@ -102,6 +108,7 @@ const sort = {
 	'fdate': sortByDate,
 	'fshippingDate': sortByDateShipping,
 	'farrivalDate': sortByArrivalDate,
+	'type': sortByType,
 };
 
 export default sort;

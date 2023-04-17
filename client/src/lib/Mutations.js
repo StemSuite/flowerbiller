@@ -116,3 +116,31 @@ export const REMOVE_VENDOR_SHIPPING_METHOD_MUTATION = `
             id
         }
     }`;
+
+export const ADD_BOX_MUTATION = `
+    mutation addBox($box: AddBoxInput!) {
+        addBox(box: $box) {
+            _id
+        }
+    }`;
+
+export const ADD_VENDOR_BOX_MUTATION =`
+    mutation addVendorBox($id: String!, $box: AddBoxInput!) {
+        addVendorBox(id: $id, box: $box) {
+            id
+        }
+    }`;
+
+export const REMOVE_VENDOR_BOX_MUTATION =`
+    mutation removeVendorBox($id: String!, $boxType: String!) {
+        removeVendorBox(id: $id, boxType: $boxType) {
+            id
+        }
+    }`;
+
+export const UPDATE_VENDOR_BOX_CBF = `
+    mutation updateVendorBoxCBF($id: String!, $box: EditBoxInput!) {
+        updateVendorBoxCBF(id: $id, box: $box) {
+            id
+        }
+    }`;

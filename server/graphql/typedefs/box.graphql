@@ -1,0 +1,18 @@
+type Box {
+    _id: String
+    type: String!
+    perOfFB: Int!
+    CBF: Float!
+}
+
+input AddBoxInput {
+    type: String!
+    perOfFB: Int!
+    CBF: Float!
+}
+
+input EditBoxInput {
+    type: String
+    perOfFB: Int
+    CBF: Float
+}

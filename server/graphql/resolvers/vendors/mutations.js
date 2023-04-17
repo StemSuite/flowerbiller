@@ -17,6 +17,28 @@ const vendorMutations = {
 			{ $pull: { shippingMethods: { name: { $eq: shippingMethod.name } } } },
 		);
 	},
+
+	addVendorBox: async( _, { id, box }) => {
+		return Vendor.findByIdAndUpdate( id, 
+			{ $push: { boxes: box } },
+		);
+	},
+
+	removeVendorBox: async( _, { id, boxType }) => {
+		return Vendor.findByIdAndUpdate( id, 
+			{ $pull: { boxes: { type: { $eq: boxType } } } },
+		);
+	},
+
+	updateVendorBoxCBF: async( _, { id, box }) => {
+		return Vendor.findByIdAndUpdate( id, 
+			{ 'boxes.$[element].CBF': box.CBF },
+			{
+				arrayFilters: [{ 'element.type': { $eq: box.type } }]
+			}
+		);
+	},
+
 };
 
 export default vendorMutations;
