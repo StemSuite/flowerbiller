@@ -12,12 +12,12 @@ import { Box, FormControl, HStack } from '@chakra-ui/react';
 import AddButton from '../buttons/AddButton.js';
 import { Form } from 'react-router-dom';
 
-function SOItemForm({ orderID }) {
+function SOItemForm({ order }) {
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
 	const [ selectedSize, setSize ] = useState( '' );
-	const [ selectedBoxType, setBoxType ] = useState( '' );
+	const [ selectedBox, setBox ] = useState( '' );
 	const [ inputBoxCount, setBoxCount ] = useState( '' );
 	const [ inputQtyPerBox, setQtyPerBox ] = useState( '' );
 	const [ inputpricePerUnit, setPricePerUnit ] = useState( '' );
@@ -54,7 +54,7 @@ function SOItemForm({ orderID }) {
 		setProduct({});
 		setVariety( '' );
 		setSize( '' );
-		setBoxType( '' );
+		setBox( '' );
 		setBoxCount( '' );
 		setQtyPerBox( '' );
 	}
@@ -67,14 +67,14 @@ function SOItemForm({ orderID }) {
 			variety: selectedVariety,
 			size: selectedSize,
 			uom: prodUOM,
-			boxType: selectedBoxType,
+			box: { type: selectedBox.type, FBE: selectedBox.FBE, CBF: selectedBox.CBF },
 			boxCount: Number( inputBoxCount ),
 			qtyPerBox: Number( inputQtyPerBox ),
 			pricePerUnit: Number( Number( inputpricePerUnit ).toFixed( 2 ) ),
 			daysToExp: selectedProduct.daysToExp                
 		};
 
-		addSOItem({ standingOrderId: orderID, item: newItem });
+		addSOItem({ standingOrderId: order._id, item: newItem });
 
 		resetFields();
 		setUOM( null );
@@ -99,7 +99,7 @@ function SOItemForm({ orderID }) {
 						value={inputBoxCount}
 						setValue={setBoxCount}
 					/>
-					<BoxTypeField value={selectedBoxType} setBoxType={setBoxType}/>
+					<BoxTypeField venSH={order.venSH} setBox={setBox}/>
 					<QuantityField 
 						label={'QTY/Box'} 
 						name={'qtyPerBox'}

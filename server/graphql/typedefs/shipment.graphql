@@ -6,7 +6,11 @@ type Shipment {
     arrivalDate: String!
     farrivalDate: String
     itemCount: Int!
+    FBE: Float
+    CBF: Float
     boxCharge: Float
-    cubicFeet: Float
-    pricePerCF: Float
+    pricePerCBF: Float
+    fuelCharge: Float
+    cbfPrice: Float
+    fuelPrice: Float
 }

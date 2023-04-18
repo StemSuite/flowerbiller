@@ -1,6 +1,6 @@
 import StandingOrder from '../../../models/standing_order.js';
 import purchaseMutations from '../purchases/mutations.js';
-import shipmentMutations from '../shipments/mutations.js';
+import shipmentMutations from '../shipments/mutations1.js';
 import moment from 'moment';
 
 const standingOrderMutations = {
@@ -10,9 +10,15 @@ const standingOrderMutations = {
 	},
 
 	addSOItem: async( _, { standingOrderId, item }) => {
-		
+		let box = item.box;
+		delete item.box;
+
+		box.FBE = item.boxCount * box.FBE;
+		box.CBF = item.boxCount * box.CBF;
+
 		item.totalQty = item.boxCount * item.qtyPerBox;
 		item.totalPrice = ( item.totalQty * item.pricePerUnit.toFixed( 2 ) );
+		item.boxType = box.type;
 
 		return StandingOrder.findByIdAndUpdate( standingOrderId, 
 			{ $push: { items: item } }, 
@@ -39,7 +45,7 @@ const standingOrderMutations = {
 						arrivalDate: arrivalDate
 					};
  
-					shipmentMutations.incShipmentItemCount( shipment, item.boxCount )
+					shipmentMutations.incShipmentItems( shipment, item.boxCount, box.CBF, box.FBE )
 						.then( shipment => {
 							if ( !newPurchase.standingOrderItem ) {
 
@@ -52,8 +58,15 @@ const standingOrderMutations = {
 							newPurchase.shippingDate = moment.utc( shipment.shippingDate ).format( 'YYYY-MM-DD' ),
 							newPurchase.arrivalDate = moment.utc( shipment.arrivalDate ).format( 'YYYY-MM-DD' ),
 							newPurchase.expirationDate = moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' );
-       
-							purchaseMutations.addPurchase( newPurchase );
+							newPurchase.box = box;
+
+							purchaseMutations.addPurchase( newPurchase )
+								.then( () => purchaseMutations.updateLandedPrices( _, { 
+									shipmentID: shipment._id, 
+									shipmentCBF: shipment.CBF,
+									shipmentSurcharges: ( shipment.fuelPrice + shipment.cbfPrice ),
+									shipmentBoxCharge: shipment.boxCharge
+								}) );
 						});
 					weeksOut += 1;
 					shippingDate.add( 7, 'days' );

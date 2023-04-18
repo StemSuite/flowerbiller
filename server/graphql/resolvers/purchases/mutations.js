@@ -46,6 +46,21 @@ const purchaseMutations = {
 		return Purchase.findByIdAndUpdate( id,
 			{ $inc: { inventory: qty } }
 		);
+	},
+
+	updateLandedPrices: async ( _, { shipmentID, shipmentCBF, shipmentSurcharges, shipmentBoxCharge }) => {
+		return Purchase.updateMany(
+			{ shipment: { $eq: shipmentID } },
+			[
+				{ $set: { landedPrice: {
+					$add: [ 
+						'$item.totalPrice',
+						{ $multiply: [ shipmentBoxCharge, '$item.boxCount' ] },
+						{ $multiply: [ { $divide: [ '$box.CBF', shipmentCBF ] }, shipmentSurcharges ] }, 
+					]
+				} } }
+			]
+		);
 	}
 };
 

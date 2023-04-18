@@ -8,9 +8,13 @@ const shipmentSchema = new Schema({
 	arrivalDate: { type: Date, required: true },
 	farrivalDate: String,
 	itemCount: { type: Number, required: true },
-	boxCharge: { type: Number, required: false },
-	cubicFeet: { type: Number, required: false },
-	pricePerCF: { type: Number, required: false },
+	FBE: { type: Number, required: false },
+	CBF: { type: Number, required: false },
+	boxCharge: { type: Number, required: true },
+	pricePerCBF: { type: Number, required: true },
+	fuelCharge: { type: Number, required: true },
+	cbfPrice: { type: Number, required: true },
+	fuelPrice: { type: Number, required: true },
 }, { timestamps: true });
 
 const Shipment = mongoose.model( 'shipment', shipmentSchema );

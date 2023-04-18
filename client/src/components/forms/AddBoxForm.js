@@ -22,7 +22,7 @@ function AddBoxForm() {
 
 		let newBox = {
 			type: inputType,
-			perOfFB: Number( inputFBPer ),
+			FBE: Number( inputFBPer ),
 			CBF: Number( Number( inputCBF ).toFixed( 2 ) )
 
 		};

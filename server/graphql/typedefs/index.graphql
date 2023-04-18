@@ -33,6 +33,8 @@ type Query {
 
     vendor(id: String!): Vendor!
 
+    vendorByShortHand(shortHand: String!): Vendor!
+
     store(id: String!): Store!
 
     stores: [Store]
@@ -114,4 +116,6 @@ type Mutation {
     addBox(box: AddBoxInput!): Box!
 
     updateVendorBoxCBF(id: String!, box: EditBoxInput!): Vendor!
+    
+    updateLandedPrices(shipmentID: String!, shipmentCBF: Float!): Purchase!
 }

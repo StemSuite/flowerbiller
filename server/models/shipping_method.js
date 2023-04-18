@@ -6,6 +6,9 @@ const shippingMethodSchema = new Schema({
 	shortHand: { type: String, required: true, maxLength: 4 },
 	shippingDays: { type: [{ type: Number, min: 0, max: 6 }], required: true },
 	daysToArrive: { type: Number, required: true },
+	pricePerCBF: { type: Number, required: true },
+	boxCharge: { type: Number, required: true },
+	fuelCharge: { type: Number, required: true },
 });
 
 const ShippingMethod = mongoose.model( 'shippingMethod', shippingMethodSchema );

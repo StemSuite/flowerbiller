@@ -4,7 +4,7 @@ import { useMutation, useQuery } from 'urql';
 import { UPDATE_SALE_QTY_MUATION } from '../../lib/Mutations';
 import {  BILL_INVENTORY_QUERY } from '../../lib/Queries';
 import ItemsList from './components/ItemsList';
-import { fullProduct } from './ItemFormats';
+import { fullProduct, price } from './ItemFormats';
 
 function changeBillQtyInput( bill, line ) {
 
@@ -95,6 +95,10 @@ function BillItemsTable ({ bill }) {
 			header: 'Product', 
 			sort: 'product', 
 			format: ( line ) => fullProduct( line.item )
+		},
+		{
+			header: 'Est. Price',
+			format: ( line ) => ( price( line.avgLandedPrice * ( 1 + ( bill.markUpPercent / 100 ) ) ) )
 		},
 		{ 
 			header: 'Qty', 

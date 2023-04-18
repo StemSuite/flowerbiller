@@ -7,6 +7,10 @@ const vendorQueries = {
     
 	vendor: async ( _, { id }) => {
 		return Vendor.findById( id );
+	},
+
+	vendorByShortHand: async ( _, { shortHand }) => {
+		return Vendor.findOne({ shortHand: { $eq: shortHand } });
 	}
 };
 

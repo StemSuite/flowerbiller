@@ -49,7 +49,7 @@ function StandingOrder () {
 					<Text>{daysOfTheWeek[standingOrder.shippingDay]}(s) via {standingOrder.shipSH}</Text>
 				</Box>
 			</Flex>
-			<SOItemForm orderID={standingOrder._id} />
+			<SOItemForm order={standingOrder} />
 			<SOItems items={items} orderID={id}/>
 		</>
 	);

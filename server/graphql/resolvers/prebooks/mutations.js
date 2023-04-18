@@ -15,8 +15,16 @@ const preBookMutations = {
 	},
 
 	addPreBookItem: async( _, { preBookId, item }) => {
+		let box = item.box;
+		delete item.box;
+
+		box.FBE = item.boxCount * box.FBE;
+		box.CBF = item.boxCount * box.CBF;
+
 		item.totalQty = ( item.boxCount * item.qtyPerBox ).toFixed( 2 );
 		item.totalPrice = item.totalQty * item.pricePerUnit;
+		item.boxType = box.type;
+
 
 		return PreBook.findByIdAndUpdate( preBookId, { $inc: { itemCount: item.boxCount } })
 			.then( preBook => {
@@ -27,7 +35,7 @@ const preBookMutations = {
 					arrivalDate: moment.utc( preBook.arrivalDate ).format( 'YYYY-MM-DD' ),
 				};
 
-				return shipmentMutations.incShipmentItemCount( shipment, item.boxCount )
+				return shipmentMutations.incShipmentItems( shipment, item.boxCount, box.CBF, box.FBE )
 					.then( shipment => {
 						item.totalQty = item.boxCount * item.qtyPerBox;
 						item.totalPrice = item.totalQty * item.pricePerUnit;
@@ -39,10 +47,18 @@ const preBookMutations = {
 							shippingDate: moment.utc( shipment.shippingDate ).format( 'YYYY-MM-DD' ),
 							arrivalDate: moment.utc( shipment.arrivalDate ).format( 'YYYY-MM-DD' ),
 							expirationDate: moment( shipment.arrivalDate ).add( item.daysToExp, 'days' ).format( 'YYYY-MM-DD' ),
+							box: box,
 							item: item
 						};
-
-						purchaseMutations.addPurchase( newPurchase );
+						
+						purchaseMutations.addPurchase( newPurchase )
+							.then( () => purchaseMutations.updateLandedPrices( _, { 
+								shipmentID: shipment._id, 
+								shipmentCBF: shipment.CBF,
+								shipmentSurcharges: ( shipment.fuelPrice + shipment.cbfPrice ),
+								shipmentBoxCharge: shipment.boxCharge
+							}) );
+							
 						return preBook;
 					});
 			});

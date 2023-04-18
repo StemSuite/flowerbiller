@@ -4,6 +4,9 @@ type ShippingMethod {
     shortHand: String!
     shippingDays: [Int]
     daysToArrive: Int!
+    pricePerCBF: Float!
+    boxCharge: Float!
+    fuelCharge: Float!
 }
 
 input AddShippingMethodInput {
@@ -11,6 +14,9 @@ input AddShippingMethodInput {
     shortHand: String!
     shippingDays: [Int]
     daysToArrive: Int
+    pricePerCBF: Float!
+    boxCharge: Float!
+    fuelCharge: Float!
 }
 
 input EditShippingMethodInput {

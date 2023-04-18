@@ -1,20 +1,40 @@
 import { Box, FormLabel, Select } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'urql';
+import { VENDOR_BY_SHORTHAND_QUERY } from '../../../lib/Queries';
 
-function BoxTypeField({ value, setBoxType }) {
-	let boxes = [ 'QB', 'HB' ];
+function BoxTypeField({ venSH, setBox }) {
+
+	const [ options, setOptions ] = useState( [] );
+	
+	const [fetchedVen] = useQuery({
+		query: VENDOR_BY_SHORTHAND_QUERY,
+		variables: { shortHand: venSH }
+	});
+
+	const { data, fetching, error } = fetchedVen;       
+
+	useEffect( () => {
+		if ( data === undefined || data === null ) return;
+		setOptions( data.vendorByShortHand.boxes );
+	}, [data] );
   
+	if ( fetching ) return 'Loading...';
+	if ( error ) return <pre>{error.message}</pre>;
+	
 	return (
 		<Box minWidth="fit-content">
 			<FormLabel textAlign="block">Box Type</FormLabel>
 			<Select 
 				size="sm" 
 				name="boxField"
-				value={value}
-				onChange={( e ) => setBoxType( e.target.value )}
+				onChange={( e ) => {
+					setBox( options[e.target.value] );
+				}}
 			>
 				<option hidden> </option>
-				{boxes.map( ( box, i ) => {
-					return <option value={box} key={i}>{box}</option>;
+				{options.map( ( box, i ) => {
+					return <option key={i} value={i}>{box.type}</option>;
 				})}
 			</Select>
 		</Box>

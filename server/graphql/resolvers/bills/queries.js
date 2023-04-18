@@ -28,7 +28,9 @@ const billQueries = {
 		return Purchase.aggregate( [
 			{ $match:{ arrivalDate: { $lte: date }, expirationDate: { $gt: date } } },
 			{ $group: {
-				_id: { product: '$item.product', variety: '$item.variety', size: '$item.size', uom: '$item.uom' }
+				_id: { product: '$item.product', variety: '$item.variety', size: '$item.size', uom: '$item.uom' },
+				totalLandedPrice: { $sum: '$landedPrice' }, 
+				totalQty: { $sum: '$item.totalQty' } 
 			} },
 			{ $lookup: {
 				from: 'sales',
@@ -52,7 +54,7 @@ const billQueries = {
 				],
 				as: 'sold'
 			} },
-			{ $project: { _id: 0, item: '$_id', soldQty: '$sold' } }
+			{ $project: { _id: 0, item: '$_id', soldQty: '$sold', avgLandedPrice: { $divide: [ '$totalLandedPrice', '$totalQty' ] } } }
 		] );
 	},
 

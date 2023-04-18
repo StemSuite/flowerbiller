@@ -9,7 +9,7 @@ type Purchase {
     arrivalDate: String!
     expirationDate: String
     landedPrice: Float
-    box: [Box]
+    box: Box
     item: IncomingItem!
 }
 
@@ -33,7 +33,7 @@ input AddIncomingItemInput {
     uom: String!
     size: String
     boxCount: Int
-    boxType: String
+    box: AddBoxInput
     qtyPerBox: Int!
     pricePerUnit: Float!
     daysToExp: Int!

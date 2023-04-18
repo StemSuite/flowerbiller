@@ -1,18 +1,18 @@
 type Box {
     _id: String
     type: String!
-    perOfFB: Int!
+    FBE: Float!
     CBF: Float!
 }
 
 input AddBoxInput {
     type: String!
-    perOfFB: Int!
+    FBE: Float!
     CBF: Float!
 }
 
 input EditBoxInput {
     type: String
-    perOfFB: Int
+    FBE: Float
     CBF: Float
 }

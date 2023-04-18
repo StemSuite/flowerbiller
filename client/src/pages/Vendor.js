@@ -113,7 +113,7 @@ function BoxesList({ vendor }) {
 
 				let editedBox = {
 					type: box.type,
-					perOfFB: box.perOfFB,
+					FBE: box.FBE,
 					CBF: box.CBF
 				};
 

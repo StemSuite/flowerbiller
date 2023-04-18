@@ -17,7 +17,7 @@ function PreBookItemForm({ preBook }) {
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
 	const [ selectedSize, setSize ] = useState( '' );
-	const [ selectedBoxType, setBoxType ] = useState( '' );
+	const [ selectedBox, setBox ] = useState( '' );
 	const [ inputBoxCount, setBoxCount ] = useState( '' );
 	const [ inputQtyPerBox, setQtyPerBox ] = useState( '' );
 	const [ inputpricePerUnit, setPricePerUnit ] = useState( '' );
@@ -54,7 +54,7 @@ function PreBookItemForm({ preBook }) {
 		setProduct( '' );
 		setVariety( '' );
 		setSize( '' );
-		setBoxType( '' );
+		setBox( '' );
 		setBoxCount( '' );
 		setQtyPerBox( '' );
 		setUOM( null );
@@ -62,20 +62,20 @@ function PreBookItemForm({ preBook }) {
 
 	function addProduct( e ) {
 		e.preventDefault();
+		console.log( selectedBox );
 
 		let newItem = { 
 			product: selectedProduct.name,
 			variety: selectedVariety,
 			size: selectedSize,
 			uom: prodUOM,
-			boxType: selectedBoxType,
+			box: { type: selectedBox.type, FBE: selectedBox.FBE, CBF: selectedBox.CBF },
 			boxCount: Number( inputBoxCount ),
 			qtyPerBox: Number( inputQtyPerBox ),
 			pricePerUnit: Number( Number( inputpricePerUnit ).toFixed( 2 ) ),
 			daysToExp: selectedProduct.daysToExp                
 		};
 
-		console.log( newItem );
 		addPreBookItem({ preBookId: preBook.id, item: newItem });
 
 		setProduct({});
@@ -101,7 +101,7 @@ function PreBookItemForm({ preBook }) {
 						value={inputBoxCount}
 						setValue={setBoxCount}
 					/>
-					<BoxTypeField value={selectedBoxType} setBoxType={setBoxType}/>
+					<BoxTypeField venSH={preBook.venSH} setBox={setBox}/>
 					<QuantityField 
 						label={'QTY/Box'} 
 						name={'qtyPerBox'}

@@ -31,7 +31,7 @@ function BoxesTable() {
 		},
 		{ 
 			header: '% of FB', 
-			format: ( box ) => box.perOfFB
+			format: ( box ) => box.FBE
 		},
 		{ 
 			header: 'Default CBF', 

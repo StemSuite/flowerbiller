@@ -109,13 +109,30 @@ export const VENDOR_QUERY = `
             }
             boxes {
                 type
-                perOfFB
+                FBE
 				CBF
             }
         }
 
-    }
-`;
+    }`;
+
+export const VENDOR_BY_SHORTHAND_QUERY = `
+    query vendorByShortHand($shortHand: String!) {
+        vendorByShortHand(shortHand: $shortHand) {
+            id
+            name
+            shortHand
+            shippingMethods {
+                name
+            }
+            boxes {
+                type
+                FBE
+				CBF
+            }
+        }
+
+    }`;
 
 export const EVENTS_QUERY = `
     query events {
@@ -226,6 +243,7 @@ export const SHIPMENT_ITEMS_QUERY = `
                 totalQty
                 totalPrice
             }
+            landedPrice
         }
     }`;
 
@@ -311,6 +329,7 @@ export const BILL_INVENTORY_QUERY = `
                 saleID
                 qtySold
             }
+            avgLandedPrice
         }
     }`;
 
@@ -329,7 +348,7 @@ export const BOXES_QUERY = `
         boxes {
             _id
             type
-            perOfFB
+            FBE
             CBF
         }
     }`;

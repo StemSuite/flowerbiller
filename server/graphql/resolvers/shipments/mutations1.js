@@ -4,25 +4,22 @@ import ShippingMethod from '../../../models/shipping_method.js';
 
 const shipmentMutations = {
 	incShipmentItems: async ( shipment, boxCount, cbf, fbe ) => {
-		return Shipment.findOne (
+		return Shipment.findOneAndUpdate (
 			{   shipSH: shipment.shipSH, 
 				shippingDate: shipment.shippingDate,
 			},
+			[
+				{ $set: {
+					itemCount:{ $add: [ boxCount, '$itemCount' ] },
+					FBE: { $add: [ fbe, '$FBE' ] },
+					CBF: { $add: [ cbf, '$CBF' ] },
+					cbfPrice: { $add: [ '$cbfPrice', { $multiply: [ cbf, '$pricePerCBF' ] } ] },
+					fuelPrice: { $add: [ '$fuelPrice' ,{ $multiply: [ '$pricePerCBF', cbf, '$fuelCharge' ] } ] },
+				} }
+			],
+			{ returnDocument: 'after' }
 		).then( res => {
-			if ( res !== null ) {
-				return Shipment.findByIdAndUpdate ( res._id, 
-					{
-						$inc: {
-							itemCount: boxCount,
-							CBF: cbf,
-							FBE: fbe,
-							totalPrice: ( boxCount * res.boxCharge ) + ( res.pricePerCBF * cbf * res.fuelCharge )
-						}
-
-					}
-				);
-			}
-
+			if ( res !== null ) return res;
 			return ShippingMethod.findOne({ shortHand: { $eq: shipment.shipSH } })
 				.then( res => {
 					let newShipment = {
@@ -35,7 +32,8 @@ const shipmentMutations = {
 						boxCharge: res.boxCharge,
 						pricePerCBF: res.pricePerCBF,
 						fuelCharge: res.fuelCharge,
-						totalPrice: ( boxCount * res.boxCharge ) + ( res.pricePerCBF * cbf * res.fuelCharge )
+						cbfPrice: ( res.pricePerCBF * cbf ),
+						fuelPrice: ( res.pricePerCBF * cbf * res.fuelCharge )
 					};
 					return new Shipment ( newShipment ).save();
 				});

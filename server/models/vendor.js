@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const vendorSchema = new Schema({
 	name: { type: String, required: true },
-	shortHand: { type: String, required: true, maxLength: 4 },
+	shortHand: { type: String, required: true, maxLength: 4, unique: true },
 	shippingMethods: [{
 		name: { type: String, required: true },
 		shortHand: { type: String, required: true },
@@ -12,7 +12,7 @@ const vendorSchema = new Schema({
 	}],
 	boxes: [{
 		type: { type: String, required: true },
-		perOfFB: { type: Number, required: true },
+		FBE: { type: Number, required: true },
 		CBF: { type: Number, required: true },
 	}]
 });

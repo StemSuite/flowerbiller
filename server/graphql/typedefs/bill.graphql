@@ -16,6 +16,7 @@ input AddBillInput {
 type billInventoryItem {
     item: IncomingItem
     soldQty: [SaleItemQty]
+    avgLandedPrice: Float
 }
 
 type SaleItemQty {

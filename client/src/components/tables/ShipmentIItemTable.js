@@ -52,8 +52,12 @@ function ShipmentItemsTable({ shipmentID }) {
 			format: ( purchase ) => qtyUom( purchase.item.totalQty, purchase.item.uom ) 
 		},
 		{ 
-			header: 'Total $', 
+			header: 'Product $', 
 			format: ( purchase ) => price( purchase.item.totalPrice )
+		},
+		{ 
+			header: 'Shipping $', 
+			format: ( purchase ) => price( purchase.landedPrice - purchase.item.totalPrice )
 		},
 	];
 
