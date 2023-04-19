@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
 import { pageHeaderStyle } from '../styles/styles.js';
 import { PREBOOK_QUERY } from '../lib/Queries.js';
-import PreBookItemForm from '../components/forms/AddPreBookItemForm.js';
 import PreBookItemsTable from '../components/tables/PreBookItemsTable.js';
+import IncomingItemForm from '../components/forms/AddIncomingItemForm.js';
+import { ADD_PREBOOK_ITEM } from '../lib/Mutations.js';
 
 function PreBook () {
 	const id = useParams().id;
@@ -41,7 +42,7 @@ function PreBook () {
 					<Text>{preBook.fshippingDate} via {preBook.shipSH}</Text>
 				</Box>
 			</Flex>
-			<PreBookItemForm preBook={preBook} />
+			<IncomingItemForm order={preBook} mutation={ADD_PREBOOK_ITEM} />
 			<PreBookItemsTable preBookId={id}/>
 		</>
 	);

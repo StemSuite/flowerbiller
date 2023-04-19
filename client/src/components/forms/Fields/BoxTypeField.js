@@ -4,7 +4,7 @@ import { useQuery } from 'urql';
 import { VENDOR_BY_SHORTHAND_QUERY } from '../../../lib/Queries';
 
 function BoxTypeField({ venSH, setBox }) {
-
+	
 	const [ options, setOptions ] = useState( [] );
 	
 	const [fetchedVen] = useQuery({
@@ -18,6 +18,10 @@ function BoxTypeField({ venSH, setBox }) {
 		if ( data === undefined || data === null ) return;
 		setOptions( data.vendorByShortHand.boxes );
 	}, [data] );
+
+	function handleChange( e ) {
+		setBox( options[e.target.value] );
+	}
   
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
@@ -28,9 +32,7 @@ function BoxTypeField({ venSH, setBox }) {
 			<Select 
 				size="sm" 
 				name="boxField"
-				onChange={( e ) => {
-					setBox( options[e.target.value] );
-				}}
+				onChange={ handleChange }
 			>
 				<option hidden> </option>
 				{options.map( ( box, i ) => {

@@ -1,6 +1,6 @@
 export const ADD_SO_ITEM = `
-    mutation addSOItem($standingOrderId: String! $item: AddIncomingItemInput!) {
-        addSOItem(standingOrderId: $standingOrderId, item: $item) {
+    mutation addSOItem($orderID: String! $item: AddIncomingItemInput!) {
+        addSOItem(standingOrderId: $orderID, item: $item) {
             _id
         }
     }`;
@@ -62,8 +62,8 @@ export const ADD_PREBOOK_MUTATION = `
     }`;
 
 export const ADD_PREBOOK_ITEM = `
-    mutation addPreBookItem($preBookId: String! $item: AddIncomingItemInput!) {
-        addPreBookItem(preBookId: $preBookId, item: $item) {
+    mutation addPreBookItem($orderID: String! $item: AddIncomingItemInput!) {
+        addPreBookItem(preBookId: $orderID, item: $item) {
             id
         }
     }`;

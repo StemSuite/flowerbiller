@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'urql';
 import { STANDING_ORDER_QUERY } from '../lib/Queries.js';
-import SOItemForm from '../components/forms/SOItemForm.js';
+// import SOItemForm from '../components/forms/SOItemForm.js';
 import SOItems from '../components/tables/SOItems';
 import { useEffect, useState } from 'react';
 import { daysOfTheWeek } from '../lib/data.js';
 import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
 import { pageHeaderStyle } from '../styles/styles.js';
+import { ADD_SO_ITEM } from '../lib/Mutations.js';
+import IncomingItemForm from '../components/forms/AddIncomingItemForm.js';
 
 function StandingOrder () {
 	const id = useParams().id;
@@ -49,7 +51,7 @@ function StandingOrder () {
 					<Text>{daysOfTheWeek[standingOrder.shippingDay]}(s) via {standingOrder.shipSH}</Text>
 				</Box>
 			</Flex>
-			<SOItemForm order={standingOrder} />
+			<IncomingItemForm order={standingOrder} mutation={ADD_SO_ITEM} />
 			<SOItems items={items} orderID={id}/>
 		</>
 	);

@@ -1,6 +1,5 @@
 import {  useState, useRef, useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { ADD_SO_ITEM } from '../../lib/Mutations.js';
 import ProductField from './Fields/ProductField.js';
 import LengthField from './Fields/SizeField.js';
 import VarietyField from './Fields/VarietyField.js';
@@ -12,12 +11,12 @@ import { Box, FormControl, HStack } from '@chakra-ui/react';
 import AddButton from '../buttons/AddButton.js';
 import { Form } from 'react-router-dom';
 
-function SOItemForm({ order }) {
+function IncomingItemForm({ order, mutation }) {
 	const [ products, setProducts ] = useState( [] );
 	const [ selectedProduct, setProduct ] = useState({});
 	const [ selectedVariety, setVariety ] = useState( '' );
 	const [ selectedSize, setSize ] = useState( '' );
-	const [ selectedBox, setBox ] = useState( '' );
+	const [ selectedBox, setBox ] = useState( [] );
 	const [ inputBoxCount, setBoxCount ] = useState( '' );
 	const [ inputQtyPerBox, setQtyPerBox ] = useState( '' );
 	const [ inputpricePerUnit, setPricePerUnit ] = useState( '' );
@@ -25,7 +24,7 @@ function SOItemForm({ order }) {
 	const inputProd = useRef( selectedProduct );
 
 
-	const [ , addSOItem ] = useMutation( ADD_SO_ITEM );
+	const [ , addItem ] = useMutation( mutation );
 
 	const [fetchedProds] = useQuery({
 		query: PRODUCTS_AND_VARIETIES_QUERY
@@ -49,14 +48,16 @@ function SOItemForm({ order }) {
 		setProduct( product || {});
 	}
 
-	function resetFields() {
+	function resetFields( e ) {
+		setUOM( null );
 		setPricePerUnit( '' );
 		setProduct({});
 		setVariety( '' );
 		setSize( '' );
-		setBox( '' );
+		setBox( [] );
 		setBoxCount( '' );
 		setQtyPerBox( '' );
+		e.target.reset();
 	}
 
 	function addProduct( e ) {
@@ -74,11 +75,10 @@ function SOItemForm({ order }) {
 			daysToExp: selectedProduct.daysToExp                
 		};
 
-		addSOItem({ standingOrderId: order._id, item: newItem });
-
-		resetFields();
-		setUOM( null );
+		addItem({ orderID: ( order._id|| order.id ), item: newItem });
+		
 		inputProd.current.focus();
+		resetFields( e );
 	}
 
 	return(
@@ -107,7 +107,7 @@ function SOItemForm({ order }) {
 						setValue={setQtyPerBox} 
 						uom={prodUOM}
 					/>
-					<PriceField value={inputpricePerUnit} setPrice={setPricePerUnit}/>
+					<PriceField inputPrice={inputpricePerUnit} setPrice={setPricePerUnit}/>
 					<Box alignSelf="end">
 						<AddButton text={'add'}/>
 					</Box>
@@ -117,4 +117,4 @@ function SOItemForm({ order }) {
 	);
 }
 
-export default SOItemForm;
+export default IncomingItemForm;
