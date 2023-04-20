@@ -15,6 +15,7 @@ const shipmentSchema = new Schema({
 	fuelCharge: { type: Number, required: true },
 	cbfPrice: { type: Number, required: true },
 	fuelPrice: { type: Number, required: true },
+	totalSurcharge: { type: Number, required: false },
 }, { timestamps: true });
 
 const Shipment = mongoose.model( 'shipment', shipmentSchema );

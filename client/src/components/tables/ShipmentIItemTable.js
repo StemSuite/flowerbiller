@@ -5,11 +5,26 @@ import { useEffect, useState } from 'react';
 import { SHIPMENT_ITEMS_QUERY } from '../../lib/Queries.js';
 import { boxes, fullProduct, price, qtyUom } from './ItemFormats.js';
 
+function getVendorBoxCount( lineItem ) {
+	let boxCounts = { 'All': { boxCount: 0 } };
 
-function ShipmentItemsTable({ shipmentID }) {
+	lineItem.forEach( lineItem => {	
+		boxCounts['All'].boxCount += lineItem.item.boxCount;
+		if ( boxCounts[lineItem.vendor] ) {
+			boxCounts[lineItem.vendor].boxCount += lineItem.item.boxCount ;
+		} else {
+			boxCounts[lineItem.vendor] = { boxCount: lineItem.item.boxCount };
+		}
+	});
+
+	return boxCounts;
+}
+
+
+function ShipmentItemsTable({ shipmentID, setVendorBoxCount, refetchTable }) {
 	const [ items, setItems ] = useState( [] );
 
-	const [fetchedItems] = useQuery({
+	const [ fetchedItems, reexecuteQuery ] = useQuery({
 		query: SHIPMENT_ITEMS_QUERY,
 		variables: { shipmentID },
 	});
@@ -19,7 +34,12 @@ function ShipmentItemsTable({ shipmentID }) {
 	useEffect( () => {
 		if ( data === undefined ) return;
 		setItems( data.shipmentItems );
+		setVendorBoxCount( getVendorBoxCount( data.shipmentItems ) );
 	}, [data] );
+
+	useEffect( () => {
+		reexecuteQuery({ requestPolicy: 'network-only' });
+	},[refetchTable] );
 
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;

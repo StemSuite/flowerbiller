@@ -221,8 +221,12 @@ export const SHIPMENT_QUERY = `
         shipment(id: $id) {
             id
             shipSH
+            itemCount
             fshippingDate
             farrivalDate
+            CBF
+            boxCharge
+            totalSurcharge
         }
     }`;
 

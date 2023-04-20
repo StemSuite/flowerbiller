@@ -118,4 +118,8 @@ type Mutation {
     updateVendorBoxCBF(id: String!, box: EditBoxInput!): Vendor!
     
     updateLandedPrices(shipmentID: String!, shipmentCBF: Float!): Purchase!
+
+    incShipmentItems(shipment: EditShipmentInput!, boxCount: Int!, cbf: Float!, fbe: Float!): Shipment!
+
+    updateShipmentSurcharge(id: String!, totalSurcharge: Float!): Shipment!
 }

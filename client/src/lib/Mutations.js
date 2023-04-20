@@ -144,3 +144,10 @@ export const UPDATE_VENDOR_BOX_CBF = `
             id
         }
     }`;
+
+export const UPDATE_SHIPMENT_SURCHARGE = `
+    mutation updateShipmentSurcharge($id: String!, $totalSurcharge: Float!) {
+        updateShipmentSurcharge(id: $id, totalSurcharge: $totalSurcharge) {
+            id
+        }
+    }`;

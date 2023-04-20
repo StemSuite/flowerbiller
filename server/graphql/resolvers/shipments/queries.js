@@ -22,6 +22,9 @@ const shipmentQueries = {
 			{
 				shipSH: 1,
 				itemCount: 1,
+				CBF: 1,
+				boxCharge: 1,
+				totalSurcharge: 1,
 				fshippingDate: { $dateToString: { format: '%m/%d/%Y', date: '$shippingDate' } },
 				farrivalDate: { $dateToString: { format: '%m/%d/%Y', date: '$arrivalDate' } }          
 			});

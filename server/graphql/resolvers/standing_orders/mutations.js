@@ -1,6 +1,6 @@
 import StandingOrder from '../../../models/standing_order.js';
 import purchaseMutations from '../purchases/mutations.js';
-import shipmentMutations from '../shipments/mutations1.js';
+import shipmentMutations from '../shipments/mutations.js';
 import moment from 'moment';
 
 const standingOrderMutations = {
@@ -45,7 +45,12 @@ const standingOrderMutations = {
 						arrivalDate: arrivalDate
 					};
  
-					shipmentMutations.incShipmentItems( shipment, item.boxCount, box.CBF, box.FBE )
+					shipmentMutations.incShipmentItems( _,  {
+						shipment: shipment, 
+						boxCount: item.boxCount, 
+						cbf: box.CBF, 
+						fbe: box.FBE
+					})
 						.then( shipment => {
 							if ( !newPurchase.standingOrderItem ) {
 
@@ -64,7 +69,7 @@ const standingOrderMutations = {
 								.then( () => purchaseMutations.updateLandedPrices( _, { 
 									shipmentID: shipment._id, 
 									shipmentCBF: shipment.CBF,
-									shipmentSurcharges: ( shipment.fuelPrice + shipment.cbfPrice ),
+									shipmentSurcharges: ( shipment.totalSurcharge ),
 									shipmentBoxCharge: shipment.boxCharge
 								}) );
 						});

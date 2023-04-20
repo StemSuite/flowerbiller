@@ -13,4 +13,23 @@ type Shipment {
     fuelCharge: Float
     cbfPrice: Float
     fuelPrice: Float
+    totalSurcharge: Float
+}
+
+input EditShipmentInput {
+    id: String!
+    shipSH: String!
+    shippingDate: String!
+    fshippingDate: String
+    arrivalDate: String!
+    farrivalDate: String
+    itemCount: Int!
+    FBE: Float
+    CBF: Float
+    boxCharge: Float
+    pricePerCBF: Float
+    fuelCharge: Float
+    cbfPrice: Float
+    fuelPrice: Float
+    totalSurcharge: Float
 }

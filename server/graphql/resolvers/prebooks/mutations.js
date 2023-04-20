@@ -35,7 +35,12 @@ const preBookMutations = {
 					arrivalDate: moment.utc( preBook.arrivalDate ).format( 'YYYY-MM-DD' ),
 				};
 
-				return shipmentMutations.incShipmentItems( shipment, item.boxCount, box.CBF, box.FBE )
+				return shipmentMutations.incShipmentItems( _,  {
+					shipment: shipment, 
+					boxCount: item.boxCount, 
+					cbf: box.CBF, 
+					fbe: box.FBE
+				})
 					.then( shipment => {
 						item.totalQty = item.boxCount * item.qtyPerBox;
 						item.totalPrice = item.totalQty * item.pricePerUnit;
@@ -55,7 +60,7 @@ const preBookMutations = {
 							.then( () => purchaseMutations.updateLandedPrices( _, { 
 								shipmentID: shipment._id, 
 								shipmentCBF: shipment.CBF,
-								shipmentSurcharges: ( shipment.fuelPrice + shipment.cbfPrice ),
+								shipmentSurcharges: ( shipment.totalSurcharge ),
 								shipmentBoxCharge: shipment.boxCharge
 							}) );
 							

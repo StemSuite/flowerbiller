@@ -3,8 +3,6 @@ import { Box, FormLabel, NumberInput, NumberInputField } from '@chakra-ui/react'
 
 function PriceField({ inputPrice, setPrice }) {
 
-
-
 	return(
 		<Box>
 			<FormLabel size="sm" textAlign="center">$/Unit</FormLabel>
