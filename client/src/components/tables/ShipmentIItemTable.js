@@ -43,12 +43,17 @@ function ShipmentItemsTable({ shipmentID, setVendorBoxCount, refetchTable }) {
 
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
+	console.log( items );
 
 	const fields = [ 
 		{ 
 			header: 'Vendor', 
 			sort: 'vendor', 
 			format: ( purchase ) => purchase.vendor
+		},
+		{ 
+			header: 'SO?', 
+			format: ( purchase ) => {if ( purchase.standingOrder ) return '*';}
 		},
 		{ 
 			header: 'Product', 

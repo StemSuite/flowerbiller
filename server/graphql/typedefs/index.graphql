@@ -122,4 +122,6 @@ type Mutation {
     incShipmentItems(shipment: EditShipmentInput!, boxCount: Int!, cbf: Float!, fbe: Float!): Shipment!
 
     updateShipmentSurcharge(id: String!, totalSurcharge: Float!): Shipment!
+
+    updateShipmentBoxCharge(id: String!, boxCharge: Float!): Shipment!
 }
