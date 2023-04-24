@@ -151,3 +151,10 @@ export const UPDATE_SHIPMENT_SURCHARGE = `
             id
         }
     }`;
+
+export const UPDATE_SHIPMENT_BOX_CHARGE = `
+    mutation updateShipmentBoxCharge($id: String!, $boxCharge: Float!) {
+        updateShipmentBoxCharge(id: $id, boxCharge: $boxCharge) {
+            id
+        }
+    }`;

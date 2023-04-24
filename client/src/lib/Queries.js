@@ -247,6 +247,7 @@ export const SHIPMENT_ITEMS_QUERY = `
                 totalQty
                 totalPrice
             }
+            standingOrder
             landedPrice
         }
     }`;

@@ -8,7 +8,7 @@ import { pageHeaderStyle } from '../styles/styles';
 import EditablePriceBox from '../components/misc/EditablePriceBox';
 import EditableDateBox from '../components/misc/EditableDateBox';
 import { PER_BOX_CHARGE_HELPER, SURCHARGE_HELPER } from '../lib/helperTexts';
-import { UPDATE_SHIPMENT_SURCHARGE } from '../lib/Mutations';
+import { UPDATE_SHIPMENT_BOX_CHARGE, UPDATE_SHIPMENT_SURCHARGE } from '../lib/Mutations';
 
 function BoxCountByVen({ vendorBoxCount }) {
 	let options = Object.keys( vendorBoxCount );
@@ -49,6 +49,7 @@ function Shipment() {
 	const [ refetchTable, setRefetchTable ] = useState( false );
 
 	const [ , editSurcharge ] = useMutation( UPDATE_SHIPMENT_SURCHARGE );
+	const [ , editSBoxCharge ] = useMutation( UPDATE_SHIPMENT_BOX_CHARGE );
 
 	const [fetchedShipment] = useQuery({
 		query: SHIPMENT_QUERY,
@@ -75,6 +76,11 @@ function Shipment() {
 			.then( () => setRefetchTable( !refetchTable ) );
 	}
 
+	function updateBoxCharge( boxCharge ) {
+		editSBoxCharge({ id: shipment.id, boxCharge: boxCharge })
+			.then( () => setRefetchTable( !refetchTable ) );
+	}
+
 	return (
 		<>
 			<Heading sx={pageHeaderStyle}>Shipment</Heading>
@@ -84,9 +90,15 @@ function Shipment() {
 					<Text>{shipment.shipSH}</Text>
 				</Box>
 				<Spacer/>
-				<EditableDateBox title={'Shipping Date'} currentDate={shipment.fshippingDate}/>
+				<EditableDateBox 
+					title={'Shipping Date'} 
+					currentDate={shipment.fshippingDate}
+				/>
 				<Spacer/>
-				<EditableDateBox title={'Arrival Date'} currentDate={shipment.farrivalDate}/>
+				<EditableDateBox 
+					title={'Arrival Date'} 
+					currentDate={shipment.farrivalDate}
+				/>
 			</Flex>
 			<Flex mx="10%" justifySelf="center" alignSelf="center" marginY="20px">
 				<BoxCountByVen vendorBoxCount={vendorBoxCount}/>
@@ -95,6 +107,7 @@ function Shipment() {
 					title={'Per Box Charge'} 
 					currentInput={formatPrice( shipment.boxCharge )}
 					helperText={PER_BOX_CHARGE_HELPER}
+					handleSubmit={updateBoxCharge}
 				/>
 				<Spacer/>
 				<EditablePriceBox 

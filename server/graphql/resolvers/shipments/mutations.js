@@ -1,4 +1,3 @@
-
 import Shipment from '../../../models/shipment.js';
 import ShippingMethod from '../../../models/shipping_method.js';
 import purchaseMutations from '../purchases/mutations.js';
@@ -53,6 +52,24 @@ const shipmentMutations = {
 		return Shipment.findByIdAndUpdate( id, 
 			{
 				totalSurcharge: totalSurcharge
+			},
+			{ returnDocument: 'after' }
+		)
+			.then( shipment => {
+				purchaseMutations.updateLandedPrices( _, { 
+					shipmentID: shipment._id, 
+					shipmentCBF: shipment.CBF,
+					shipmentSurcharges: ( shipment.totalSurcharge ),
+					shipmentBoxCharge: shipment.boxCharge
+				});
+				return shipment;
+			});
+	},
+
+	updateShipmentBoxCharge: async ( _, { id, boxCharge }) => {
+		return Shipment.findByIdAndUpdate( id, 
+			{
+				boxCharge: boxCharge
 			},
 			{ returnDocument: 'after' }
 		)

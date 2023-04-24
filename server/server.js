@@ -12,8 +12,6 @@ mongoose
 	.then( () => console.log( 'Database connected successfully' ) )
 	.catch( ( err ) => console.log( err ) );
 
-//Promise = global.Promise;
-
 app.use( cors() );
 app.use( '/graphql', graphqlHTTP({
 	schema: schema,
