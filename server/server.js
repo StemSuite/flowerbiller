@@ -7,10 +7,12 @@ import cors from 'cors';
 import schema from './graphql/schema.js';
 import 'dotenv/config';
 
+
 mongoose
 	.connect( process.env.DB )
 	.then( () => console.log( 'Database connected successfully' ) )
 	.catch( ( err ) => console.log( err ) );
+
 
 app.use( cors() );
 app.use( '/graphql', graphqlHTTP({

@@ -66,4 +66,8 @@ typings/
 .env
 .env.test
 
+#client configs
+config.js
+auth_config.json
+
 

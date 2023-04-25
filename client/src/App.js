@@ -1,4 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import RootLayout from './layouts/RootLayout.js';
 import Home from './pages/Home.js';
 import StandingOrder from './pages/StandingOrder.js';
@@ -16,11 +17,14 @@ import Settings from './pages/Settings.js';
 import Vendors from './pages/Vendors.js';
 import Vendor from './pages/Vendor.js';
 import Boxes from './pages/Boxes.js';
+import UserProfile from './pages/UserProfile.js';
+
 
 const router = createBrowserRouter(
 	createRoutesFromElements (
 		<Route path="/" element={<RootLayout />}>
 			<Route index element={<Home />} />
+			<Route path="/profile" element={<UserProfile/>} />
 			<Route path="/standing_orders" element={<StandingOrders />} />
 			<Route path="/standing_order/:id" element={<StandingOrder />} />
 			<Route path="/events" element={<Events />} />
@@ -41,8 +45,16 @@ const router = createBrowserRouter(
 );
 
 function App() {
+	const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+
+	if ( isLoading ) {
+		return <div>Loading ...</div>;
+	}
+
+	if ( !isAuthenticated ) return loginWithRedirect();
+
 	return (
-		<RouterProvider router={router} />
+		isAuthenticated && <RouterProvider router={router} />
 	);
 }
 
