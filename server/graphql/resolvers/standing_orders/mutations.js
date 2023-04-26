@@ -26,18 +26,18 @@ const standingOrderMutations = {
 		)
 			.then( standingOrder => {
 				let startDate = moment.utc( standingOrder.startDate );
-				let endDate = moment.utc( standingOrder.endDate ) || null;
+				let endDate = standingOrder.endDate  || moment( standingOrder.startDate ).add( 15, 'weeks' );
+				endDate = moment.utc( endDate );
+		
 				
 				let newPurchase = { standingOrder: standingOrder._id, vendor: standingOrder.venSH };
 				newPurchase.item = standingOrder.items.slice( -1 )[0].toObject();
-
-				let weeksOut = 0;
 
 				while ( startDate.day() !== standingOrder.shippingDay ) {
 					startDate.add( 1, 'day' );}
 				let shippingDate = startDate;
        
-				while ( shippingDate <= endDate && weeksOut <= 15 ) {
+				while ( shippingDate <= endDate  ) {
 					let arrivalDate = moment( shippingDate ).add( standingOrder.daysToArrive, 'days' ).format( 'YYYY-MM-DD' );
 					let shipment = {  
 						shipSH: standingOrder.shipSH, 
@@ -73,7 +73,6 @@ const standingOrderMutations = {
 									shipmentBoxCharge: shipment.boxCharge
 								}) );
 						});
-					weeksOut += 1;
 					shippingDate.add( 7, 'days' );
 				}
 				return standingOrder;

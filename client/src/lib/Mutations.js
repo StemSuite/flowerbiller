@@ -158,3 +158,10 @@ export const UPDATE_SHIPMENT_BOX_CHARGE = `
             id
         }
     }`;
+
+export const ADD_SHIPPING_METHOD_MUTATION = `
+    mutation addShippingMethod($shippingMethod: AddShippingMethodInput!) {
+        addShippingMethod(shippingMethod: $shippingMethod) {
+            id
+        }
+    }`;

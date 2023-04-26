@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import SimpleSidebar from '../components/Sidebar';
 import { Box, Flex, Grid, GridItem, Spacer } from '@chakra-ui/react';
-import AccountButton from '../components/buttons/AccountButton';
+// import AccountButton from '../components/buttons/AccountButton';
+import LoginButton from '../components/auth0/ProfileMenu';
 
 export default function SidebarLayout() {
 	return (
@@ -23,7 +24,7 @@ export default function SidebarLayout() {
 					<Flex>
 						<span></span>
 						<Spacer />
-						<AccountButton/>
+						<LoginButton/>
 					</Flex>
 					<Outlet/>
 				</Box>

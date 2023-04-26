@@ -7,6 +7,8 @@ function Settings() {
 	const settingsItems = [
 		{ title: 'Vendors', route: '/vendors' },
 		{ title: 'Boxes', route: '/boxes' },
+		{ title: 'Stores', route: '/customers' },
+		{ title: 'Shipping Methods', route: '/shipping_methods' }
 	];
 
 	function SettingItem({ item }) {
