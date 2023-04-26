@@ -43,7 +43,7 @@ function StandingOrder () {
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Dates</Text>
-					<Text>{standingOrder.fstartDate} - {standingOrder.fendDate}</Text>
+					<Text>{standingOrder.fstartDate} - {standingOrder.fendDate || 'N/A'}</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">

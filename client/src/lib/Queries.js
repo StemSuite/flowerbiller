@@ -202,6 +202,7 @@ export const STORES_QUERY = `
         stores {
             id
             name
+            address
         }
     }`;
 
@@ -345,6 +346,8 @@ export const SHIPPING_METHODS_QUERY = `
             shortHand
             shippingDays
             daysToArrive
+            boxCharge
+            pricePerCBF
         }
     }`;
 
@@ -355,5 +358,16 @@ export const BOXES_QUERY = `
             type
             FBE
             CBF
+        }
+    }`;
+
+export const SHIPMENTS_BY_DATE_QUERY = `
+    query shipmentsByDates($startDate: String!, $endDate: String!) {
+        shipmentsByDates(startDate: $startDate, endDate: $endDate) {
+            id
+            shipSH
+            fshippingDate
+            farrivalDate
+            itemCount
         }
     }`;

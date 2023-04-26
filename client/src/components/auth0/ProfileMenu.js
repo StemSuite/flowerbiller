@@ -5,7 +5,7 @@ import { MdAccountCircle } from 'react-icons/md';
 
 function ProfileMenu({ user }) {
 	const { logout } = useAuth0();
-
+	
 	return (
 		<Menu>
 			<MenuButton 

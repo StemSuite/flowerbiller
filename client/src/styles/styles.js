@@ -1,4 +1,4 @@
-export const addButtonStyle = {
+export const buttonStyle = {
 	bg:'green.300',
 	boxShadow:'md', 
 	rounded:'md',

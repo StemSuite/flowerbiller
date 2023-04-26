@@ -18,6 +18,8 @@ import Vendors from './pages/Vendors.js';
 import Vendor from './pages/Vendor.js';
 import Boxes from './pages/Boxes.js';
 import UserProfile from './pages/UserProfile.js';
+import Customers from './pages/Customers.js';
+import ShippingMethods from './pages/ShippingMethods.js';
 
 
 const router = createBrowserRouter(
@@ -40,6 +42,8 @@ const router = createBrowserRouter(
 			<Route path="/vendors" element={<Vendors />} />
 			<Route path="/vendor/:id" element={<Vendor/>} />
 			<Route path="/boxes" element={<Boxes/>} />
+			<Route path="/customers" element={<Customers/>} />
+			<Route path="/shipping_methods" element={<ShippingMethods/>} />
 		</Route>
 	)
 );

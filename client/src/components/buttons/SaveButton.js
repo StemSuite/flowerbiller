@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { addButtonStyle } from '../../styles/styles';
+import { buttonStyle } from '../../styles/styles';
 
 export default function SaveButton({ text, clickAction, disabled }) {
 
@@ -8,7 +8,7 @@ export default function SaveButton({ text, clickAction, disabled }) {
 	}
 
 	return (
-		<Button sx={addButtonStyle} size="xs" isDisabled={disabled} onClick={handleClick}>
+		<Button sx={buttonStyle} size="xs" isDisabled={disabled} onClick={handleClick}>
 			{text}
 		</Button>
 	);

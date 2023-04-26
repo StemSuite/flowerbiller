@@ -5,7 +5,6 @@ import { pageHeaderStyle } from '../styles/styles';
 import moment from 'moment';
 import InventoryTable from '../components/tables/InventoryTable';
 
-
 function Home() {
 	let today = moment.utc( new Date() ).format( 'YYYY-MM-DD' );
 	const [ inventoryDate, setDate ] = useState( today );

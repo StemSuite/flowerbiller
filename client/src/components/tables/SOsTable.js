@@ -21,7 +21,7 @@ function SOsTable({ standingOrders }) {
 		{ 
 			header: 'End Date', 
 			sort: 'fendDate',
-			format: ( order ) => order.fendDate
+			format: ( order ) => order.fendDate || 'N/A'
 		},
 		{ 
 			header: 'Shipping Day', 

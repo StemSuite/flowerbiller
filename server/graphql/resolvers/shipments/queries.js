@@ -30,6 +30,20 @@ const shipmentQueries = {
 			});
 	},
 
+	shipmentsByDates: async( _, { startDate, endDate }) => {
+		startDate = new Date( startDate );
+		endDate = new Date( endDate );
+		return Shipment.find(
+			{ shippingDate: { $gte: startDate  , $lte: endDate } },
+			{
+				shipSH: 1,
+				itemCount: 1,
+				fshippingDate: { $dateToString: { format: '%m/%d/%Y', date: '$shippingDate' } },
+				farrivalDate: { $dateToString: { format: '%m/%d/%Y', date: '$arrivalDate' } }
+			}
+		);
+	},
+
 	shipmentItems: async ( _, { shipmentID }) => {
 		return Purchase.find({ shipment: { $eq: shipmentID } });
 	},
