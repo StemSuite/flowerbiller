@@ -23,8 +23,6 @@ function ShippingMethodsTable() {
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
 
-	console.log( data );
-
 	const fields = [
 		{ 
 			header: 'Name',

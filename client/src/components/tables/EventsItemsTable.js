@@ -22,7 +22,6 @@ function EventsItemsTable() {
 
 	if ( fetching ) return 'Loading...';
 	if ( error ) return <pre>{error.message}</pre>;
-	console.log( items );
 
 	const fields = [ 
 		{ 

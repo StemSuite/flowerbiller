@@ -20,9 +20,6 @@ const client = createClient({
 
 // const config = getConfig();
 
-console.log( 'working?' );
-console.log( process.env.AUTH0_DOMAIN );
-
 const providerConfig = {
 	domain: process.env.REACT_APP_AUTH0_DOMAIN,
 	clientId: process.env.REACT_APP_AUTH0_CLIENT_ID,
