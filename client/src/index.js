@@ -3,6 +3,7 @@ import App from './App.js';
 import { createClient, cacheExchange, fetchExchange, Provider } from 'urql';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Auth0Provider } from '@auth0/auth0-react';
+
 import { getConfig } from './config.js';
 
 let serverPort = process.env.PORT || 4000;
