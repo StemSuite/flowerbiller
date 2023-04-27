@@ -1,22 +1,25 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.js';
-import { createClient, Provider } from 'urql';
+import { createClient, cacheExchange, fetchExchange, Provider } from 'urql';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { getConfig } from './config.js';
+
+let serverPort = process.env.PORT || 4000;
 
 
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 
 const client = createClient({
-	url: 'http://localhost:4000/graphql'
+	url: process.env.serverUrl || `http://localhost:${serverPort}/graphql`,
+	exchanges: [ cacheExchange, fetchExchange ],
 });
 
 const config = getConfig();
 
 const providerConfig = {
-	domain: config.domain,
-	clientId: config.clientId,
+	domain: process.env.AUTH0_DOMAIN || config.domain,
+	clientId: process.env.AUTH0_CLIENT_ID || config.clientId,
 	authorizationParams: {
 		redirect_uri: window.location.origin,
 		... null,

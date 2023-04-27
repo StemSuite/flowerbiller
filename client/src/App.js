@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
 import RootLayout from './layouts/RootLayout.js';
 import Home from './pages/Home.js';
 import StandingOrder from './pages/StandingOrder.js';
@@ -49,16 +49,17 @@ const router = createBrowserRouter(
 );
 
 function App() {
-	const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+	// const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
-	if ( isLoading ) {
-		return <div>Loading ...</div>;
-	}
+	// if ( isLoading ) {
+	// 	return <div>Loading ...</div>;
+	// }
 
-	if ( !isAuthenticated ) return loginWithRedirect();
+	// if ( !isAuthenticated ) return loginWithRedirect();
 
 	return (
-		isAuthenticated && <RouterProvider router={router} />
+		// isAuthenticated && 
+		<RouterProvider router={router} />
 	);
 }
 

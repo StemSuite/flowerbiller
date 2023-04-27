@@ -3,15 +3,17 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { auth } from 'express-oauth2-jwt-bearer';
+// import { auth } from 'express-oauth2-jwt-bearer';
 import schema from './graphql/schema.js';
 import 'dotenv/config';
 
-const jwtCheck = auth({
-	audience: 'http://localhost:4000/graphql',
-	issuerBaseURL: 'https://dev-cz5tq76cgos2bf6b.us.auth0.com/',
-	tokenSigningAlg: 'RS256'
-});
+const port = process.env.PORT || 4000;
+
+// const jwtCheck = auth({
+// 	audience: process.env.AUTH0_CALLBACK_URL,
+// 	issuerBaseURL: process.env.AUTH0_DOMAIN,
+// 	tokenSigningAlg: 'RS256'
+// });
 
 const app = express();
 app.use( cors() );
@@ -26,12 +28,18 @@ app.use( '/graphql', graphqlHTTP({
 	graphiql: true
 }) ); 
 
-app.use( jwtCheck );
+app.use( express.static( path.join( '../client/build' ) ) );
 
-app.get( '/authorized', function ( req, res ) {
-	res.send( 'Secured Resource' );
+app.get( '*', ( req, res ) => {
+	res.sendFile( path.join( __dirname, '../client/build/index.html' ) );
 });
 
-app.listen( 4000, () => {
-	console.log( 'Running a GraphQL API server at http://localhost:4000/graphql' );
+// app.use( jwtCheck );
+
+// app.get( '/authorized', function ( req, res ) {
+// 	res.send( 'Secured Resource' );
+// });
+
+app.listen( port, () => {
+	console.log( `Running a GraphQL API server at http://localhost:${port}/graphql ` );
 });
