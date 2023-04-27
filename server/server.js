@@ -32,9 +32,7 @@ app.use( '/graphql', graphqlHTTP({
 	graphiql: true
 }) );
 
-console.log( '../client/build', path.join( '../client/build' ) );
-console.log( console.log( '__dirname, \'./client/build/index.html\'', path.join( __dirname, './client/build/index.html' ) ) );
-console.log( path.join( __dirname, './client/build/index.html' ) );
+console.log( process.env.AUTH0_DOMAIN );
 
 app.use( express.static( path.join( '../client/build' ) ) );
 

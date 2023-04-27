@@ -20,8 +20,12 @@ const client = createClient({
 
 // const config = getConfig();
 
+console.log( 'working?' );
+console.log( process.env.AUTH0_DOMAIN );
+console.log( process.env.DB );
+
 const providerConfig = {
-	domain: process.env.AUTH0_DOMAIN,
+	domain: 'dev-cz5tq76cgos2bf6b.us.auth0.com',
 	clientId: process.env.AUTH0_CLIENT_ID,
 	authorizationParams: {
 		redirect_uri: window.location.origin,
