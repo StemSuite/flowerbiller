@@ -51,8 +51,6 @@ const router = createBrowserRouter(
 function App() {
 	const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
-	console.log( 'load?' );
-
 	if ( isLoading ) {
 		return <div>Loading ...</div>;
 	}
