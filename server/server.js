@@ -6,10 +6,10 @@ import cors from 'cors';
 // import { auth } from 'express-oauth2-jwt-bearer';
 import schema from './graphql/schema.js';
 import 'dotenv/config';
-import * as url from 'url';
+import { dirname, path } from 'path';
+import { fileURLToPath } from 'url';
 
-const __filename = url.fileURLToPath( import.meta.url );
-const __dirname = url.fileURLToPath( new URL( '.', import.meta.url ) );
+const __dirname = dirname( fileURLToPath( import.meta.url ) );
 
 const port = process.env.PORT || 4000;
 
