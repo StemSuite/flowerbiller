@@ -6,6 +6,10 @@ import cors from 'cors';
 // import { auth } from 'express-oauth2-jwt-bearer';
 import schema from './graphql/schema.js';
 import 'dotenv/config';
+import * as url from 'url';
+
+const __filename = url.fileURLToPath( import.meta.url );
+const __dirname = url.fileURLToPath( new URL( '.', import.meta.url ) );
 
 const port = process.env.PORT || 4000;
 
@@ -28,10 +32,10 @@ app.use( '/graphql', graphqlHTTP({
 	graphiql: true
 }) ); 
 
-app.use( express.static( path.join( '../client/build' ) ) );
+app.use( express.static( path.join( __dirname, './client/build' ) ) );
 
 app.get( '*', ( req, res ) => {
-	res.sendFile( path.join( __dirname, '../client/build/index.html' ) );
+	res.sendFile( path.join( __dirname, './client/build/index.html' ) );
 });
 
 // app.use( jwtCheck );
