@@ -32,8 +32,6 @@ app.use( '/graphql', graphqlHTTP({
 	graphiql: true
 }) );
 
-console.log( process.env.AUTH0_DOMAIN );
-
 app.use( express.static( path.join( '../client/build' ) ) );
 
 app.get( '*', ( req, res ) => {
