@@ -12,7 +12,7 @@ let serverPort = process.env.PORT || 4000;
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 
 const client = createClient({
-	url: process.env.serverUrl || `http://localhost:${serverPort}/graphql`,
+	url: process.env.REACT_APP_SERVER_URL || `http://localhost:${serverPort}/graphql`,
 	exchanges: [ cacheExchange, fetchExchange ],
 });
 
