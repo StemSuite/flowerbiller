@@ -7,9 +7,6 @@ import cors from 'cors';
 import schema from './graphql/schema.js';
 import 'dotenv/config';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname( fileURLToPath( import.meta.url ) );
 
 const port = process.env.PORT || 4000;
 
@@ -27,15 +24,10 @@ mongoose
 	.then( () => console.log( 'Database connected successfully' ) )
 	.catch( ( err ) => console.log( err ) );
 
-
-// console.log( __dirname );
-// console.log( path.join( __dirname, '../', 'client', 'build' ) );
-// console.log( path.join( __dirname, '../client/build/index.html' ) );
-
-app.use( express.static( path.join( __dirname, 'client', 'build' ) ) );
+app.use( express.static( path.resolve( '..', 'client', 'build' ) ) );
 
 app.get( '*', ( req, res ) => {
-	res.sendFile( path.join( __dirname, './client/build/index.html' ) );
+	res.sendFile( path.resolve( '..', 'client', 'build', 'index.html' ) );
 });
 
 app.use( '/graphql', graphqlHTTP({
