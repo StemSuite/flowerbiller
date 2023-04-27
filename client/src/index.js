@@ -4,7 +4,7 @@ import { createClient, cacheExchange, fetchExchange, Provider } from 'urql';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-import { getConfig } from './config.js';
+// import { getConfig } from './config.js';
 
 let serverPort = process.env.PORT || 4000;
 
@@ -16,11 +16,13 @@ const client = createClient({
 	exchanges: [ cacheExchange, fetchExchange ],
 });
 
-const config = getConfig();
+
+
+// const config = getConfig();
 
 const providerConfig = {
-	domain: process.env.AUTH0_DOMAIN || config.domain,
-	clientId: process.env.AUTH0_CLIENT_ID || config.clientId,
+	domain: process.env.AUTH0_DOMAIN,
+	clientId: process.env.AUTH0_CLIENT_ID,
 	authorizationParams: {
 		redirect_uri: window.location.origin,
 		... null,
