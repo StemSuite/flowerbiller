@@ -39,7 +39,7 @@ console.log( path.join( __dirname, './client/build/index.html' ) );
 app.use( express.static( path.join( '../client/build' ) ) );
 
 app.get( '*', ( req, res ) => {
-	res.sendFile( path.join(  '../client/build/index.html' ) );
+	res.sendFile( path.join( __dirname, './client/build/index.html' ) );
 });
 
 // app.use( jwtCheck );
