@@ -9,6 +9,7 @@ const productMutations = {
 	},
 
 	addProduct: async( _, { product }) => {
+		product.varieties= [];
 		let newProduct = new Product( product );
 		return newProduct.save();
 	},
