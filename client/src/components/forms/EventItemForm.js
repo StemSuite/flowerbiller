@@ -1,6 +1,5 @@
 import {  useState, useRef, useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { Form } from 'react-router-dom';
 import { Box, FormControl, HStack } from '@chakra-ui/react';
 import { ADD_EVENT_ITEM } from '../../lib/Mutations.js';
 import ProductField from './Fields/ProductField.js';
@@ -76,7 +75,7 @@ function EventItemForm({ event }) {
 	}
   
 	return(
-		<Form onSubmit={addProduct} >
+		<form onSubmit={addProduct} >
 			<FormControl as="fieldset" p="20px" >
 				<HStack spacing="10px" justifyContent="center" >
 					<ProductField 
@@ -99,7 +98,7 @@ function EventItemForm({ event }) {
 					</Box>
 				</HStack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 }
   

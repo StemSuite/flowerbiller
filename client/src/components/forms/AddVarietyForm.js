@@ -4,7 +4,6 @@ import { ADD_VARIETY_MUTATION } from '../../lib/Mutations';
 import ProductField from '../forms/Fields/ProductField';
 import { PRODUCTS_ONLY_QUERY } from '../../lib/Queries';
 import { useQuery } from 'urql';
-import { Form } from 'react-router-dom';
 import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Stack, useToast } from '@chakra-ui/react';
 import AddModal from '../modals/AddModal';
 
@@ -79,7 +78,7 @@ function AddVarietyForm() {
 
 	let form = (
 		<>
-			<Form>
+			<form>
 				<FormControl as="fieldset" p="20px">
 					<Stack>
 						<HStack spacing="10px" justifyContent="center">
@@ -129,7 +128,7 @@ function AddVarietyForm() {
 						</HStack>
 					</Stack>
 				</FormControl>
-			</Form>
+			</form>
 		</>
 	);
 

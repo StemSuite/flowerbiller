@@ -4,7 +4,6 @@ import VendorField from './Fields/VendorField';
 import ShippingMethodField from './Fields/ShippingMethodField';
 import { ADD_PREBOOK_MUTATION } from '../../lib/Mutations';
 import { VENDORS_QUERY } from '../../lib/Queries';
-import { Form } from 'react-router-dom';
 import { Box, FormControl, FormErrorMessage, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
 import AddModal from '../modals/AddModal';
 
@@ -80,7 +79,7 @@ function AddPreBookForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl isRequired as="fieldset" p="20px">
 				<Stack>
 					<HStack spacing="10px" justifyContent="center">
@@ -113,7 +112,7 @@ function AddPreBookForm() {
 					</HStack>
 				</Stack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 
 	return (

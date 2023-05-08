@@ -1,3 +1,4 @@
+import Purchase from '../../../models/purchase.js';
 import StandingOrder from '../../../models/standing_order.js';
 import purchaseMutations from '../purchases/mutations.js';
 import shipmentMutations from '../shipments/mutations.js';
@@ -81,10 +82,18 @@ const standingOrderMutations = {
 	},
 
 	deleteSOItem: async( _, { standingOrderId, itemId }) => {
+		Purchase.deleteMany(
+			{
+				standingOrder: standingOrderId,
+				standingOrderItem: itemId
+			}
+		);
+
 		return StandingOrder.findByIdAndUpdate( standingOrderId, 
 			{ $pull: { items: { _id: itemId } } },
 			{ new: true }
 		);
+
 	},
 };
 

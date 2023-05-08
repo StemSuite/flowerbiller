@@ -1,6 +1,5 @@
 import {  useState, useRef, useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { Form } from 'react-router-dom';
 import { Box, Center, FormControl, HStack, Text } from '@chakra-ui/react';
 import ProductField from './Fields/ProductField.js';
 import LengthField from './Fields/SizeField.js';
@@ -86,7 +85,7 @@ function BillItemForm ({ bill }) {
                     Non-Inventory Item
 				</Text>
 			</Center>
-			<Form onSubmit={addProduct} >
+			<form onSubmit={addProduct} >
 				<FormControl as="fieldset" p="20px" >
 					<HStack spacing="10px" justifyContent="center" >
 						<ProductField 
@@ -109,7 +108,7 @@ function BillItemForm ({ bill }) {
 						</Box>
 					</HStack>
 				</FormControl>
-			</Form>
+			</form>
 		</Box>
 	);
 }

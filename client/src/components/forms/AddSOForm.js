@@ -5,9 +5,9 @@ import VendorField from './Fields/VendorField';
 import ShippingMethodField from './Fields/ShippingMethodField';
 import { ADD_STANDING_ORDER } from '../../lib/Mutations';
 import { VENDORS_QUERY } from '../../lib/Queries';
-import { Form } from 'react-router-dom';
 import { Box, FormControl, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
 import AddModal from '../modals/AddModal';
+import Vendor from '../../pages/Vendor';
 
 function AddSOForm() {
 
@@ -51,6 +51,7 @@ function AddSOForm() {
 	}
 
 	function changeShippingOptions( shipSH ) {
+		console.log( Vendor );
 		let shippingMethod = shippingMethodOptions.find( method => method.shortHand === shipSH );
 		let shippingDays = shippingMethod.shippingDays;
 		setShippingMethod( shippingMethod );
@@ -95,7 +96,7 @@ function AddSOForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl isRequired as="fieldset" p="20px">
 				<Stack>
 					<HStack spacing="10px" justifyContent="center">
@@ -144,7 +145,7 @@ function AddSOForm() {
 					</HStack>
 				</Stack>
 			</FormControl>{}
-		</Form>
+		</form>
 	);
 
 	return (

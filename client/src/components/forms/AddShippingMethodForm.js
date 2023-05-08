@@ -1,6 +1,5 @@
 import { Box, FormControl, FormLabel, HStack, Input, NumberInput, NumberInputField } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
 import { useMutation } from 'urql';
 import { ADD_SHIPPING_METHOD_MUTATION } from '../../lib/Mutations';
 import AddModal from '../modals/AddModal';
@@ -40,7 +39,7 @@ function AddShippingMethodForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl as="fieldset" p="20px">
 				<HStack spacing="10px" justifyContent="center" marginY="20px">
 					<Box>
@@ -123,7 +122,7 @@ function AddShippingMethodForm() {
 					
 				</HStack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 
 	return (

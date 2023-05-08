@@ -1,6 +1,5 @@
 import { Box, FormControl, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
 import { useMutation } from 'urql';
 import { ADD_EVENT } from '../../lib/Mutations';
 import StoreField from './Fields/StoreField';
@@ -36,7 +35,7 @@ function AddEventForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl as="fieldset" p="20px">
 				<Stack>
 					<HStack spacing="10px" justifyContent="center">
@@ -77,7 +76,7 @@ function AddEventForm() {
 					</HStack>
 				</Stack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 
 	return (
