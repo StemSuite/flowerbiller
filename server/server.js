@@ -24,12 +24,15 @@ mongoose
 	.then( () => console.log( 'Database connected successfully' ) )
 	.catch( ( err ) => console.log( err ) );
 
-app.use( express.static( path.resolve( '..', 'client', 'build' ) ) );
+if ( process.env.environment !== 'dev' ) {
+	app.use( express.static( path.resolve( '..', 'client', 'build' ) ) );
 
-app.get( '*', ( req, res ) => {
-	res.sendFile( path.resolve( '..', 'client', 'build', 'index.html' ) );
-});
+	app.get( '*', ( req, res ) => {
+		res.sendFile( path.resolve( '..', 'client', 'build', 'index.html' ) );
+	});
+}
 
+	
 app.use( '/graphql', graphqlHTTP({
 	schema: schema,
 	graphiql: true

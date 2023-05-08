@@ -3,7 +3,6 @@ import { useMutation } from 'urql';
 import { ADD_PRODUCT_MUTATION } from '../../lib/Mutations';
 import ProductTypesField from '../forms/Fields/ProductTypeField';
 import AddModal from '../modals/AddModal';
-import { Form } from 'react-router-dom';
 import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Select, Stack } from '@chakra-ui/react';
 import QuantityField from '../forms/Fields/QuantityField';
 
@@ -55,7 +54,7 @@ function AddProductForm() {
 	}
 	const form = (
 		<>
-			<Form>
+			<form>
 				<FormControl as="fieldset" p="20px">
 					<Stack>
 						<HStack spacing="10px" justifyContent="center">
@@ -109,7 +108,7 @@ function AddProductForm() {
 						</HStack>
 					</Stack>
 				</FormControl>
-			</Form>
+			</form>
 
 		</>
 	);

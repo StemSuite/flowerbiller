@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'urql';
 import { STANDING_ORDER_QUERY } from '../lib/Queries.js';
-// import SOItemForm from '../components/forms/SOItemForm.js';
 import SOItems from '../components/tables/SOItems';
 import { useEffect, useState } from 'react';
 import { daysOfTheWeek } from '../lib/data.js';
@@ -43,7 +42,7 @@ function StandingOrder () {
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">
 					<Text textDecor="underline" fontSize="lg">Dates</Text>
-					<Text>{standingOrder.fstartDate} - {standingOrder.fendDate || 'N/A'}</Text>
+					<Text>{standingOrder.fstartDate} - {standingOrder.fendDate }</Text>
 				</Box>
 				<Spacer/>
 				<Box textAlign="center" minWidth="100px">

@@ -1,6 +1,5 @@
 import { Box, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
 import StoreField from './Fields/StoreField';
 import AddModal from '../modals/AddModal';
 import { useMutation } from 'urql';
@@ -34,7 +33,7 @@ function AddOrderForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl as="fieldset" p="20px">
 				<HStack spacing="10px" justifyContent="center">
 					<StoreField setStore={setStore}/>
@@ -69,7 +68,7 @@ function AddOrderForm() {
 					</Box>
 				</HStack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 
 	return (

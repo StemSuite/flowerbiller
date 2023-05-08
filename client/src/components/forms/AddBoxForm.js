@@ -1,6 +1,5 @@
 import { Box, FormControl, FormLabel, HStack, Input } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
 import { useMutation } from 'urql';
 import { ADD_BOX_MUTATION } from '../../lib/Mutations';
 import AddModal from '../modals/AddModal';
@@ -32,7 +31,7 @@ function AddBoxForm() {
 	}
 
 	let form = (
-		<Form>
+		<form>
 			<FormControl as="fieldset" p="20px">
 				<HStack spacing="10px" justifyContent="center">
 					<Box>
@@ -67,7 +66,7 @@ function AddBoxForm() {
 					</Box>
 				</HStack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 
 	return (

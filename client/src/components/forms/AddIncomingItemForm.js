@@ -9,7 +9,6 @@ import PriceField from './Fields/PriceField.js';
 import { PRODUCTS_AND_VARIETIES_QUERY } from '../../lib/Queries';
 import { Box, FormControl, HStack } from '@chakra-ui/react';
 import AddButton from '../buttons/AddButton.js';
-import { Form } from 'react-router-dom';
 
 function IncomingItemForm({ order, mutation }) {
 	const [ products, setProducts ] = useState( [] );
@@ -82,7 +81,7 @@ function IncomingItemForm({ order, mutation }) {
 	}
 
 	return(
-		<Form onSubmit={addProduct} >
+		<form onSubmit={addProduct} >
 			<FormControl as="fieldset" p="20px" >
 				<HStack spacing="10px" justifyContent="center" >
 					<ProductField 
@@ -113,7 +112,7 @@ function IncomingItemForm({ order, mutation }) {
 					</Box>
 				</HStack>
 			</FormControl>
-		</Form>
+		</form>
 	);
 }
 
